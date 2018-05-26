@@ -2,7 +2,7 @@ import {
 	fromJS,
 	is
 } from 'immutable';
-import Todos from './Todos';
+import TodosActions from './TodosActions';
 
 describe('Actions', () => {
 
@@ -14,41 +14,55 @@ describe('Actions', () => {
 	});
 
 	const mockStore = {
-		state:             mockState,
-		_setState:         () => {},
-		_isLocked:         false,
-		_actionsCallDepth: 0
+		state:    mockState,
+		actions:  {},
+		dispatch: () => {}
 	};
 
-	it('should create Actions instance', () => {
+	const mockReducersMap = {
+		'todos/setItems':   'setItems',
+		'todos/addItem':    'addItem',
+		'todos/removeItem': 'removeItem'
+	};
 
-		const todos = new Todos({
-			...mockStore
-		}, 'todos');
+	const mockReducersMapWithoutNamespace = {
+		'setItems':   'setItems',
+		'addItem':    'addItem',
+		'removeItem': 'removeItem'
+	};
 
-		expect(todos.loadItems).toBeInstanceOf(Function);
-		expect(todos.setItems).toBeInstanceOf(Function);
-		expect(todos.addItem).toBeInstanceOf(Function);
-		expect(todos.removeItem).toBeInstanceOf(Function);
+	it('should create correct instance', () => {
+
+		const todos = new TodosActions(
+			mockStore,
+			mockReducersMap,
+			'todos'
+		);
+
+		expect(typeof todos.setItems).toBe('function');
+		expect(typeof todos.addItem).toBe('function');
+		expect(typeof todos.removeItem).toBe('function');
 	});
 
-	it('should create Actions instance without namespace', () => {
+	it('should create correct instance without namespace', () => {
 
-		const todos = new Todos({
-			...mockStore
-		});
+		const todos = new TodosActions(
+			mockStore,
+			mockReducersMapWithoutNamespace
+		);
 
-		expect(todos.loadItems).toBeInstanceOf(Function);
-		expect(todos.setItems).toBeInstanceOf(Function);
-		expect(todos.addItem).toBeInstanceOf(Function);
-		expect(todos.removeItem).toBeInstanceOf(Function);
+		expect(typeof todos.setItems).toBe('function');
+		expect(typeof todos.addItem).toBe('function');
+		expect(typeof todos.removeItem).toBe('function');
 	});
 
 	it('should define state getters', () => {
 
-		const todos = new Todos({
-			...mockStore
-		}, 'todos');
+		const todos = new TodosActions(
+			mockStore,
+			mockReducersMap,
+			'todos'
+		);
 
 		expect(is(
 			todos.state,
@@ -63,10 +77,13 @@ describe('Actions', () => {
 
 	it('should define state getters without namespace', () => {
 
-		const todos = new Todos({
-			...mockStore,
-			state: mockState.get('todos')
-		});
+		const todos = new TodosActions(
+			{
+				...mockStore,
+				state: mockState.get('todos')
+			},
+			mockReducersMap
+		);
 
 		expect(is(
 			todos.state,
@@ -81,34 +98,19 @@ describe('Actions', () => {
 
 	it('should wrap methods', async () => {
 
-		const setState = jest.fn();
+		const dispatch = jest.fn();
 
-		const todos = new Todos({
-			...mockStore,
-			_setState: setState
-		}, 'todos');
+		const todos = new TodosActions(
+			{
+				...mockStore,
+				dispatch
+			},
+			mockReducersMap,
+			'todos'
+		);
 
 		todos.addItem('todo');
 		expect(await todos.loadItems()).toBe(true);
-		expect(setState.mock.calls.length).toBe(3);
-	});
-
-	it('should prevent reducer call in another reducer', () => {
-
-		const todos = new Todos({
-			...mockStore
-		}, 'todos');
-
-		expect(() => todos.wrongAction()).toThrowError();
-	});
-
-	it('should prevent reducer call in another reducer without namespace', () => {
-
-		const todos = new Todos({
-			...mockStore,
-			state: mockState.get('todos')
-		});
-
-		expect(() => todos.wrongAction()).toThrowError();
+		expect(dispatch.mock.calls.length).toBe(3);
 	});
 });

@@ -1,30 +1,30 @@
-# @flexis/state-manager
+# @flexis/redux
 
 [![NPM version][npm]][npm-url]
 [![Dependency status][deps]][deps-url]
 [![Build status][build]][build-url]
 [![Coverage status][coverage]][coverage-url]
 
-[npm]: https://img.shields.io/npm/v/%40flexis/state-manager.svg
-[npm-url]: https://npmjs.com/package/@flexis/state-manager
+[npm]: https://img.shields.io/npm/v/%40flexis/redux.svg
+[npm-url]: https://npmjs.com/package/@flexis/redux
 
-[deps]: https://david-dm.org/TrigenSoftware/flexis-state-manager.svg
-[deps-url]: https://david-dm.org/TrigenSoftware/flexis-state-manager
+[deps]: https://david-dm.org/TrigenSoftware/flexis-redux.svg
+[deps-url]: https://david-dm.org/TrigenSoftware/flexis-redux
 
-[build]: http://img.shields.io/travis/TrigenSoftware/flexis-state-manager.svg
-[build-url]: https://travis-ci.org/TrigenSoftware/flexis-state-manager
+[build]: http://img.shields.io/travis/TrigenSoftware/flexis-redux.svg
+[build-url]: https://travis-ci.org/TrigenSoftware/flexis-redux
 
-[coverage]: https://img.shields.io/coveralls/TrigenSoftware/flexis-state-manager.svg
-[coverage-url]: https://coveralls.io/r/TrigenSoftware/flexis-state-manager
+[coverage]: https://img.shields.io/coveralls/TrigenSoftware/flexis-redux.svg
+[coverage-url]: https://coveralls.io/r/TrigenSoftware/flexis-redux
 
-Lightweight alternative of [Redux](https://github.com/reactjs/redux), inspired by [Hyperapp](https://github.com/hyperapp/hyperapp), based on [ImmutableJS](https://github.com/facebook/immutable-js/).
+Wrapper for [Redux](https://github.com/reactjs/redux), based on [ImmutableJS](https://github.com/facebook/immutable-js/).
 
 ## Install
 
 ```sh
-npm i -S @flexis/state-manager
+npm i -S @flexis/redux
 # or
-yarn add @flexis/state-manager
+yarn add @flexis/redux
 ```
 
 ## API
@@ -39,4 +39,4 @@ yarn add @flexis/state-manager
 - `@Connect(mapStateToProps, mapActionsToProps, mergeProps, { withRef: bool } = { withRef: false })`
 
 ---
-[![NPM](https://nodeico.herokuapp.com/@flexis/state-manager.svg)](https://npmjs.com/package/@flexis/state-manager)
+[![NPM](https://nodeico.herokuapp.com/@flexis/redux.svg)](https://npmjs.com/package/@flexis/redux)

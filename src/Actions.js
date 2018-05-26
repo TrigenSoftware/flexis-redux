@@ -1,21 +1,18 @@
-import { isImmutable } from 'immutable';
 
 export default class Actions {
 
-	constructor(store, namespace) {
+	constructor(store, actionsMap, namespace) {
 
-		this._namespace = namespace;
 		this._store = store;
 
-		this._defineStateGetters();
-		this._wrapMethods();
+		this._defineStateGetters(namespace);
+		this._prepareMethods(actionsMap);
 	}
 
-	_defineStateGetters() {
+	_defineStateGetters(namespace) {
 
 		const {
-			_namespace: namespace,
-			_store:	    store
+			_store: store
 		} = this;
 
 		Reflect.defineProperty(this, 'state', {
@@ -27,24 +24,55 @@ export default class Actions {
 		Reflect.defineProperty(this, 'globalState', {
 			get: () => store.state
 		});
+
+		Reflect.defineProperty(this, 'actions', {
+			get: () => store.actions
+		});
 	}
 
-	_wrapMethods() {
+	_prepareMethods(actionsMap) {
 
 		const {
-			_namespace: namespace,
-			_store:	    store
+			_store: store
 		} = this;
 
-		Reflect.ownKeys(
-			this.constructor.prototype
-		).forEach((methodName) => {
+		const {
+			prototype: actionsProto
+		} = this.constructor;
+
+		Object.entries(actionsMap).forEach(([type, methodName]) => {
+			Reflect.defineProperty(this, methodName, {
+				value: (payload, meta) => {
+
+					const action = {
+						type
+					};
+
+					if (typeof payload != 'undefined') {
+
+						action.payload = payload;
+
+						if (payload instanceof Error) {
+							action.error = true;
+						}
+					}
+
+					if (typeof meta != 'undefined') {
+						action.meta = meta;
+					}
+
+					store.dispatch(action);
+				}
+			});
+		});
+
+		Reflect.ownKeys(actionsProto).forEach((methodName) => {
 
 			if (typeof methodName == 'symbol') {
 				return;
 			}
 
-			const method = this[methodName];
+			const method = actionsProto[methodName];
 
 			if (methodName == 'constructor'
 				|| typeof method != 'function'
@@ -52,76 +80,31 @@ export default class Actions {
 				return;
 			}
 
-			if (namespace) {
-				this[methodName] = (...args) => {
+			if (this.hasOwnProperty(methodName)) {
 
-					const wasLocked = store._isLocked,
-						actionsCallDepthPre = ++store._actionsCallDepth;
+				const dispatch = this[methodName];
 
-					store._isLocked = true;
+				Reflect.defineProperty(this, methodName, {
+					value: async (payload, meta) => {
 
-					const result = Reflect.apply(method, this, args),
-						actionsCallDepthPost = store._actionsCallDepth;
+						const result = await Reflect.apply(method, this, [
+							payload,
+							meta
+						]);
 
-					if (actionsCallDepthPre === 1) {
-						store._actionsCallDepth = 0;
+						dispatch(payload, meta);
+
+						return result;
 					}
-
-					if (isImmutable(result)) {
-
-						if (actionsCallDepthPost > actionsCallDepthPre) {
-							throw new Error(
-								'Store is locked by another action.'
-							);
-						}
-
-						store._isLocked = false;
-						store._setState(
-							store.state.set(namespace, result)
-						);
-						store._isLocked = wasLocked;
-
-						return;
-					}
-
-					store._isLocked = wasLocked;
-
-					return result; // eslint-disable-line
-				};
+				});
 			} else {
-				this[methodName] = (...args) => {
-
-					const wasLocked = store._isLocked,
-						actionsCallDepthPre = ++store._actionsCallDepth;
-
-					store._isLocked = true;
-
-					const result = Reflect.apply(method, this, args),
-						actionsCallDepthPost = store._actionsCallDepth;
-
-					if (actionsCallDepthPre === 1) {
-						store._actionsCallDepth = 0;
-					}
-
-					if (isImmutable(result)) {
-
-						if (actionsCallDepthPost > actionsCallDepthPre) {
-							throw new Error(
-								'Store is locked by another action.'
-							);
-						}
-
-						store._isLocked = false;
-						store._setState(result);
-						store._isLocked = wasLocked;
-
-						return;
-					}
-
-					store._isLocked = wasLocked;
-
-					return result; // eslint-disable-line
-				};
+				Reflect.defineProperty(this, methodName, {
+					value: (payload, meta) =>
+						Reflect.apply(method, this, [
+							payload,
+							meta
+						])
+				});
 			}
 
 			Reflect.defineProperty(this[methodName], 'name', {

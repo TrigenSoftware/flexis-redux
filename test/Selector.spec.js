@@ -3,13 +3,13 @@ import Selector from '../src/utils/Selector';
 
 describe('Selector', () => {
 
-	it('should create Selector instance', () => {
+	it('should create correct instance', () => {
 
 		const selector = new Selector();
 
-		expect(selector.mapStateToProps).toBeInstanceOf(Function);
-		expect(selector.mapActionsToProps).toBeInstanceOf(Function);
-		expect(selector.mergeProps).toBeInstanceOf(Function);
+		expect(typeof selector.mapStateToProps).toBe('function');
+		expect(typeof selector.mapActionsToProps).toBe('function');
+		expect(typeof selector.mergeProps).toBe('function');
 		expect(selector.error).toBe(null);
 		expect(selector.shouldComponentUpdate).toBe(true);
 		expect(selector.hasRunAtLeastOnce).toBe(false);
@@ -22,7 +22,7 @@ describe('Selector', () => {
 		expect(selector.mergedProps).toEqual({});
 	});
 
-	it('should destroy Selector', () => {
+	it('should correct destroy', () => {
 
 		const selector = new Selector();
 
@@ -44,7 +44,7 @@ describe('Selector', () => {
 		expect(selector.mergedProps).toEqual({});
 	});
 
-	it('should should handle first call', () => {
+	it('should handle first call', () => {
 
 		const state = { todos: List() },
 			actions = {},
