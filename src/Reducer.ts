@@ -1,9 +1,27 @@
+import {
+	Reducer as ReduxReducer
+} from 'redux';
+import { Map } from 'immutable';
 
-let ownMethods = [];
+export interface IReducerConstructor {
+	initialState?: any;
+	new (namespace?: string): Reducer;
+}
+
+export type ReducersMap = {
+	[actionType: string]: string;
+};
+
+let ownMethods: PropertyKey[] = [];
 
 export default class Reducer {
 
-	constructor(namespace) {
+	static initialState?: any;
+	reducersMap: ReducersMap;
+
+	constructor(
+		private namespace?: string
+	) {
 
 		const actionNamespace = typeof namespace == 'string'
 			? `${namespace}/`
@@ -12,29 +30,28 @@ export default class Reducer {
 		const reducersNames = Reflect.ownKeys(this.constructor.prototype)
 			.filter(_ => !ownMethods.includes(_) && typeof _ != 'symbol');
 
-		const reducersMap = reducersNames.reduce((reducersMap, reducerName) => {
+		const reducersMap: ReducersMap = reducersNames.reduce((reducersMap, reducerName) => {
 			reducersMap[`${actionNamespace}${this[reducerName].name}`] = reducerName;
 			return reducersMap;
 		}, {});
 
 		this.reducersMap = reducersMap;
-		this._namespace = namespace;
 	}
 
-	createReducer(parentReducer) {
+	createReducer(parentReducer?: ReduxReducer): ReduxReducer {
 
 		const {
-			_namespace: namespace
+			namespace
 		} = this;
 
 		if (namespace) {
-			return this._createNamespaceReducer(parentReducer);
+			return this.createNamespaceReducer(parentReducer);
 		}
 
-		return this._createReducer(parentReducer);
+		return this.createSimpleReducer(parentReducer);
 	}
 
-	_createReducer(parentReducer) {
+	private createSimpleReducer(parentReducer: ReduxReducer): ReduxReducer {
 
 		const {
 			reducersMap
@@ -77,10 +94,10 @@ export default class Reducer {
 		};
 	}
 
-	_createNamespaceReducer(parentReducer) {
+	private createNamespaceReducer(parentReducer: ReduxReducer): ReduxReducer {
 
 		const {
-			_namespace: namespace,
+			namespace,
 			reducersMap
 		} = this;
 

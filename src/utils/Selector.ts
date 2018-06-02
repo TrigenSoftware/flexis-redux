@@ -1,16 +1,58 @@
+import {
+	StoreActions,
+	StoreNamespacedActions
+} from '../Store';
 import defaultMergeProps from './mergeProps';
-import initMapFunction from './initMapFunction';
+import initMapFunction, { IMapFunction } from './initMapFunction';
 import isEqual from './isEqual';
+
+export type Actions = StoreActions|StoreNamespacedActions;
+
+export interface IMapStateToProps extends IMapFunction {
+	(
+		state: any,
+		ownProps: object
+	): object;
+}
+
+export interface IMapActionsToProps extends IMapFunction {
+	(
+		actions: Actions,
+		ownProps: object
+	): object;
+}
+
+export interface IMergeProps {
+	(
+		stateProps: object,
+		actionsProps: object,
+		ownProps: object
+	): object;
+}
 
 export default class Selector {
 
+	private mapStateToProps: IMapStateToProps;
+	private mapActionsToProps: IMapActionsToProps;
+	private mergeProps: IMergeProps;
+	private hasRunAtLeastOnce: boolean;
+	private state: object;
+	private actions: object;
+	private ownProps: object;
+	private stateProps: object;
+	private actionsProps: object;
+	private mergedProps: object;
+	error: Error;
+	shouldComponentUpdate: boolean;
+	props: object;
+
 	constructor(
-		mapStateToProps,
-		mapActionsToProps,
+		mapStateToProps?: IMapStateToProps,
+		mapActionsToProps?: IMapActionsToProps,
 		mergeProps = defaultMergeProps
 	) {
-		this.mapStateToProps = initMapFunction(mapStateToProps);
-		this.mapActionsToProps = initMapFunction(mapActionsToProps);
+		this.mapStateToProps = initMapFunction<IMapStateToProps>(mapStateToProps);
+		this.mapActionsToProps = initMapFunction<IMapActionsToProps>(mapActionsToProps);
 		this.mergeProps = mergeProps;
 		this.error = null;
 		this.shouldComponentUpdate = true;
@@ -26,11 +68,11 @@ export default class Selector {
 
 	destroy() {
 
-		const noop = initMapFunction(false);
+		const noop = initMapFunction();
 
-		this.mapStateToProps = noop;
-		this.mapActionsToProps = noop;
-		this.mergeProps = noop;
+		this.mapStateToProps = noop as IMapStateToProps;
+		this.mapActionsToProps = noop as IMapActionsToProps;
+		this.mergeProps = noop as IMergeProps;
 		this.error = null;
 		this.shouldComponentUpdate = false;
 		this.props = {};
@@ -43,7 +85,7 @@ export default class Selector {
 		this.mergedProps = {};
 	}
 
-	run(state, actions, ownProps) {
+	run(state, actions: Actions, ownProps: object) {
 
 		try {
 
@@ -63,7 +105,11 @@ export default class Selector {
 		}
 	}
 
-	handleFirstCall(firstState, firstActions, firstOwnProps) {
+	private handleFirstCall(
+		firstState: any,
+		firstActions: Actions,
+		firstOwnProps: object
+	) {
 
 		const {
 			mapStateToProps,
@@ -82,7 +128,11 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
-	handleSubsequentCalls(nextState, nextActions, nextOwnProps) {
+	private handleSubsequentCalls(
+		nextState: any,
+		nextActions: Actions,
+		nextOwnProps: object
+	) {
 
 		const propsChanged = !isEqual(nextOwnProps, this.ownProps),
 			actionsChanged = !isEqual(nextActions, this.actions),
@@ -123,7 +173,7 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
-	handleNewPropsAndNewActionsAndNewState() {
+	private handleNewPropsAndNewActionsAndNewState() {
 
 		const {
 			mapStateToProps,
@@ -141,7 +191,7 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
-	handleNewPropsAndNewState() {
+	private handleNewPropsAndNewState() {
 
 		const {
 			mapStateToProps,
@@ -163,7 +213,7 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
-	handleNewPropsAndNewActions() {
+	private handleNewPropsAndNewActions() {
 
 		const {
 			mapStateToProps,
@@ -185,7 +235,7 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
-	handleNewActionsAndNewState() {
+	private handleNewActionsAndNewState() {
 
 		const {
 			mapStateToProps,
@@ -203,7 +253,7 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
-	handleNewProps() {
+	private handleNewProps() {
 
 		const {
 			mapStateToProps,
@@ -227,7 +277,7 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
-	handleNewActions() {
+	private handleNewActions() {
 
 		const {
 			mapActionsToProps,
@@ -249,7 +299,7 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
-	handleNewState() {
+	private handleNewState() {
 
 		const {
 			mapStateToProps,

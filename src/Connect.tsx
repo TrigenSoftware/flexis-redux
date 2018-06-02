@@ -1,10 +1,22 @@
 import React, {
+	ComponentClass,
+	StatelessComponent,
 	Component,
 	createElement
 } from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
-import Selector from './utils/Selector';
+import Selector, {
+	IMapStateToProps,
+	IMapActionsToProps,
+	IMergeProps,
+	Actions
+} from './utils/Selector';
 import StoreContext from './StoreContext';
+
+interface IContext {
+	storeState: any;
+	actions: Actions;
+}
 
 const {
 	Consumer: StoreContextConsumer
@@ -13,16 +25,16 @@ const {
 let hotReloadingVersion = 0;
 
 export default function Connect(
-	mapStateToProps,
-	mapActionsToProps,
-	mergeProps,
+	mapStateToProps?: IMapStateToProps,
+	mapActionsToProps?: IMapActionsToProps,
+	mergeProps?: IMergeProps,
 	{
 		withRef
 	} = {
 		withRef: false
 	}
 ) {
-	return (WrappedComponent) => {
+	return (WrappedComponent: ComponentClass|StatelessComponent) => {
 
 		const wrappedComponentName = WrappedComponent.displayName
 			|| WrappedComponent.name
@@ -35,12 +47,16 @@ export default function Connect(
 			static WrappedComponent = WrappedComponent;
 			static displayName = displayName;
 
-			renderChild = this.renderChild.bind(this);
-			onWrappedInstance = this.onWrappedInstance.bind(this);
-
-			selector = null;
+			addExtraProps: (props: object) => object;
+			selector: Selector = null;
 			wrappedInstance = null;
 			renderedChild = null;
+
+			constructor(props) {
+				super(props);
+				this.renderChild = this.renderChild.bind(this);
+				this.onWrappedInstance = this.onWrappedInstance.bind(this);
+			}
 
 			render() {
 				return (
@@ -53,7 +69,7 @@ export default function Connect(
 			renderChild({
 				storeState,
 				actions
-			}) {
+			}: IContext) {
 
 				if (this.selector === null) {
 					this.initSelector(storeState, actions);
@@ -100,7 +116,7 @@ export default function Connect(
 				return this.wrappedInstance;
 			}
 
-			initSelector(storeState, actions) {
+			initSelector(storeState: any, actions: Actions) {
 
 				const selector = new Selector(
 					mapStateToProps,
@@ -138,7 +154,7 @@ export default function Connect(
 				renderChild
 			} = Connect.prototype;
 
-			Connect.version = hotReloadingVersion++;
+			(Connect as any).version = hotReloadingVersion++;
 
 			Connect.prototype.renderChild =
 			function renderChildWithHotReload(context) {

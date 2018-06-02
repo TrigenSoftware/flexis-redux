@@ -1,18 +1,38 @@
+import { AnyAction } from 'redux';
+import Store, {
+	StoreActions,
+	StoreNamespacedActions
+} from './Store';
+import { ReducersMap } from './Reducer';
+
+export interface IActionsConstructor {
+	new (
+		store: Store,
+		actionsMap: ReducersMap,
+		namespace?: string
+	): Actions;
+}
 
 export default class Actions {
 
-	constructor(store, actionsMap, namespace) {
+	readonly state: any;
+	readonly globalState: any;
+	readonly actions: StoreActions|StoreNamespacedActions;
+	readonly [action: string]: any;
 
-		this._store = store;
-
-		this._defineStateGetters(namespace);
-		this._prepareMethods(actionsMap);
+	constructor(
+		private store: Store,
+		actionsMap: ReducersMap,
+		namespace?: string
+	) {
+		this.defineStateGetters(namespace);
+		this.prepareMethods(actionsMap);
 	}
 
-	_defineStateGetters(namespace) {
+	private defineStateGetters(namespace: string) {
 
 		const {
-			_store: store
+			store
 		} = this;
 
 		Reflect.defineProperty(this, 'state', {
@@ -30,10 +50,10 @@ export default class Actions {
 		});
 	}
 
-	_prepareMethods(actionsMap) {
+	private prepareMethods(actionsMap: ReducersMap) {
 
 		const {
-			_store: store
+			store
 		} = this;
 
 		const {
@@ -44,7 +64,7 @@ export default class Actions {
 			Reflect.defineProperty(this, methodName, {
 				value: (payload, meta) => {
 
-					const action = {
+					const action: AnyAction = {
 						type
 					};
 

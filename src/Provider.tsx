@@ -3,23 +3,33 @@ import React, {
 	Fragment
 } from 'react';
 import PropTypes from 'prop-types';
-import Store from './Store';
+import Store, { StoreActions } from './Store';
 import StoreContext from './StoreContext';
 
 const {
 	Provider: StoreContextProvider
 } = StoreContext;
 
-export default class Provider extends Component {
+interface IProps {
+	store: Store;
+	children: any;
+}
+
+interface IState {
+	storeState: any;
+	actions: StoreActions;
+}
+
+export default class Provider extends Component<IProps, IState> {
 
 	static propTypes = {
 		store:    PropTypes.instanceOf(Store).isRequired,
 		children: PropTypes.any.isRequired
-	}
+	};
 
-	unsubscribe = null;
+	unsubscribe: Function = null;
 
-	constructor(props) {
+	constructor(props: IProps) {
 
 		super(props);
 
@@ -70,10 +80,10 @@ export default class Provider extends Component {
 if (process.env.NODE_ENV != 'production') {
 
 	Provider.getDerivedStateFromProps =
-	function getDerivedStateFromProps({ store }, {
+	function getDerivedStateFromProps({ store }: IProps, {
 		storeState: prevStoreState,
 		actions:    prevActions
-	}) {
+	}: IState): IState {
 
 		const {
 			state: storeState,
@@ -93,11 +103,11 @@ if (process.env.NODE_ENV != 'production') {
 	};
 
 	Provider.prototype.componentDidUpdate =
-	function componentDidUpdate({ store: prevStore }) {
+	function componentDidUpdate({ store: prevStore }: IProps) {
 
 		const {
 			store
-		} = this.props;
+		} = this.props as IProps;
 
 		if (prevStore !== store) {
 			prevStore.destroy();
