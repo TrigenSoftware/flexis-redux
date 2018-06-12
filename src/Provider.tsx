@@ -3,7 +3,7 @@ import React, {
 	Fragment
 } from 'react';
 import PropTypes from 'prop-types';
-import Store, { StoreActions } from './Store';
+import Store, { IStoreActions } from './Store';
 import StoreContext from './StoreContext';
 
 const {
@@ -17,7 +17,7 @@ interface IProps {
 
 interface IState {
 	storeState: any;
-	actions: StoreActions;
+	actions: IStoreActions;
 }
 
 export default class Provider extends Component<IProps, IState> {
@@ -27,7 +27,7 @@ export default class Provider extends Component<IProps, IState> {
 		children: PropTypes.any.isRequired
 	};
 
-	unsubscribe: Function = null;
+	private unsubscribe: () => void = null;
 
 	constructor(props: IProps) {
 
@@ -77,12 +77,12 @@ export default class Provider extends Component<IProps, IState> {
 	}
 }
 
-if (process.env.NODE_ENV != 'production') {
+if (process.env.NODE_ENV !== 'production') {
 
-	Provider.getDerivedStateFromProps =
+	(Provider as any).getDerivedStateFromProps =
 	function getDerivedStateFromProps({ store }: IProps, {
 		storeState: prevStoreState,
-		actions:    prevActions
+		actions: prevActions
 	}: IState): IState {
 
 		const {
@@ -90,8 +90,8 @@ if (process.env.NODE_ENV != 'production') {
 			actions
 		} = store;
 
-		if (storeState == prevStoreState
-			&& actions == prevActions
+		if (storeState === prevStoreState
+			&& actions === prevActions
 		) {
 			return null;
 		}

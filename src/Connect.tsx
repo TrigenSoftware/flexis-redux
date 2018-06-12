@@ -47,10 +47,9 @@ export default function Connect(
 			static WrappedComponent = WrappedComponent;
 			static displayName = displayName;
 
-			addExtraProps: (props: object) => object;
-			selector: Selector = null;
 			wrappedInstance = null;
-			renderedChild = null;
+			private selector: Selector = null;
+			private renderedChild = null;
 
 			constructor(props) {
 				super(props);
@@ -66,7 +65,7 @@ export default function Connect(
 				);
 			}
 
-			renderChild({
+			private renderChild({
 				storeState,
 				actions
 			}: IContext) {
@@ -108,7 +107,7 @@ export default function Connect(
 				this.selector = null;
 			}
 
-			onWrappedInstance(ref) {
+			private onWrappedInstance(ref) {
 				this.wrappedInstance = ref;
 			}
 
@@ -116,7 +115,7 @@ export default function Connect(
 				return this.wrappedInstance;
 			}
 
-			initSelector(storeState: any, actions: Actions) {
+			private initSelector(storeState: any, actions: Actions) {
 
 				const selector = new Selector(
 					mapStateToProps,
@@ -131,39 +130,43 @@ export default function Connect(
 					this.props
 				);
 			}
+
+			// tslint:disable-next-line
+			private addExtraProps(props: object): object {
+				return props;
+			}
 		}
 
+		const {
+			prototype: ConnectPrototype
+		} = Connect as any;
+
 		if (withRef) {
-			Connect.prototype.addExtraProps =
+			ConnectPrototype.addExtraProps =
 			function addExtraProps(props) {
 				return {
 					...props,
 					ref: this.onWrappedInstance
 				};
 			};
-		} else {
-			Connect.prototype.addExtraProps =
-			function addExtraProps(props) {
-				return props;
-			};
 		}
 
-		if (process.env.NODE_ENV != 'production') {
+		if (process.env.NODE_ENV !== 'production') {
 
 			const {
 				renderChild
-			} = Connect.prototype;
+			} = ConnectPrototype;
 
 			(Connect as any).version = hotReloadingVersion++;
 
-			Connect.prototype.renderChild =
+			ConnectPrototype.renderChild =
 			function renderChildWithHotReload(context) {
 
 				const {
 					version
 				} = this.constructor;
 
-				if (typeof this.version != 'number') {
+				if (typeof this.version !== 'number') {
 					this.version = version;
 				} else
 				if (this.version !== version) {

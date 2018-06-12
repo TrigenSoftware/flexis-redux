@@ -1,12 +1,12 @@
 import {
-	StoreActions,
-	StoreNamespacedActions
+	IStoreActions,
+	IStoreNamespacedActions
 } from '../Store';
 import defaultMergeProps from './mergeProps';
 import initMapFunction, { IMapFunction } from './initMapFunction';
 import isEqual from './isEqual';
 
-export type Actions = StoreActions|StoreNamespacedActions;
+export type Actions = IStoreActions|IStoreNamespacedActions;
 
 export interface IMapStateToProps extends IMapFunction {
 	(
@@ -22,16 +22,18 @@ export interface IMapActionsToProps extends IMapFunction {
 	): object;
 }
 
-export interface IMergeProps {
-	(
-		stateProps: object,
-		actionsProps: object,
-		ownProps: object
-	): object;
-}
+// Named as interface due to consistenсy.
+export type IMergeProps = (
+	stateProps: object,
+	actionsProps: object,
+	ownProps: object
+) => object;
 
 export default class Selector {
 
+	error: Error;
+	shouldComponentUpdate: boolean;
+	props: object;
 	private mapStateToProps: IMapStateToProps;
 	private mapActionsToProps: IMapActionsToProps;
 	private mergeProps: IMergeProps;
@@ -42,9 +44,6 @@ export default class Selector {
 	private stateProps: object;
 	private actionsProps: object;
 	private mergedProps: object;
-	error: Error;
-	shouldComponentUpdate: boolean;
-	props: object;
 
 	constructor(
 		mapStateToProps?: IMapStateToProps,
@@ -134,9 +133,9 @@ export default class Selector {
 		nextOwnProps: object
 	) {
 
-		const propsChanged = !isEqual(nextOwnProps, this.ownProps),
-			actionsChanged = !isEqual(nextActions, this.actions),
-			stateChanged = !isEqual(nextState, this.state);
+		const propsChanged = !isEqual(nextOwnProps, this.ownProps);
+		const actionsChanged = !isEqual(nextActions, this.actions);
+		const stateChanged = !isEqual(nextState, this.state);
 
 		this.state = nextState;
 		this.actions = nextActions;
@@ -287,8 +286,8 @@ export default class Selector {
 			ownProps
 		} = this;
 
-		const nextActionsProps = mapActionsToProps(actions, ownProps),
-			actionsPropsChanged = !isEqual(nextActionsProps, this.actionsProps);
+		const nextActionsProps = mapActionsToProps(actions, ownProps);
+		const actionsPropsChanged = !isEqual(nextActionsProps, this.actionsProps);
 
 		this.actionsProps = nextActionsProps;
 
@@ -309,8 +308,8 @@ export default class Selector {
 			ownProps
 		} = this;
 
-		const nextStateProps = mapStateToProps(state, ownProps),
-			statePropsChanged = !isEqual(nextStateProps, this.stateProps);
+		const nextStateProps = mapStateToProps(state, ownProps);
+		const statePropsChanged = !isEqual(nextStateProps, this.stateProps);
 
 		this.stateProps = nextStateProps;
 

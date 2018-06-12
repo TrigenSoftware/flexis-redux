@@ -14,8 +14,8 @@ export default function isEqual(objA, objB) {
 		return false;
 	}
 
-	const keysA = Object.keys(objA),
-		keysB = Object.keys(objB);
+	const keysA = Object.keys(objA);
+	const keysB = Object.keys(objB);
 
 	if (keysA.length !== keysB.length) {
 		return false;

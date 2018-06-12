@@ -5,13 +5,13 @@ export interface IMapFunction extends Function {
 
 export default function initMapFunction<T extends IMapFunction>(fn?: T): T {
 
-	if (typeof fn != 'function') {
+	if (typeof fn !== 'function') {
 		return noop as T;
 	}
 
-	fn.dependsOnOwnProps = typeof fn.dependsOnOwnProps == 'boolean'
+	fn.dependsOnOwnProps = typeof fn.dependsOnOwnProps === 'boolean'
 		? fn.dependsOnOwnProps
-		: fn.length != 1;
+		: fn.length !== 1;
 
 	return fn;
 }

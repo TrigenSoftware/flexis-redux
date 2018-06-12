@@ -1,7 +1,9 @@
 {
 	"compilerOptions": {
 		"outDir": "lib",
-		"module": "commonjs",
+		"declaration": true,
+		"module": "esnext",
+		"moduleResolution": "node",
 		"target": "esnext",
 		"jsx": "react",
 		"noImplicitAny": false,
@@ -11,9 +13,6 @@
 		"sourceMap": true,
 		"lib": [
 			"es2017"
-		],
-		"types": [
-			"node"
 		]
 	},
 	"include": [

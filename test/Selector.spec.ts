@@ -17,7 +17,6 @@ describe('Selector', () => {
 		const selector = new Selector();
 
 		selector.run({ todos: List() }, {}, { prop: true });
-
 		selector.destroy();
 
 		expect(selector.error).toBe(null);
@@ -27,10 +26,9 @@ describe('Selector', () => {
 
 	it('should handle first call', () => {
 
-		const state = { todos: List() },
-			actions = {},
-			props = {};
-
+		const state = { todos: List() };
+		const actions = {};
+		const props = {};
 		const selector = new Selector();
 
 		selector.run(state, actions, props);
@@ -40,10 +38,9 @@ describe('Selector', () => {
 
 	it('should not set `shouldComponentUpdate` to `true` without map functions', () => {
 
-		const state = { todos: List() },
-			actions = {},
-			props = {};
-
+		const state = { todos: List() };
+		const actions = {};
+		const props = {};
 		const selector = new Selector();
 
 		selector.run(state, actions, props);
@@ -57,7 +54,11 @@ describe('Selector', () => {
 
 		expect(selector.shouldComponentUpdate).toBe(false);
 
-		const anotherActions = { action() {} };
+		const anotherActions = {
+			action() {
+				// Empty
+			}
+		};
 
 		selector.shouldComponentUpdate = false;
 		selector.run({ todos: List() }, anotherActions, {});
@@ -72,10 +73,9 @@ describe('Selector', () => {
 
 	it('should not set `shouldComponentUpdate` to `true` with `mapStateToProps`', () => {
 
-		const state = { todos: List() },
-			actions = {},
-			props = {};
-
+		const state = { todos: List() };
+		const actions = {};
+		const props = {};
 		const selector = new Selector(
 			state => ({ todos: state.todos })
 		);
@@ -92,17 +92,24 @@ describe('Selector', () => {
 		expect(selector.shouldComponentUpdate).toBe(false);
 
 		selector.shouldComponentUpdate = false;
-		selector.run({ todos: List() }, { action() {} }, {});
+		selector.run({ todos: List() }, {
+			action() {
+				// Empty
+			}
+		}, {});
 
 		expect(selector.shouldComponentUpdate).toBe(false);
 	});
 
 	it('should not set `shouldComponentUpdate` to `true` with `mapActionsToProps`', () => {
 
-		const state = { todos: List() },
-			actions = { action() {} },
-			props = {};
-
+		const state = { todos: List() };
+		const actions = {
+			action() {
+				// Empty
+			}
+		};
+		const props = {};
 		const selector = new Selector(
 			null,
 			actions => ({ action: actions.action })
@@ -122,10 +129,13 @@ describe('Selector', () => {
 
 	it('should not set `shouldComponentUpdate` to `true` with `mapStateToProps` and `mapActionsToProps`', () => {
 
-		const state = { todos: List() },
-			actions = { action() {} },
-			props = {};
-
+		const state = { todos: List() };
+		const actions = {
+			action() {
+				// Empty
+			}
+		};
+		const props = {};
 		const selector = new Selector(
 			state => ({ todos: state.todos }),
 			actions => ({ action: actions.action })
@@ -145,8 +155,11 @@ describe('Selector', () => {
 
 	it('should set `shouldComponentUpdate` to `true` without map functions', () => {
 
-		const actions = { action() {} };
-
+		const actions = {
+			action() {
+				// Empty
+			}
+		};
 		const selector = new Selector();
 
 		selector.run({ todos: List() }, {}, {});
@@ -183,8 +196,11 @@ describe('Selector', () => {
 
 	it('should set `shouldComponentUpdate` to `true` with `mapActionsToProps`', () => {
 
-		const actions = { action() {} };
-
+		const actions = {
+			action() {
+				// Empty
+			}
+		};
 		const selector = new Selector(
 			null,
 			actions => ({ action: actions.action })
@@ -210,8 +226,11 @@ describe('Selector', () => {
 
 	it('should set `shouldComponentUpdate` to `true` with `mapStateToProps` and `mapActionsToProps`', () => {
 
-		const actions = { action() {} };
-
+		const actions = {
+			action() {
+				// Empty
+			}
+		};
 		const selector = new Selector(
 			state => ({ todos: state.todos }),
 			actions => ({ action: actions.action })

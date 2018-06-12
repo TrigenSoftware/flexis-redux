@@ -1,14 +1,14 @@
 import { AnyAction } from 'redux';
 import Store, {
-	StoreActions,
-	StoreNamespacedActions
+	IStoreActions,
+	IStoreNamespacedActions
 } from './Store';
-import { ReducersMap } from './Reducer';
+import { IReducersMap } from './Reducer';
 
 export interface IActionsConstructor {
 	new (
 		store: Store,
-		actionsMap: ReducersMap,
+		actionsMap: IReducersMap,
 		namespace?: string
 	): Actions;
 }
@@ -17,12 +17,12 @@ export default class Actions {
 
 	readonly state: any;
 	readonly globalState: any;
-	readonly actions: StoreActions|StoreNamespacedActions;
+	readonly actions: IStoreActions|IStoreNamespacedActions;
 	readonly [action: string]: any;
 
 	constructor(
-		private store: Store,
-		actionsMap: ReducersMap,
+		private readonly store: Store,
+		actionsMap: IReducersMap,
 		namespace?: string
 	) {
 		this.defineStateGetters(namespace);
@@ -50,12 +50,11 @@ export default class Actions {
 		});
 	}
 
-	private prepareMethods(actionsMap: ReducersMap) {
+	private prepareMethods(actionsMap: IReducersMap) {
 
 		const {
 			store
 		} = this;
-
 		const {
 			prototype: actionsProto
 		} = this.constructor;
@@ -68,7 +67,7 @@ export default class Actions {
 						type
 					};
 
-					if (typeof payload != 'undefined') {
+					if (typeof payload !== 'undefined') {
 
 						action.payload = payload;
 
@@ -77,7 +76,7 @@ export default class Actions {
 						}
 					}
 
-					if (typeof meta != 'undefined') {
+					if (typeof meta !== 'undefined') {
 						action.meta = meta;
 					}
 
@@ -88,14 +87,14 @@ export default class Actions {
 
 		Reflect.ownKeys(actionsProto).forEach((methodName) => {
 
-			if (typeof methodName == 'symbol') {
+			if (typeof methodName === 'symbol') {
 				return;
 			}
 
 			const method = actionsProto[methodName];
 
-			if (methodName == 'constructor'
-				|| typeof method != 'function'
+			if (methodName === 'constructor'
+				|| typeof method !== 'function'
 			) {
 				return;
 			}

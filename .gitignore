@@ -38,6 +38,7 @@ node_modules
 
 # Some caches
 .eslintcache
+.rpt2_cache
 
 # Compiled dist
 lib

@@ -32,8 +32,8 @@ describe('Reducer', () => {
 
 	it('should apply reducer to the previous state', async () => {
 
-		const todos = new TodosReducer('todos'),
-			todosReducer = todos.createReducer();
+		const todos = new TodosReducer('todos');
+		const todosReducer = todos.createReducer();
 
 		let state = fromJS({
 			todos: []
@@ -72,8 +72,8 @@ describe('Reducer', () => {
 
 	it('should apply reducer to the previous state without namespaces', async () => {
 
-		const todos = new TodosReducer(),
-			todosReducer = todos.createReducer();
+		const todos = new TodosReducer();
+		const todosReducer = todos.createReducer();
 
 		let state = fromJS([]);
 
