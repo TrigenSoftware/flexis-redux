@@ -15,11 +15,11 @@ import Actions, {
 	IActionsConstructor
 } from './Actions';
 
-interface IStoreNamespacedReducerConstructors {
+export interface IStoreNamespacedReducerConstructors {
 	[namespace: string]: IReducerConstructor;
 }
 
-interface IStoreNamespacedActionsConstructors {
+export interface IStoreNamespacedActionsConstructors {
 	[namespace: string]: IActionsConstructor;
 }
 
