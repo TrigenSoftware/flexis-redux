@@ -147,7 +147,7 @@ export default class Reducer {
 ownMethods = Reflect.ownKeys(Reducer.prototype);
 
 export function ActionType(type) {
-	return (target, key, descriptor) => {
+	return (_, __, descriptor) => {
 		Reflect.defineProperty(descriptor.value, 'name', {
 			value: type
 		});
