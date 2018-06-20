@@ -22,12 +22,13 @@ export interface IMapActionsToProps extends IMapFunction {
 	): object;
 }
 
-// Named as interface due to consistenсy.
-export type IMergeProps = (
-	stateProps: object,
-	actionsProps: object,
-	ownProps: object
-) => object;
+export interface IMergeProps {
+	(
+		stateProps: object,
+		actionsProps: object,
+		ownProps: object
+	): object;
+}
 
 export default class Selector {
 

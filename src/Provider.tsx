@@ -6,13 +6,8 @@ import PropTypes from 'prop-types';
 import Store, { IStoreActions } from './Store';
 import StoreContext from './StoreContext';
 
-const {
-	Provider: StoreContextProvider
-} = StoreContext;
-
 interface IProps {
 	store: Store;
-	children: any;
 }
 
 interface IState {
@@ -20,12 +15,18 @@ interface IState {
 	actions: IStoreActions;
 }
 
-export default class Provider extends Component<IProps, IState> {
+const {
+	Provider: StoreContextProvider
+} = StoreContext;
+
+export default class Provider extends Component<IProps> {
 
 	static propTypes = {
 		store:    PropTypes.instanceOf(Store).isRequired,
 		children: PropTypes.any.isRequired
 	};
+
+	state: IState;
 
 	private unsubscribe: () => void = null;
 

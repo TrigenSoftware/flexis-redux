@@ -13,7 +13,7 @@
   },
   "main": "lib/index.js",
   "module": "lib/index.es.js",
-  "types" : "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "lint": "tslint -p . -t stylish 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
     "test": "npm run lint && NODE_ENV=test jest -c jest.config.json",
@@ -54,7 +54,7 @@
     "rollup-plugin-typescript2": "^0.14.0",
     "ts-jest": "^22.4.6",
     "tslint": "^5.10.0",
-    "tslint-config-trigen": "^3.0.0",
+    "tslint-config-trigen": "^3.0.2",
     "typescript": "^2.9.1"
   },
   "peerDependencies": {
