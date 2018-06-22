@@ -19,14 +19,12 @@ const {
 	Provider: StoreContextProvider
 } = StoreContext;
 
-export default class Provider extends Component<IProps> {
+export default class Provider extends Component<IProps, IState> {
 
 	static propTypes = {
 		store:    PropTypes.instanceOf(Store).isRequired,
 		children: PropTypes.any.isRequired
 	};
-
-	state: IState;
 
 	private unsubscribe: () => void = null;
 
@@ -40,8 +38,8 @@ export default class Provider extends Component<IProps> {
 		} = props.store;
 
 		this.state = {
-			storeState, // eslint-disable-line
-			actions // eslint-disable-line
+			storeState,
+			actions
 		};
 	}
 
@@ -81,10 +79,13 @@ export default class Provider extends Component<IProps> {
 if (process.env.NODE_ENV !== 'production') {
 
 	(Provider as any).getDerivedStateFromProps =
-	function getDerivedStateFromProps({ store }: IProps, {
-		storeState: prevStoreState,
-		actions: prevActions
-	}: IState): IState {
+	function getDerivedStateFromProps(
+		{ store }: IProps,
+		{
+			storeState: prevStoreState,
+			actions: prevActions
+		}: IState
+	): IState {
 
 		const {
 			state: storeState,
