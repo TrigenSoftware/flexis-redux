@@ -20,7 +20,7 @@
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "coverage": "cat ./coverage/lcov.info | coveralls",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run test && npm run build"
   },
   "keywords": [
     "redux",
@@ -43,6 +43,7 @@
     "@types/jest": "^22.2.3",
     "coveralls": "^3.0.0",
     "jest": "^22.4.3",
+    "pre-commit": "^1.2.2",
     "prop-types": "^15.6.1",
     "redux": "^4.0.0",
     "rollup": "^0.60.2",
