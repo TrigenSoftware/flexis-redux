@@ -15,10 +15,10 @@
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "checkDeps": "ncu -e 2",
+    "checkDeps": "ncu -e 2; echo $?; exit 1",
     "lint": "tslint -p . -t stylish 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
     "jest": "NODE_ENV=test jest -c jest.config.json",
-    "test": "npm run checkDeps && npm run lint && npm run jest",
+    "test": "npm run checkDeps && npm run lint && npm run jest; exit 1",
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "coverage": "cat ./coverage/lcov.info | coveralls",
@@ -44,9 +44,9 @@
     "@babel/preset-stage-0": "^7.0.0-beta.49",
     "@types/jest": "^22.2.3",
     "coveralls": "^3.0.0",
+    "husky": "^0.14.3",
     "jest": "^22.4.3",
     "npm-check-updates": "^2.14.2",
-    "pre-commit": "^1.2.2",
     "prop-types": "^15.6.1",
     "redux": "^4.0.0",
     "rollup": "^0.60.2",
@@ -69,5 +69,10 @@
   },
   "files": [
     "lib"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  }
 }
