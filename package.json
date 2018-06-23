@@ -15,7 +15,7 @@
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "checkDeps": "npm-check -i husky -i ts-jest -i tslint-*; exit 0",
+    "checkDeps": "npm-check -s; exit 0",
     "lint": "tslint -p . -t stylish 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
     "jest": "NODE_ENV=test jest -c jest.config.json",
     "test": "npm run checkDeps && npm run lint && npm run jest",
@@ -44,6 +44,8 @@
     "@babel/preset-stage-0": "^7.0.0-beta.49",
     "@types/jest": "^23.1.1",
     "coveralls": "^3.0.0",
+    "eslint": "^5.0.0",
+    "eslint-config-trigen": "^3.0.0",
     "husky": "^1.0.0-rc.9",
     "jest": "^23.1.0",
     "npm-check": "^5.7.1",
