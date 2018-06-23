@@ -15,7 +15,7 @@
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "checkDeps": "npm-check -i husky -i ts-jest -i tslint-config-trigen; exit 0",
+    "checkDeps": "npm-check -i husky -i ts-jest -i tslint-*; exit 0",
     "lint": "tslint -p . -t stylish 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
     "jest": "NODE_ENV=test jest -c jest.config.json",
     "test": "npm run checkDeps && npm run lint && npm run jest",
