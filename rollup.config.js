@@ -22,7 +22,6 @@ const plugins = [
 	commonjs(),
 	globals()
 ];
-
 const dependencies = [].concat(
 	Object.keys(pkg.dependencies),
 	Object.keys(pkg.peerDependencies)
