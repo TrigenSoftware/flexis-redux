@@ -15,7 +15,7 @@
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "checkDeps": "npm-check -s",
+    "checkDeps": "npm-check -i husky -i ts-jest -i tslint-config-trigen; exit 0",
     "lint": "tslint -p . -t stylish 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
     "jest": "NODE_ENV=test jest -c jest.config.json",
     "test": "npm run checkDeps && npm run lint && npm run jest",
@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.49",
-    "@types/node": "^10.3.2",
+    "@types/node": "^10.3.5",
     "@types/react": "^16.3.16",
     "hoist-non-react-statics": "^2.5.0",
     "immutable": "4.0.0-rc.9"
@@ -49,7 +49,7 @@
     "npm-check": "^5.7.1",
     "prop-types": "^15.6.1",
     "redux": "^4.0.0",
-    "rollup": "^0.61.1",
+    "rollup": "^0.61.2",
     "rollup-plugin-babel": "^4.0.0-beta.5",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-globals": "^1.1.0",

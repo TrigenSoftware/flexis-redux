@@ -792,9 +792,13 @@
   version "23.1.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.1.1.tgz#c54ab1a5f41aa693c0957222dd10414416d0c87b"
 
-"@types/node@*", "@types/node@^10.3.2":
+"@types/node@*":
   version "10.3.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.4.tgz#c74e8aec19e555df44609b8057311052a2c84d9e"
+
+"@types/node@^10.3.5":
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.5.tgz#8423cdf6e6fb83433e489900d7600d3b61c8260c"
 
 "@types/react@^16.3.16":
   version "16.4.1"
@@ -4466,9 +4470,9 @@ rollup-pluginutils@^2.0.1:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
 
-rollup@^0.61.1:
-  version "0.61.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.61.1.tgz#65a12f27c2094e6d643fb9cca6a3057190ecc5fe"
+rollup@^0.61.2:
+  version "0.61.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.61.2.tgz#30a953736964683a5b8ea952b137a393d84e6302"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
@@ -5026,13 +5030,13 @@ type-check@~0.3.2:
   dependencies:
     prelude-ls "~1.1.2"
 
+typescript@2.9.1:
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.1.tgz#fdb19d2c67a15d11995fd15640e373e09ab09961"
+
 typescript@^2.6.2:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
-
-typescript@^2.9.1:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.1.tgz#fdb19d2c67a15d11995fd15640e373e09ab09961"
 
 uglify-js@^2.6:
   version "2.8.29"
