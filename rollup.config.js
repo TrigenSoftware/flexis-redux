@@ -41,10 +41,10 @@ export default [{
 		file:      pkg.main,
 		format:    'cjs',
 		exports:   'named',
-		sourcemap: true
+		sourcemap: 'inline'
 	}, {
 		file:      pkg.module,
 		format:    'es',
-		sourcemap: true
+		sourcemap: 'inline'
 	}]
 }];
