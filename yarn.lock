@@ -876,9 +876,9 @@
   version "10.5.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.0.tgz#f5b61395c09b47ac46aaa1452750c9a72b3d3673"
 
-"@types/react@^16.4.4":
-  version "16.4.4"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.4.tgz#ffaa339e41346a7c65ddc914779ae43fa522a39a"
+"@types/react@16.4.2":
+  version "16.4.2"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.2.tgz#f1a9cf1ee85221530def2ac26aee20f910a9dac8"
   dependencies:
     csstype "^2.2.0"
 
@@ -1390,6 +1390,10 @@ browser-resolve@^1.11.2, browser-resolve@^1.11.3:
   resolved "https://registry.yarnpkg.com/browser-resolve/-/browser-resolve-1.11.3.tgz#9b7cbb3d0f510e4cb86bdbd796124d28b5890af6"
   dependencies:
     resolve "1.1.7"
+
+browserslist-config-trigen@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/browserslist-config-trigen/-/browserslist-config-trigen-1.0.0.tgz#166e4a3112e45656925c36af4c95497321f916a4"
 
 browserslist@^3.0.0:
   version "3.2.8"
