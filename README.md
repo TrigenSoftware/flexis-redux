@@ -22,10 +22,26 @@ Wrapper for [Redux](https://github.com/reactjs/redux), based on [ImmutableJS](ht
 ## Install
 
 ```sh
-npm i -S @flexis/redux
+npm i @flexis/redux
 # or
 yarn add @flexis/redux
 ```
+
+# API
+
+Module exposes next API:
+
+```js
+export default Store;
+export {
+	Reducer,
+	Actions,
+	Provider,
+	Connect
+};
+```
+
+[Description of this methods you can find in Documentation.](https://trigensoftware.github.io/flexis-redux/index.html)
 
 ---
 [![NPM](https://nodeico.herokuapp.com/@flexis/redux.svg)](https://npmjs.com/package/@flexis/redux)
