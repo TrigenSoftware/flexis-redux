@@ -42,6 +42,3 @@ export {
 ```
 
 [Description of this methods you can find in Documentation.](https://trigensoftware.github.io/flexis-redux/index.html)
-
----
-[![NPM](https://nodeico.herokuapp.com/@flexis/redux.svg)](https://npmjs.com/package/@flexis/redux)
