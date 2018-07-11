@@ -13,6 +13,7 @@
 	"collectCoverage": true,
 	"collectCoverageFrom": [
 		"src/**/*.{ts,tsx}",
+		"!**/*.d.ts",
 		"!**/node_modules/**"
 	],
 	"coverageReporters": [
