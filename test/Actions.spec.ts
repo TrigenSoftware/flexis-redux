@@ -2,8 +2,8 @@ import {
 	fromJS,
 	is
 } from 'immutable';
-import Store from '../src/Store';
-import TodosActions from './TodosActions';
+import Store from '../src';
+import TodosActions from './Todos.actions';
 
 function createMockStore(
 	mockState: any,
@@ -46,24 +46,7 @@ describe('Actions', () => {
 
 	it('should create correct instance', () => {
 
-		const todos = new TodosActions(
-			mockStore,
-			mockReducersMap,
-			'todos'
-		);
-
-		expect(typeof todos.loadItems).toBe('function');
-		expect(typeof todos.setItems).toBe('function');
-		expect(typeof todos.addItem).toBe('function');
-		expect(typeof todos.removeItem).toBe('function');
-	});
-
-	it('should create correct instance without namespace', () => {
-
-		const todos = new TodosActions(
-			mockStore,
-			mockReducersMapWithoutNamespace
-		);
+		const todos: TodosActions = new (TodosActions as any)(mockStore);
 
 		expect(typeof todos.loadItems).toBe('function');
 		expect(typeof todos.setItems).toBe('function');
@@ -73,11 +56,7 @@ describe('Actions', () => {
 
 	it('should define state getters', () => {
 
-		const todos = new TodosActions(
-			mockStore,
-			mockReducersMap,
-			'todos'
-		);
+		const todos: TodosActions = new (TodosActions as any)(mockStore);
 
 		expect(is(
 			todos.state,
@@ -92,9 +71,12 @@ describe('Actions', () => {
 
 	it('should define state getters without namespace', () => {
 
-		const todos = new TodosActions(
-			createMockStore(mockState.get('todos')),
-			mockReducersMap
+		abstract class TodosActionsNoNamespaced extends TodosActions {
+			static namespace = undefined;
+		}
+
+		const todos: TodosActions = new (TodosActionsNoNamespaced as any)(
+			createMockStore(mockState.get('todos'))
 		);
 
 		expect(is(
@@ -112,10 +94,8 @@ describe('Actions', () => {
 
 		const dispatch = jest.fn();
 
-		const todos = new TodosActions(
-			createMockStore(mockState, dispatch),
-			mockReducersMap,
-			'todos'
+		const todos: TodosActions = new (TodosActions as any)(
+			createMockStore(mockState, dispatch)
 		);
 
 		todos.addItem('todo');

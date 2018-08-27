@@ -1,134 +1,129 @@
 import { AnyAction } from 'redux';
-import Store, {
-	IStoreActions,
-	IStoreNamespacedActions
-} from './Store';
+import {
+	protoKeys,
+	isFunctionProp
+} from './utils/proto';
+import Store from './Store';
 import { IReducersMap } from './Reducer';
 
 export interface IActionsConstructor {
-	new (
-		store: Store,
-		actionsMap: IReducersMap,
-		namespace?: string
-	): Actions;
+	namespace: string;
+	new (store: Store): Actions;
 }
 
-export default class Actions {
+const EXCLUDE_PROPS = [
+	'state',
+	'globalState',
+	'actions'
+];
 
-	readonly state: any;
-	readonly globalState: any;
-	readonly actions: IStoreActions|IStoreNamespacedActions;
-	readonly [action: string]: any;
+export default abstract class Actions<
+	TState = any,
+	TGlobalState = any,
+	TAllActions = any
+> {
+
+	static namespace: string;
+
+	readonly state: TState;
 
 	constructor(
-		private readonly store: Store,
-		actionsMap: IReducersMap,
-		namespace?: string
+		readonly store: Store
 	) {
-		this.defineStateGetters(namespace);
-		this.prepareMethods(actionsMap);
+		runtimePrepareMethods(this);
 	}
 
-	private defineStateGetters(namespace: string) {
-
-		const {
-			store
-		} = this;
-
-		Reflect.defineProperty(this, 'state', {
-			get: namespace
-				? () => store.state.get(namespace)
-				: () => store.state
-		});
-
-		Reflect.defineProperty(this, 'globalState', {
-			get: () => store.state
-		});
-
-		Reflect.defineProperty(this, 'actions', {
-			get: () => store.actions
-		});
+	get globalState(): TGlobalState {
+		return this.store.state;
 	}
 
-	private prepareMethods(actionsMap: IReducersMap) {
+	get actions(): TAllActions {
+		return this.store.actions;
+	}
+}
 
-		const {
-			store
-		} = this;
-		const {
-			prototype: actionsProto
-		} = this.constructor;
+export function prepareMethods(
+	{
+		prototype
+	}: IActionsConstructor,
+	actionsMap: IReducersMap
+) {
+	Object.entries(actionsMap).forEach(([type, methodName]) => {
+		Reflect.defineProperty(prototype, methodName, {
+			value(payload, meta) {
 
-		Object.entries(actionsMap).forEach(([type, methodName]) => {
-			Reflect.defineProperty(this, methodName, {
-				value: (payload, meta) => {
+				const action: AnyAction = {
+					type
+				};
 
-					const action: AnyAction = {
-						type
-					};
+				if (typeof payload !== 'undefined') {
 
-					if (typeof payload !== 'undefined') {
+					action.payload = payload;
 
-						action.payload = payload;
-
-						if (payload instanceof Error) {
-							action.error = true;
-						}
+					if (payload instanceof Error) {
+						action.error = true;
 					}
+				}
 
-					if (typeof meta !== 'undefined') {
-						action.meta = meta;
-					}
+				if (typeof meta !== 'undefined') {
+					action.meta = meta;
+				}
 
-					store.dispatch(action);
+				this.store.dispatch(action);
+			}
+		});
+	});
+}
+
+function runtimePrepareMethods(actions: Actions) {
+
+	const { namespace } = actions.constructor as IActionsConstructor;
+	const selfProto = Object.getPrototypeOf(actions);
+	const superProto = Object.getPrototypeOf(selfProto);
+	const methods = protoKeys(selfProto, EXCLUDE_PROPS);
+
+	Reflect.defineProperty(actions, 'state', {
+		get: namespace
+			? function state() {
+				return this.store.state.get(namespace);
+			}
+			: function state() {
+				return this.store.state;
+			}
+	});
+
+	methods.forEach((methodName) => {
+
+		if (!isFunctionProp(selfProto, methodName)) {
+			return;
+		}
+
+		const selfMethod = selfProto[methodName];
+		const superMethod = superProto[methodName];
+		const superIsFunction = typeof superMethod === 'function';
+
+		if (selfMethod !== superMethod && superIsFunction) {
+			Reflect.defineProperty(actions, methodName, {
+				async value(payload, meta) {
+
+					const result = await Reflect.apply(selfMethod, actions, [
+						payload,
+						meta
+					]);
+
+					superMethod(payload, meta);
+
+					return result;
 				}
 			});
-		});
-
-		Reflect.ownKeys(actionsProto).forEach((methodName) => {
-
-			if (typeof methodName === 'symbol') {
-				return;
-			}
-
-			const method = actionsProto[methodName];
-
-			if (methodName === 'constructor'
-				|| typeof method !== 'function'
-			) {
-				return;
-			}
-
-			if (this.hasOwnProperty(methodName)) {
-
-				const dispatch = this[methodName];
-
-				Reflect.defineProperty(this, methodName, {
-					value: async (payload, meta) => {
-
-						const result = await Reflect.apply(method, this, [
-							payload,
-							meta
-						]);
-
-						dispatch(payload, meta);
-
-						return result;
-					}
-				});
-			} else {
-				Reflect.defineProperty(this, methodName, {
-					value: (payload, meta) =>
-						Reflect.apply(method, this, [
-							payload,
-							meta
-						])
-				});
-			}
-
-			Reflect.defineProperty(this[methodName], 'name', {
-				value: methodName
+		} else {
+			Reflect.defineProperty(actions, methodName, {
+				value: selfMethod.bind(actions)
 			});
+		}
+
+		Reflect.defineProperty(actions[methodName], 'name', {
+			value: methodName
 		});
-	}
+	});
 }

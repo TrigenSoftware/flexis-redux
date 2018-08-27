@@ -1,9 +1,9 @@
 
 export default function mergeProps(
-	stateProps: object,
-	actionsProps: object,
-	ownProps: object
-): object {
+	stateProps,
+	actionsProps,
+	ownProps
+) {
 	return {
 		...stateProps,
 		...actionsProps,

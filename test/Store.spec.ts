@@ -1,26 +1,45 @@
 import {
+	Record,
 	Map,
 	List,
 	fromJS,
 	is
 } from 'immutable';
-import Store from '../src/Store';
-import TodosReducer from './TodosReducer';
+import Store from '../src';
+import TodosReducer from './Todos.reducer';
+import TodosActions from './Todos.actions';
+import {
+	State as TodosState
+} from './Todos.types';
+
+interface IStateProps {
+	todos: TodosState;
+}
+
+type State = ReturnType<Record.Factory<IStateProps>>;
+
+const State = Record<IStateProps>({
+	todos: null
+});
+
+interface IActions {
+	todos: TodosActions;
+}
 
 describe('Store', () => {
 
 	it('should create correct instance', () => {
 
-		const store = new Store({
-			reducer: {
-				todos: TodosReducer
-			}
+		const store = new Store<State, IActions>({
+			reducer: [TodosReducer],
+			actions: [TodosActions],
+			state: State()
 		});
 
 		expect(typeof store.subscribe).toBe('function');
 		expect(typeof store.dispatch).toBe('function');
-		expect(store.state).toBeInstanceOf(Map);
-		expect(store.state.get('todos')).toBeInstanceOf(List);
+		expect(store.state).toBeInstanceOf(State);
+		expect(store.state.todos).toBeInstanceOf(List);
 
 		expect(store.actions).toBeInstanceOf(Object);
 
@@ -34,10 +53,9 @@ describe('Store', () => {
 
 	it('should correct destroy', () => {
 
-		const store = new Store({
-			reducer: {
-				todos: TodosReducer
-			}
+		const store = new Store<State>({
+			reducer: [TodosReducer],
+			state: State()
 		});
 
 		store.destroy();
@@ -47,8 +65,10 @@ describe('Store', () => {
 
 	it('should create instance without namespaces', () => {
 
-		const store = new Store({
-			reducer: TodosReducer
+		const store = new Store<TodosState, TodosActions>({
+			reducer: TodosReducer,
+			actions: TodosActions,
+			state: List()
 		});
 
 		expect(typeof store.subscribe).toBe('function');
@@ -64,23 +84,27 @@ describe('Store', () => {
 
 	it('should change state by dispatch', () => {
 
-		const store = new Store({
-			reducer: {
-				todos: TodosReducer
-			}
+		const store = new Store<State>({
+			reducer: [TodosReducer],
+			state: State()
 		});
 
 		store.dispatch({
 			type:    'todos/addItem',
 			payload: '1st todo'
 		});
-		expect(store.state.get('todos').toJS()).toEqual(['1st todo']);
+		expect(store.state.todos.toJS()).toEqual(['1st todo']);
 	});
 
 	it('should change state by dispatch without namespace', () => {
 
-		const store = new Store({
-			reducer: TodosReducer
+		class TodosReducerNoNamespaced extends TodosReducer {
+			static namespace = undefined;
+		}
+
+		const store = new Store<TodosState>({
+			reducer: TodosReducerNoNamespaced,
+			state: List()
 		});
 
 		store.dispatch({
@@ -91,12 +115,26 @@ describe('Store', () => {
 	});
 
 	it('should change state by dispatch with multiple namespaces', () => {
+		/* tslint:disable:max-classes-per-file */
+		class TasksReducer extends TodosReducer {
+			static namespace = 'tasks';
+		}
+		/* tslint:enable:max-classes-per-file */
 
-		const store = new Store({
-			reducer: {
-				todos: TodosReducer,
-				tasks: TodosReducer
-			}
+		interface IExtendedStateProps extends IStateProps {
+			tasks: TodosState;
+		}
+
+		type ExtendedState = ReturnType<Record.Factory<IExtendedStateProps>>;
+
+		const ExtendedState = Record<IExtendedStateProps>({
+			todos: null,
+			tasks: null
+		});
+
+		const store = new Store<ExtendedState>({
+			reducer: [TodosReducer, TasksReducer],
+			state: ExtendedState()
 		});
 
 		store.dispatch({
@@ -115,23 +153,21 @@ describe('Store', () => {
 
 	it('should set force state', () => {
 
-		const forceState = {
-			todos: [
+		const forceState = State({
+			todos: List([
 				'1st todo',
 				'2nd todo'
-			]
-		};
+			])
+		});
 
 		const store = new Store({
-			reducer: {
-				todos: TodosReducer
-			},
-			forceState
+			reducer: [TodosReducer],
+			state: forceState
 		});
 
 		expect(is(
 			store.state,
-			fromJS(forceState)
+			forceState
 		)).toBe(true);
 	});
 });

@@ -1,58 +1,71 @@
-import {
-	IStoreActions,
-	IStoreNamespacedActions
-} from '../Store';
 import defaultMergeProps from './mergeProps';
-import initMapFunction, { IMapFunction } from './initMapFunction';
+import initMapFunction, {
+	IMapFunction
+} from './initMapFunction';
 import isEqual from './isEqual';
 
-export type Actions = IStoreActions|IStoreNamespacedActions;
+export {
+	IMapFunction
+};
 
-export interface IMapStateToProps extends IMapFunction {
+export interface IMapStateToProps<
+	TStateProps,
+	TState,
+	TOwnProps = {}
+> extends IMapFunction {
 	(
-		state: any,
-		ownProps: object
-	): object;
+		state: TState,
+		ownProps?: TOwnProps
+	): TStateProps;
 }
 
-export interface IMapActionsToProps extends IMapFunction {
+export interface IMapActionsToProps<
+	TActionProps,
+	TActions,
+	TOwnProps = {}
+> extends IMapFunction {
 	(
-		actions: Actions,
-		ownProps: object
-	): object;
+		actions: TActions,
+		ownProps?: TOwnProps
+	): TActionProps;
 }
 
-export interface IMergeProps {
+export interface IMergeProps<
+	TMergedProps,
+	TStateProps,
+	TActionProps,
+	TOwnProps
+> {
 	(
-		stateProps: object,
-		actionsProps: object,
-		ownProps: object
-	): object;
+		stateProps: TStateProps,
+		actionsProps: TActionProps,
+		ownProps: TOwnProps
+	): TMergedProps;
 }
 
 export default class Selector {
 
 	error: Error;
 	shouldComponentUpdate: boolean;
-	props: object;
-	private mapStateToProps: IMapStateToProps;
-	private mapActionsToProps: IMapActionsToProps;
-	private mergeProps: IMergeProps;
+	props: {};
+	private mapStateToProps: IMapFunction;
+	private mapActionsToProps: IMapFunction;
+	private mergeProps: IMapFunction;
 	private hasRunAtLeastOnce: boolean;
-	private state: object;
-	private actions: object;
-	private ownProps: object;
-	private stateProps: object;
-	private actionsProps: object;
-	private mergedProps: object;
+	private state: any;
+	private actions: any;
+	private ownProps: {};
+	private stateProps: {};
+	private actionsProps: {};
+	private mergedProps: {};
 
 	constructor(
-		mapStateToProps?: IMapStateToProps,
-		mapActionsToProps?: IMapActionsToProps,
-		mergeProps = defaultMergeProps
+		mapStateToProps?: IMapFunction,
+		mapActionsToProps?: IMapFunction,
+		mergeProps: IMapFunction = defaultMergeProps
 	) {
-		this.mapStateToProps = initMapFunction<IMapStateToProps>(mapStateToProps);
-		this.mapActionsToProps = initMapFunction<IMapActionsToProps>(mapActionsToProps);
+		this.mapStateToProps = initMapFunction(mapStateToProps);
+		this.mapActionsToProps = initMapFunction(mapActionsToProps);
 		this.mergeProps = mergeProps;
 		this.error = null;
 		this.shouldComponentUpdate = true;
@@ -70,13 +83,13 @@ export default class Selector {
 
 		const noop = initMapFunction();
 
-		this.mapStateToProps = noop as IMapStateToProps;
-		this.mapActionsToProps = noop as IMapActionsToProps;
-		this.mergeProps = noop as IMergeProps;
+		this.mapStateToProps = noop as IMapFunction;
+		this.mapActionsToProps = noop as IMapFunction;
+		this.mergeProps = noop as IMapFunction;
 		this.error = null;
 		this.shouldComponentUpdate = false;
-		this.props = {};
 		this.hasRunAtLeastOnce = false;
+		this.props = {};
 		this.state = {};
 		this.actions = {};
 		this.ownProps = {};
@@ -85,7 +98,11 @@ export default class Selector {
 		this.mergedProps = {};
 	}
 
-	run(state, actions: Actions, ownProps: object) {
+	run(
+		state,
+		actions,
+		ownProps: {}
+	) {
 
 		try {
 
@@ -106,9 +123,9 @@ export default class Selector {
 	}
 
 	private handleFirstCall(
-		firstState: any,
-		firstActions: Actions,
-		firstOwnProps: object
+		firstState,
+		firstActions,
+		firstOwnProps: {}
 	) {
 
 		const {
@@ -129,9 +146,9 @@ export default class Selector {
 	}
 
 	private handleSubsequentCalls(
-		nextState: any,
-		nextActions: Actions,
-		nextOwnProps: object
+		nextState,
+		nextActions,
+		nextOwnProps: {}
 	) {
 
 		const propsChanged = !isEqual(nextOwnProps, this.ownProps);

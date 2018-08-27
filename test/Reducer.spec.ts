@@ -1,7 +1,9 @@
 import {
-	fromJS
+	fromJS,
+	List
 } from 'immutable';
-import TodosReducer from './TodosReducer';
+import { createReducer } from '../src/Reducer';
+import TodosReducer from './Todos.reducer';
 
 describe('Reducer', () => {
 
@@ -14,15 +16,6 @@ describe('Reducer', () => {
 
 	it('should create correct instance', () => {
 
-		const todos = new TodosReducer('todos');
-
-		expect(typeof todos.setItems).toBe('function');
-		expect(typeof todos.addItem).toBe('function');
-		expect(typeof todos.removeItem).toBe('function');
-	});
-
-	it('should create correct instance without namespace', () => {
-
 		const todos = new TodosReducer();
 
 		expect(typeof todos.setItems).toBe('function');
@@ -32,9 +25,7 @@ describe('Reducer', () => {
 
 	it('should apply reducer to the previous state', async () => {
 
-		const todos = new TodosReducer('todos');
-		const todosReducer = todos.createReducer();
-
+		const todosReducer = createReducer(TodosReducer);
 		let state = fromJS({
 			todos: []
 		});
@@ -72,15 +63,18 @@ describe('Reducer', () => {
 
 	it('should apply reducer to the previous state without namespaces', async () => {
 
-		const todos = new TodosReducer();
-		const todosReducer = todos.createReducer();
+		class TodosReducerNoNamespaced extends TodosReducer {
+			static namespace = undefined;
+		}
 
-		let state = fromJS([]);
+		const todosReducer = createReducer(TodosReducerNoNamespaced);
+		let state = List();
 
 		state = todosReducer(state, {
 			type:    'addItem',
 			payload: '1st todo'
 		});
+
 		state = todosReducer(state, {
 			type:    'addItem',
 			payload: '2nd todo'

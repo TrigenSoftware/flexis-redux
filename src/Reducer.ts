@@ -1,132 +1,162 @@
 import {
 	Reducer as ReduxReducer
 } from 'redux';
+import {
+	protoKeys
+} from './utils/proto';
+import Actions, {
+	prepareMethods
+} from './Actions';
 
 export interface IReducerConstructor {
+	namespace?: string;
 	initialState?: any;
-	new (namespace?: string): Reducer;
+	Actions: typeof Actions;
+	new (): Reducer;
 }
 
 export interface IReducersMap {
 	[actionType: string]: string;
 }
 
-let ownMethods: PropertyKey[] = [];
-
 export default class Reducer {
 
+	static namespace: string;
 	static initialState?: any;
-	reducersMap: IReducersMap;
-
-	constructor(
-		private readonly namespace?: string
-	) {
-
-		const actionNamespace = typeof namespace === 'string'
-			? `${namespace}/`
-			: '';
-
-		const reducersNames = Reflect.ownKeys(this.constructor.prototype)
-			.filter(_ => !ownMethods.includes(_) && typeof _ !== 'symbol');
-
-		const reducersMap: IReducersMap = reducersNames.reduce((reducersMap, reducerName) => {
-			reducersMap[`${actionNamespace}${this[reducerName].name}`] = reducerName;
-			return reducersMap;
-		}, {});
-
-		this.reducersMap = reducersMap;
-	}
-
-	createReducer(parentReducer?: ReduxReducer): ReduxReducer {
+	static get Actions() {
 
 		const {
 			namespace
 		} = this;
+		/* tslint:disable:max-classes-per-file */
+		const GeneratedActions = class GeneratedActions<
+			TState = any,
+			TGlobalState = any,
+			TAllActions = any
+		> extends Actions<
+			TState,
+			TGlobalState,
+			TAllActions
+		> {
+			static namespace: string = namespace;
+		};
+		/* tslint:enable:max-classes-per-file */
 
-		if (namespace) {
-			return this.createNamespaceReducer(parentReducer);
-		}
+		prepareMethods(
+			GeneratedActions,
+			getReducersMap(this)
+		);
 
-		return this.createSimpleReducer(parentReducer);
+		return GeneratedActions;
+	}
+}
+
+export function ActionType(type) {
+	return (_, __, descriptor) => {
+		Reflect.defineProperty(descriptor.value, 'name', {
+			value: type
+		});
+	};
+}
+
+export function createReducer(
+	Reducer: IReducerConstructor,
+	parentReducer?: ReduxReducer
+): ReduxReducer {
+
+	const {
+		namespace
+	} = Reducer;
+
+	if (namespace) {
+		return createNamespaceReducer(Reducer, parentReducer);
 	}
 
-	private createSimpleReducer(parentReducer: ReduxReducer): ReduxReducer {
+	return createSimpleReducer(Reducer, parentReducer);
+}
 
-		const {
-			reducersMap
-		} = this;
+function getReducersMap(Reducer: IReducerConstructor) {
 
-		const withParentReducer = typeof parentReducer === 'function';
+	const {
+		namespace,
+		prototype
+	} = Reducer;
+	const actionNamespace = typeof namespace === 'string'
+		? `${namespace}/`
+		: '';
+	const reducersNames = protoKeys(prototype);
+	const reducersMap = reducersNames.reduce<IReducersMap>((reducersMap, reducerName) => {
+		reducersMap[`${actionNamespace}${prototype[reducerName].name}`] = reducerName;
+		return reducersMap;
+	}, {});
 
-		if (withParentReducer) {
-			return (inputState, action) => {
+	return reducersMap;
+}
 
-				const state = parentReducer(inputState, action);
+function createSimpleReducer(
+	Reducer: IReducerConstructor,
+	parentReducer: ReduxReducer
+): ReduxReducer {
 
-				if (state !== inputState) {
-					return state;
-				}
+	const reducer = new Reducer();
+	const reducersMap = getReducersMap(Reducer);
+	const withParentReducer = typeof parentReducer === 'function';
 
-				const {
-					type
-				} = action;
+	if (withParentReducer) {
+		return (inputState, action) => {
 
-				if (reducersMap.hasOwnProperty(type)) {
-					return this[reducersMap[type]](state, action);
-				}
+			const state = parentReducer(inputState, action);
 
+			if (state !== inputState) {
 				return state;
-			};
-		}
-
-		return (state, action) => {
+			}
 
 			const {
 				type
 			} = action;
 
 			if (reducersMap.hasOwnProperty(type)) {
-				return this[reducersMap[type]](state, action);
+				return reducer[reducersMap[type]](state, action);
 			}
 
 			return state;
 		};
 	}
 
-	private createNamespaceReducer(parentReducer: ReduxReducer): ReduxReducer {
+	return (state, action) => {
 
 		const {
-			namespace,
-			reducersMap
-		} = this;
+			type
+		} = action;
 
-		const withParentReducer = typeof parentReducer === 'function';
-
-		if (withParentReducer) {
-			return (inputState, action) => {
-
-				const state = parentReducer(inputState, action);
-
-				if (state !== inputState) {
-					return state;
-				}
-
-				const {
-					type
-				} = action;
-
-				if (reducersMap.hasOwnProperty(type)) {
-					return state.set(
-						namespace,
-						this[reducersMap[type]](state.get(namespace), action)
-					);
-				}
-
-				return state;
-			};
+		if (reducersMap.hasOwnProperty(type)) {
+			return reducer[reducersMap[type]](state, action);
 		}
 
-		return (state, action) => {
+		return state;
+	};
+}
+
+function createNamespaceReducer(
+	Reducer: IReducerConstructor,
+	parentReducer: ReduxReducer
+): ReduxReducer {
+
+	const {
+		namespace
+	} = Reducer;
+	const reducer = new Reducer();
+	const reducersMap = getReducersMap(Reducer);
+	const withParentReducer = typeof parentReducer === 'function';
+
+	if (withParentReducer) {
+		return (inputState, action) => {
+
+			const state = parentReducer(inputState, action);
+
+			if (state !== inputState) {
+				return state;
+			}
 
 			const {
 				type
@@ -135,21 +165,27 @@ export default class Reducer {
 			if (reducersMap.hasOwnProperty(type)) {
 				return state.set(
 					namespace,
-					this[reducersMap[type]](state.get(namespace), action)
+					reducer[reducersMap[type]](state.get(namespace), action)
 				);
 			}
 
 			return state;
 		};
 	}
-}
 
-ownMethods = Reflect.ownKeys(Reducer.prototype);
+	return (state, action) => {
 
-export function ActionType(type) {
-	return (_, __, descriptor) => {
-		Reflect.defineProperty(descriptor.value, 'name', {
-			value: type
-		});
+		const {
+			type
+		} = action;
+
+		if (reducersMap.hasOwnProperty(type)) {
+			return state.set(
+				namespace,
+				reducer[reducersMap[type]](state.get(namespace), action)
+			);
+		}
+
+		return state;
 	};
 }

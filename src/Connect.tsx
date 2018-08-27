@@ -1,22 +1,38 @@
 import React, {
+	ComponentType,
 	ComponentClass,
-	StatelessComponent,
 	Component,
 	createElement
 } from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import Selector, {
+	IMapFunction,
 	IMapStateToProps,
 	IMapActionsToProps,
-	IMergeProps,
-	Actions
+	IMergeProps
 } from './utils/Selector';
 import StoreContext from './StoreContext';
 
 interface IContext {
 	storeState: any;
-	actions: Actions;
+	actions: any;
 }
+
+interface IOptions {
+	withRef?: boolean;
+}
+
+type CombineProps<U, T> = U & {
+	[K in Exclude<keyof T, keyof U>]?: T[K]
+};
+
+type ConnectedComponentClass<TOwnProps, TProps> = ComponentClass<TOwnProps> & {
+	WrappedComponent: ComponentType<CombineProps<TProps, TOwnProps>>
+};
+
+type ConnectDecorator<TOwnProps, TProps> = (WrappedComponent: ComponentType<CombineProps<TProps, TOwnProps>>) =>
+	ConnectedComponentClass<TOwnProps, TProps>
+;
 
 const {
 	Consumer: StoreContextConsumer
@@ -24,17 +40,88 @@ const {
 
 let hotReloadingVersion = 0;
 
-export default function Connect(
-	mapStateToProps?: IMapStateToProps,
-	mapActionsToProps?: IMapActionsToProps,
-	mergeProps?: IMergeProps,
-	{
-		withRef
-	} = {
-		withRef: false
-	}
+export default Connect;
+
+function Connect<
+	TStateProps,
+	TState,
+	TOwnProps = {}
+>(
+	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>
+): ConnectDecorator<TOwnProps, TStateProps>;
+
+function Connect<
+	TActionsProps,
+	TActions,
+	TOwnProps = {}
+>(
+	mapStateToProps: null | undefined,
+	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>
+): ConnectDecorator<TOwnProps, TActionsProps>;
+
+function Connect<
+	TStateProps,
+	TActionsProps,
+	TState,
+	TActions,
+	TOwnProps = {}
+>(
+	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
+	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>
+): ConnectDecorator<TOwnProps, TStateProps & TActionsProps>;
+
+function Connect<
+	TStateProps,
+	TActionsProps,
+	TMergedProps,
+	TState,
+	TOwnProps = {}
+>(
+	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
+	mapActionsToProps: null | undefined,
+	mergeProps: IMergeProps<TMergedProps, TStateProps, TActionsProps, TOwnProps>,
+	options?: IOptions
+): ConnectDecorator<TOwnProps, TMergedProps>;
+
+function Connect<
+	TStateProps,
+	TActionsProps,
+	TMergedProps,
+	TActions,
+	TOwnProps = {}
+>(
+	mapStateToProps: null | undefined,
+	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>,
+	mergeProps: IMergeProps<TMergedProps, TStateProps, TActionsProps, TOwnProps>,
+	options?: IOptions
+): ConnectDecorator<TOwnProps, TMergedProps>;
+
+function Connect<
+	TStateProps,
+	TActionsProps,
+	TMergedProps,
+	TState,
+	TActions,
+	TOwnProps = {}
+>(
+	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
+	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>,
+	mergeProps: IMergeProps<TMergedProps, TStateProps, TActionsProps, TOwnProps>,
+	options?: IOptions
+): ConnectDecorator<TOwnProps, TMergedProps>;
+
+function Connect(
+	mapStateToProps: IMapFunction,
+	mapActionsToProps?: IMapFunction,
+	mergeProps?: IMapFunction,
+	options?: IOptions
 ) {
-	return (WrappedComponent: ComponentClass|StatelessComponent) => {
+
+	const {
+		withRef = false
+	} = options;
+
+	return (WrappedComponent) => {
 
 		const wrappedComponentName = WrappedComponent.displayName
 			|| WrappedComponent.name
@@ -115,7 +202,7 @@ export default function Connect(
 				return this.wrappedInstance;
 			}
 
-			private initSelector(storeState: any, actions: Actions) {
+			private initSelector(storeState, actions) {
 
 				const selector = new Selector(
 					mapStateToProps,
@@ -132,7 +219,7 @@ export default function Connect(
 			}
 
 			// tslint:disable-next-line
-			private addExtraProps(props: object): object {
+			private addExtraProps(props) {
 				return props;
 			}
 		}
@@ -183,6 +270,6 @@ export default function Connect(
 			};
 		}
 
-		return hoistNonReactStatics(Connect, WrappedComponent);
+		return hoistNonReactStatics(Connect, WrappedComponent) as any;
 	};
 }

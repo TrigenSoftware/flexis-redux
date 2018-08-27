@@ -4,66 +4,64 @@ import {
 	StoreEnhancer,
 	createStore
 } from 'redux';
+import { Map } from 'immutable';
 import {
-	Map,
-	fromJS
-} from 'immutable';
-import Reducer, {
-	IReducerConstructor
+	IReducerConstructor,
+	createReducer
 } from './Reducer';
-import Actions, {
+import {
 	IActionsConstructor
 } from './Actions';
 
-export interface IStoreNamespacedReducerConstructors {
-	[namespace: string]: IReducerConstructor;
-}
+type InputClasses<T> = T | T[] | {
+	[key: string]: T;
+};
 
-export interface IStoreNamespacedActionsConstructors {
-	[namespace: string]: IActionsConstructor;
-}
-
-export interface IStoreActions {
-	[action: string]: any;
-}
-
-export interface IStoreNamespacedActions {
-	[namespace: string]: IStoreActions;
-}
-
-export interface IStoreConfig {
-	reducer: IReducerConstructor|IStoreNamespacedReducerConstructors;
-	actions?: IActionsConstructor|IStoreNamespacedActionsConstructors;
-	forceState?: any;
+export interface IStoreConfig<TState> {
+	reducer: InputClasses<IReducerConstructor>;
+	actions?: InputClasses<any>;
+	state: TState;
 	enhancer?: StoreEnhancer;
 }
 
-export default class Store {
+function inputClassesToArray<T>(inputClasses): T[] {
+	return inputClasses
+		? (Array.isArray(inputClasses)
+			? inputClasses
+			: Object.values(inputClasses))
+		: [];
+}
+
+export default class Store<
+	TState = any,
+	TActions = any
+> {
 
 	private store: ReduxStore;
-	private storeActions: IStoreActions|IStoreNamespacedActions;
+	private storeActions: TActions;
 
 	constructor({
 		reducer,
 		actions,
-		forceState,
+		state,
 		enhancer
-	}: IStoreConfig) {
+	}: IStoreConfig<TState>) {
 
-		const withoutNamespaces = Reflect.getPrototypeOf(reducer) === Reducer;
+		const withoutNamespaces = !Array.isArray(reducer)
+			&& Object.prototype !== Reflect.getPrototypeOf(reducer);
 
 		if (withoutNamespaces) {
 			this.createSimpleStore(
 				reducer as IReducerConstructor,
 				actions as IActionsConstructor,
-				forceState,
+				state,
 				enhancer
 			);
 		} else {
 			this.createNamespacedStore(
-				reducer as IStoreNamespacedReducerConstructors,
-				actions as IStoreNamespacedActionsConstructors,
-				forceState,
+				inputClassesToArray<IReducerConstructor>(reducer),
+				inputClassesToArray<IActionsConstructor>(actions),
+				state,
 				enhancer
 			);
 		}
@@ -76,72 +74,69 @@ export default class Store {
 	private createSimpleStore(
 		Reducer: IReducerConstructor,
 		maybeActions: IActionsConstructor,
-		forceState,
+		stateBase,
 		enhancer: StoreEnhancer
 	) {
 
-		const ActionsConstructor = typeof maybeActions === 'undefined'
-			? Actions
+		const Actions = typeof maybeActions === 'undefined'
+			? Reducer.Actions as IActionsConstructor
 			: maybeActions;
-		const reducerInstance = new Reducer();
-		const reducer = reducerInstance.createReducer();
-		const actions = new ActionsConstructor(this, reducerInstance.reducersMap);
+		const reducer = createReducer(Reducer);
+		const actions = new Actions(this);
 		const { initialState } = Reducer;
 
-		let state: any = Map<any, any>();
+		let state: any = Map();
 
-		if (typeof forceState !== 'undefined') {
-			state = fromJS(forceState);
+		if (typeof stateBase !== 'undefined') {
+			state = stateBase;
 		} else
 		if (typeof initialState !== 'undefined') {
-			state = fromJS(initialState);
+			state = initialState;
 		}
 
 		this.store = createStore(reducer, state, enhancer);
-		this.storeActions = actions;
+		this.storeActions = actions as any;
 	}
 
 	private createNamespacedStore(
-		reducersClasses: IStoreNamespacedReducerConstructors,
-		actionsClasses: IStoreNamespacedActionsConstructors,
-		forceState,
+		reducers: IReducerConstructor[],
+		maybeActions: IActionsConstructor[],
+		stateBase,
 		enhancer: StoreEnhancer
 	) {
 
-		const withoutForceState = typeof forceState === 'undefined';
-		const actions: IStoreNamespacedActions = {};
+		let state = stateBase || Map();
+		let actions: any = {};
 
-		let reducer: ReduxReducer = null;
-		let state = withoutForceState
-			? Map<any, any>()
-			: fromJS(forceState);
+		const reducer: ReduxReducer = reducers.reduce<ReduxReducer>((
+			parentReducer: ReduxReducer,
+			Reducer: IReducerConstructor
+		) => {
 
-		Object.entries(reducersClasses).forEach(([
-			key,
-			Reducer
-		]: [string, IReducerConstructor]) => {
+			const {
+				namespace,
+				initialState
+			} = Reducer;
+			const reducer = createReducer(Reducer, parentReducer);
 
-			const storeKey = key.replace(/^./, key[0].toLowerCase());
-			const ActionsConstructor = typeof actionsClasses === 'undefined'
-				? Actions
-				: actionsClasses[key] || Actions;
-			const reducerInstance = new Reducer(storeKey);
-			const { initialState } = Reducer;
-
-			reducer = reducerInstance.createReducer(reducer);
-
-			Reflect.defineProperty(actions, storeKey, {
-				value: new ActionsConstructor(
-					this,
-					reducerInstance.reducersMap,
-					storeKey
-				)
-			});
-
-			if (withoutForceState && typeof initialState !== 'undefined') {
-				state = state.set(storeKey, fromJS(initialState));
+			if (initialState && state.get(namespace) === null) {
+				state = state.set(namespace, initialState);
 			}
-		});
+
+			return reducer;
+		}, null);
+
+		if (maybeActions) {
+			actions = maybeActions.reduce((actions, Actions) => {
+				actions[Actions.namespace] = new Actions(this);
+				return actions;
+			}, {});
+		} else {
+			actions = reducers.reduce((actions, { Actions }) => {
+				actions[Actions.namespace] = new (Actions as IActionsConstructor)(this);
+				return actions;
+			}, {});
+		}
 
 		this.store = createStore(reducer, state, enhancer);
 		this.storeActions = actions;
@@ -154,7 +149,7 @@ export default class Store {
 		}
 	}
 
-	get state(): any {
+	get state(): TState {
 		this.checkIfDestroyed();
 		return this.store.getState();
 	}

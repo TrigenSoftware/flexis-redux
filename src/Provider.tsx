@@ -3,7 +3,7 @@ import React, {
 	Fragment
 } from 'react';
 import PropTypes from 'prop-types';
-import Store, { IStoreActions } from './Store';
+import Store from './Store';
 import StoreContext from './StoreContext';
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
 
 interface IState {
 	storeState: any;
-	actions: IStoreActions;
+	actions: any;
 }
 
 const {
@@ -22,7 +22,7 @@ const {
 export default class Provider extends Component<IProps, IState> {
 
 	static propTypes = {
-		store:    PropTypes.instanceOf(Store).isRequired,
+		store: PropTypes.instanceOf(Store).isRequired,
 		children: PropTypes.any.isRequired
 	};
 
