@@ -35,7 +35,7 @@ Module exposes next API:
 export default Store;
 export {
 	Reducer,
-	Actions,
+	ActionType,
 	Provider,
 	Connect
 };
