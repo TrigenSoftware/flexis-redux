@@ -1,11 +1,11 @@
 import {
 	Record,
-	Map,
 	List,
-	fromJS,
 	is
 } from 'immutable';
-import Store from '../src';
+import Store, {
+	Reducer
+} from '../src';
 import TodosReducer from './Todos.reducer';
 import TodosActions from './Todos.actions';
 import {
@@ -65,9 +65,17 @@ describe('Store', () => {
 
 	it('should create instance without namespaces', () => {
 
+		class TodosReducerNoNamespaced extends TodosReducer {
+			static namespace = undefined;
+		}
+
+		abstract class TodosActionsNoNamespaced extends TodosActions {
+			static namespace = undefined;
+		}
+
 		const store = new Store<TodosState, TodosActions>({
-			reducer: TodosReducer,
-			actions: TodosActions,
+			reducer: TodosReducerNoNamespaced,
+			actions: TodosActionsNoNamespaced,
 			state: List()
 		});
 
@@ -82,10 +90,84 @@ describe('Store', () => {
 		expect(typeof actions.removeItem).toBe('function');
 	});
 
+	it('should create instance with hybrid state', () => {
+
+		class RootReducer extends Reducer {
+
+			addTodoItem(state: State, { payload }) {
+				const { todos } = state;
+				return state.set('todos', todos.push(payload));
+			}
+		}
+
+		abstract class RootActions extends RootReducer.Actions {
+			abstract addTodoItem(payload: string);
+		}
+
+		interface IHybridActions extends RootActions, IActions {
+		}
+
+		const store = new Store<State, IHybridActions>({
+			reducer: [RootReducer, TodosReducer],
+			actions: [RootActions, TodosActions],
+			state: State()
+		});
+
+		expect(store.state).toBeInstanceOf(State);
+		expect(store.state.todos).toBeInstanceOf(List);
+
+		const { actions } = store;
+
+		expect(actions).toBeInstanceOf(Object);
+		expect(typeof actions.addTodoItem).toBe('function');
+
+		const { todos } = actions;
+
+		expect(todos).toBeInstanceOf(Object);
+		expect(typeof todos.setItems).toBe('function');
+		expect(typeof todos.addItem).toBe('function');
+		expect(typeof todos.removeItem).toBe('function');
+	});
+
+	it('should add reducer on the fly', () => {
+
+		const store = new Store<State, IActions>({
+			state: State({
+				todos: List()
+			})
+		});
+
+		expect(store.actions).toEqual({});
+
+		store.dispatch({
+			type:    'todos/addItem',
+			payload: '1st todo'
+		});
+		expect(store.state.todos.toJS()).toEqual([]);
+
+		store.add({
+			reducer: TodosReducer,
+			actions: TodosActions
+		});
+
+		const { todos } = store.actions;
+
+		expect(todos).toBeInstanceOf(Object);
+		expect(typeof todos.setItems).toBe('function');
+		expect(typeof todos.addItem).toBe('function');
+		expect(typeof todos.removeItem).toBe('function');
+
+		store.dispatch({
+			type:    'todos/addItem',
+			payload: '1st todo'
+		});
+		expect(store.state.todos.toJS()).toEqual(['1st todo']);
+	});
+
 	it('should change state by dispatch', () => {
 
 		const store = new Store<State>({
-			reducer: [TodosReducer],
+			reducer: TodosReducer,
 			state: State()
 		});
 
@@ -115,11 +197,10 @@ describe('Store', () => {
 	});
 
 	it('should change state by dispatch with multiple namespaces', () => {
-		/* tslint:disable:max-classes-per-file */
+
 		class TasksReducer extends TodosReducer {
 			static namespace = 'tasks';
 		}
-		/* tslint:enable:max-classes-per-file */
 
 		interface IExtendedStateProps extends IStateProps {
 			tasks: TodosState;
@@ -151,6 +232,37 @@ describe('Store', () => {
 		});
 	});
 
+	it('should change state by dispatch with hybrid state', () => {
+
+		class RootReducer extends Reducer {
+
+			addTodoItem(state: State, { payload }) {
+				const { todos } = state;
+				return state.set('todos', todos.push(payload));
+			}
+		}
+
+		const store = new Store<State>({
+			reducer: { RootReducer, TodosReducer },
+			state: State()
+		});
+
+		store.dispatch({
+			type:    'todos/addItem',
+			payload: '1st todo'
+		});
+		store.dispatch({
+			type:    'addTodoItem',
+			payload: '2nd todo'
+		});
+		expect(store.state.toJS()).toEqual({
+			todos: [
+				'1st todo',
+				'2nd todo'
+			]
+		});
+	});
+
 	it('should set force state', () => {
 
 		const forceState = State({
@@ -161,7 +273,7 @@ describe('Store', () => {
 		});
 
 		const store = new Store({
-			reducer: [TodosReducer],
+			reducer: TodosReducer,
 			state: forceState
 		});
 

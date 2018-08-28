@@ -104,6 +104,7 @@ function runtimePrepareMethods(actions: Actions) {
 
 		if (selfMethod !== superMethod && superIsFunction) {
 			Reflect.defineProperty(actions, methodName, {
+				enumerable: true,
 				async value(payload, meta) {
 
 					const result = await Reflect.apply(selfMethod, actions, [
@@ -118,6 +119,7 @@ function runtimePrepareMethods(actions: Actions) {
 			});
 		} else {
 			Reflect.defineProperty(actions, methodName, {
+				enumerable: true,
 				value: selfMethod.bind(actions)
 			});
 		}

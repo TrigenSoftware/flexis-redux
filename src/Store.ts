@@ -18,18 +18,33 @@ type InputClasses<T> = T | T[] | {
 };
 
 export interface IStoreConfig<TState> {
-	reducer: InputClasses<IReducerConstructor>;
+	reducer?: InputClasses<IReducerConstructor>;
 	actions?: InputClasses<any>;
 	state: TState;
 	enhancer?: StoreEnhancer;
 }
 
+export interface IAddConfig {
+	reducer: InputClasses<IReducerConstructor>;
+	actions?: InputClasses<any>;
+}
+
+function sortClasses({ namespace }: IReducerConstructor|IActionsConstructor) {
+	return namespace ? 1 : 0;
+}
+
 function inputClassesToArray<T>(inputClasses): T[] {
-	return inputClasses
-		? (Array.isArray(inputClasses)
-			? inputClasses
-			: Object.values(inputClasses))
-		: [];
+	const classesArray = Array.isArray(inputClasses)
+		? inputClasses
+		: inputClasses && Reflect.getPrototypeOf(inputClasses) === Object.prototype
+			? Object.values(inputClasses)
+			: [inputClasses];
+
+	return classesArray.filter(Boolean).sort(sortClasses);
+}
+
+function noopReducer(state) {
+	return state;
 }
 
 export default class Store<
@@ -39,74 +54,18 @@ export default class Store<
 
 	private store: ReduxStore;
 	private storeActions: TActions;
+	private reducer: ReduxReducer = null;
 
 	constructor({
-		reducer,
-		actions,
-		state,
+		reducer: inputReducers,
+		actions: inputActions,
+		state: stateBase,
 		enhancer
 	}: IStoreConfig<TState>) {
 
-		const withoutNamespaces = !Array.isArray(reducer)
-			&& Object.prototype !== Reflect.getPrototypeOf(reducer);
-
-		if (withoutNamespaces) {
-			this.createSimpleStore(
-				reducer as IReducerConstructor,
-				actions as IActionsConstructor,
-				state,
-				enhancer
-			);
-		} else {
-			this.createNamespacedStore(
-				inputClassesToArray<IReducerConstructor>(reducer),
-				inputClassesToArray<IActionsConstructor>(actions),
-				state,
-				enhancer
-			);
-		}
-	}
-
-	destroy() {
-		this.store = null;
-	}
-
-	private createSimpleStore(
-		Reducer: IReducerConstructor,
-		maybeActions: IActionsConstructor,
-		stateBase,
-		enhancer: StoreEnhancer
-	) {
-
-		const Actions = typeof maybeActions === 'undefined'
-			? Reducer.Actions as IActionsConstructor
-			: maybeActions;
-		const reducer = createReducer(Reducer);
-		const actions = new Actions(this);
-		const { initialState } = Reducer;
-
-		let state: any = Map();
-
-		if (typeof stateBase !== 'undefined') {
-			state = stateBase;
-		} else
-		if (typeof initialState !== 'undefined') {
-			state = initialState;
-		}
-
-		this.store = createStore(reducer, state, enhancer);
-		this.storeActions = actions as any;
-	}
-
-	private createNamespacedStore(
-		reducers: IReducerConstructor[],
-		maybeActions: IActionsConstructor[],
-		stateBase,
-		enhancer: StoreEnhancer
-	) {
-
-		let state = stateBase || Map();
-		let actions: any = {};
+		const reducers = inputClassesToArray<IReducerConstructor>(inputReducers);
+		const actions = inputClassesToArray<IActionsConstructor>(inputActions);
+		let state: any = stateBase;
 
 		const reducer: ReduxReducer = reducers.reduce<ReduxReducer>((
 			parentReducer: ReduxReducer,
@@ -119,27 +78,71 @@ export default class Store<
 			} = Reducer;
 			const reducer = createReducer(Reducer, parentReducer);
 
-			if (initialState && state.get(namespace) === null) {
-				state = state.set(namespace, initialState);
+			if (namespace) {
+
+				if (!state) {
+					state = Map();
+				}
+
+				if (initialState
+					&& (!state.has(namespace) || state.get(namespace) === null)
+				) {
+					state = state.set(namespace, initialState);
+				}
+
+			} else
+			if (!state && initialState) {
+				state = initialState;
 			}
 
 			return reducer;
 		}, null);
 
-		if (maybeActions) {
-			actions = maybeActions.reduce((actions, Actions) => {
-				actions[Actions.namespace] = new Actions(this);
-				return actions;
-			}, {});
-		} else {
-			actions = reducers.reduce((actions, { Actions }) => {
-				actions[Actions.namespace] = new (Actions as IActionsConstructor)(this);
-				return actions;
-			}, {});
-		}
+		this.store = createStore(reducer || noopReducer, state, enhancer);
+		this.storeActions = this.createActions(actions);
+		this.reducer = reducer;
+	}
 
-		this.store = createStore(reducer, state, enhancer);
-		this.storeActions = actions;
+	add(config: IAddConfig) {
+
+		const reducers = inputClassesToArray<IReducerConstructor>(config.reducer);
+		const actions = inputClassesToArray<IActionsConstructor>(config.actions);
+
+		const reducer: ReduxReducer = reducers.reduce<ReduxReducer>(
+			(
+				parentReducer: ReduxReducer,
+				Reducer: IReducerConstructor
+			) => createReducer(Reducer, parentReducer),
+			this.reducer
+		);
+
+		this.store.replaceReducer(reducer || noopReducer);
+		Object.assign(this.storeActions, this.createActions(actions));
+		this.reducer = reducer;
+	}
+
+	destroy() {
+		this.store = null;
+	}
+
+	private createActions(
+		actions: IActionsConstructor[]
+	): TActions {
+		return actions.reduce<any>((actions, Actions) => {
+
+			const {
+				namespace
+			} = Actions;
+			const actionsIsntance = new Actions(this);
+
+			if (namespace) {
+				actions[namespace] = actionsIsntance;
+			} else {
+				Object.assign(actions, actionsIsntance);
+			}
+
+			return actions;
+		}, {});
 	}
 
 	private checkIfDestroyed() {

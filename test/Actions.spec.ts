@@ -32,18 +32,6 @@ describe('Actions', () => {
 
 	const mockStore: Store = createMockStore(mockState);
 
-	const mockReducersMap = {
-		'todos/setItems':   'setItems',
-		'todos/addItem':    'addItem',
-		'todos/removeItem': 'removeItem'
-	};
-
-	const mockReducersMapWithoutNamespace = {
-		'setItems':   'setItems',
-		'addItem':    'addItem',
-		'removeItem': 'removeItem'
-	};
-
 	it('should create correct instance', () => {
 
 		const todos: TodosActions = new (TodosActions as any)(mockStore);

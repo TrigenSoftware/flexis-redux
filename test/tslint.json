@@ -1,6 +1,7 @@
 {
 	"extends": "../tslint.json",
 	"rules": {
-		"no-magic-numbers": false
+		"no-magic-numbers": false,
+		"max-classes-per-file": false
 	}
 }
