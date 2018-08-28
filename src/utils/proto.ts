@@ -4,6 +4,12 @@ const {
 	prototype: objectProto
 } = Object;
 
+/**
+ * Get all keys of all prototypes.
+ * @param  proto - Target prototype.
+ * @param  exclude - Keys to exclude.
+ * @return Prototype keys.
+ */
 export function protoKeys(proto, exclude: string[] = []): string[] {
 
 	if (proto === objectProto) {
@@ -20,6 +26,12 @@ export function protoKeys(proto, exclude: string[] = []): string[] {
 	) as string[];
 }
 
+/**
+ * Property of prototype is function or not.
+ * @param  proto - Target prototype.
+ * @param  prop - Prop name.
+ * @return Result of checking.
+ */
 export function isFunctionProp(proto, prop: string): boolean {
 
 	if (proto === objectProto) {

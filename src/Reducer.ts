@@ -23,6 +23,11 @@ export default class Reducer {
 
 	static namespace: string;
 	static initialState?: any;
+
+	/**
+	 * Getter to generate base actions class.
+	 * @return Base class with dispatch methods.
+	 */
 	static get Actions() {
 
 		const {
@@ -51,7 +56,12 @@ export default class Reducer {
 	}
 }
 
-export function ActionType(type) {
+/**
+ * Decorator to override action type.
+ * @param type - Action type.
+ * @return Decorator for class method.
+ */
+export function ActionType(type: string) {
 	return (_, __, descriptor) => {
 		Reflect.defineProperty(descriptor.value, 'name', {
 			value: type
@@ -59,6 +69,12 @@ export function ActionType(type) {
 	};
 }
 
+/**
+ * Create reducer function from reducer class.
+ * @param  Reducer - Reducer class.
+ * @param  parentReducer - Parent reducer function.
+ * @return Reducer function.
+ */
 export function createReducer(
 	Reducer: IReducerConstructor,
 	parentReducer?: ReduxReducer
@@ -75,6 +91,11 @@ export function createReducer(
 	return createSimpleReducer(Reducer, parentReducer);
 }
 
+/**
+ * Get `{ [action name]: [method name] }` map from reducer class.
+ * @param  Reducer - Reducer class.
+ * @return `{ [action name]: [method name] }` map.
+ */
 function getReducersMap(Reducer: IReducerConstructor) {
 
 	const {
@@ -93,6 +114,12 @@ function getReducersMap(Reducer: IReducerConstructor) {
 	return reducersMap;
 }
 
+/**
+ * Create reducer function from reducer class without namespaces.
+ * @param  Reducer - Reducer class.
+ * @param  parentReducer - Parent reducer function.
+ * @return Reducer function.
+ */
 function createSimpleReducer(
 	Reducer: IReducerConstructor,
 	parentReducer: ReduxReducer
@@ -137,6 +164,12 @@ function createSimpleReducer(
 	};
 }
 
+/**
+ * Create reducer function from reducer class with namespaces.
+ * @param  Reducer - Reducer class.
+ * @param  parentReducer - Parent reducer function.
+ * @return Reducer function.
+ */
 function createNamespaceReducer(
 	Reducer: IReducerConstructor,
 	parentReducer: ReduxReducer

@@ -1,11 +1,22 @@
-import { is } from 'immutable';
+import {
+	is,
+	isImmutable
+} from 'immutable';
 
 const { hasOwnProperty } = Object.prototype;
 
+/**
+ * Deep equal check function.
+ * @param  objA - A object.
+ * @param  objB - B object.
+ * @return Result of equality check.
+ */
 export default function isEqual(objA, objB) {
 
-	if (is(objA, objB)) {
-		return true;
+	const equality = is(objA, objB);
+
+	if (equality || isImmutable(objA) && isImmutable(objB)) {
+		return equality;
 	}
 
 	if (typeof objA !== 'object' || objA === null

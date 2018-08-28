@@ -33,15 +33,28 @@ export default abstract class Actions<
 		runtimePrepareMethods(this);
 	}
 
+	/**
+	 * Global state getter.
+	 * @return Global state.
+	 */
 	get globalState(): TGlobalState {
 		return this.store.state;
 	}
 
+	/**
+	 * Actions getter.
+	 * @return Actions object.
+	 */
 	get actions(): TAllActions {
 		return this.store.actions;
 	}
 }
 
+/**
+ * Define dispatch methods on actios class prototype.
+ * @param Actions - Actions class.
+ * @param actionsMap - `{ [action name]: [method name] }` map.
+ */
 export function prepareMethods(
 	{
 		prototype
@@ -75,6 +88,10 @@ export function prepareMethods(
 	});
 }
 
+/**
+ * Prepare class methods: define state getter, bind context, wrap payload modifiers.
+ * @param actions - Actions instance.
+ */
 function runtimePrepareMethods(actions: Actions) {
 
 	const { namespace } = actions.constructor as IActionsConstructor;

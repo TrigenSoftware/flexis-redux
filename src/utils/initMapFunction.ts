@@ -3,6 +3,11 @@ export interface IMapFunction extends Function {
 	dependsOnOwnProps?: boolean;
 }
 
+/**
+ * Define `dependsOnOwnProps` on function.
+ * @param  fn - Target function.
+ * @return Function.
+ */
 export default function initMapFunction<T extends IMapFunction>(fn?: T): T {
 
 	if (typeof fn !== 'function') {

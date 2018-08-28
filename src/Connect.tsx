@@ -110,6 +110,14 @@ function Connect<
 	options?: IOptions
 ): ConnectDecorator<TOwnProps, TMergedProps>;
 
+/**
+ * Decorator to connect component to the store.
+ * @param  mapStateToProps - Function to map state to props.
+ * @param  mapActionsToProps - Function to map actions to props.
+ * @param  mergeProps - Function to merge props.
+ * @param  options - Connect options.
+ * @return Connect HOC.
+ */
 function Connect(
 	mapStateToProps: IMapFunction,
 	mapActionsToProps?: IMapFunction,

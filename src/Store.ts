@@ -29,10 +29,20 @@ export interface IAddConfig {
 	actions?: InputClasses<any>;
 }
 
+/**
+ * Sort classes by having of namespace property.
+ * @param  class - Target class.
+ * @return Has namespace property or not.
+ */
 function sortClasses({ namespace }: IReducerConstructor|IActionsConstructor) {
 	return namespace ? 1 : 0;
 }
 
+/**
+ * Convert class, array of classes or object of classes to array of classes.
+ * @param  inputClasses - Target to convert.
+ * @return Array of classes.
+ */
 function inputClassesToArray<T>(inputClasses): T[] {
 	const classesArray = Array.isArray(inputClasses)
 		? inputClasses
@@ -43,6 +53,11 @@ function inputClassesToArray<T>(inputClasses): T[] {
 	return classesArray.filter(Boolean).sort(sortClasses);
 }
 
+/**
+ * Empty reducer.
+ * @param  state - State.
+ * @return State.
+ */
 function noopReducer(state) {
 	return state;
 }
@@ -103,6 +118,11 @@ export default class Store<
 		this.reducer = reducer;
 	}
 
+	/**
+	 * Add reducers and actions on the fly. Initial state will be ignored.
+	 * @param  config - Object with reducers adn actions.
+	 * @return Store instance.
+	 */
 	add(config: IAddConfig) {
 
 		const reducers = inputClassesToArray<IReducerConstructor>(config.reducer);
@@ -119,12 +139,23 @@ export default class Store<
 		this.store.replaceReducer(reducer || noopReducer);
 		Object.assign(this.storeActions, this.createActions(actions));
 		this.reducer = reducer;
+
+		return this;
 	}
 
+	/**
+	 * Destroy store instance.
+	 */
 	destroy() {
 		this.store = null;
+		this.storeActions = null;
 	}
 
+	/**
+	 * Create actions object from classes.
+	 * @param  actions - Classes.
+	 * @return Actions object.
+	 */
 	private createActions(
 		actions: IActionsConstructor[]
 	): TActions {
@@ -145,6 +176,9 @@ export default class Store<
 		}, {});
 	}
 
+	/**
+	 * Throw error if instance was destroyed.
+	 */
 	private checkIfDestroyed() {
 
 		if (this.store === null) {
@@ -152,22 +186,39 @@ export default class Store<
 		}
 	}
 
+	/**
+	 * State getter.
+	 * @return Current state.
+	 */
 	get state(): TState {
 		this.checkIfDestroyed();
 		return this.store.getState();
 	}
 
+	/**
+	 * Dispatch getter.
+	 * @return Dispatch function.
+	 */
 	get dispatch() {
 		this.checkIfDestroyed();
 		return this.store.dispatch;
 	}
 
+	/**
+	 * Subscribe getter.
+	 * @return Subscribe function.
+	 */
 	get subscribe() {
 		this.checkIfDestroyed();
 		return this.store.subscribe;
 	}
 
+	/**
+	 * Actions getter.
+	 * @return Actions object.
+	 */
 	get actions() {
+		this.checkIfDestroyed();
 		return this.storeActions;
 	}
 }

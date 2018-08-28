@@ -79,6 +79,9 @@ export default class Selector {
 		this.mergedProps = {};
 	}
 
+	/**
+	 * Destroy selector instance.
+	 */
 	destroy() {
 
 		const noop = initMapFunction();
@@ -98,6 +101,12 @@ export default class Selector {
 		this.mergedProps = {};
 	}
 
+	/**
+	 * Run next props calculating.
+	 * @param state - Store state.
+	 * @param actions - Store actions.
+	 * @param ownProps - Component's own props.
+	 */
 	run(
 		state,
 		actions,
@@ -122,6 +131,12 @@ export default class Selector {
 		}
 	}
 
+	/**
+	 * Handle first calculating call.
+	 * @param firstState - Store state.
+	 * @param firstActions - Store actions.
+	 * @param firstOwnProps - Component's own props.
+	 */
 	private handleFirstCall(
 		firstState,
 		firstActions,
@@ -145,6 +160,12 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
+	/**
+	 * Handle subsequent calculating call.
+	 * @param nextState - Store state.
+	 * @param nextActions - Store actions.
+	 * @param nextOwnProps - Component's own props.
+	 */
 	private handleSubsequentCalls(
 		nextState,
 		nextActions,
@@ -190,6 +211,10 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
+	/**
+	 * Handle new props, new actions and new state.
+	 * @return Merged props.
+	 */
 	private handleNewPropsAndNewActionsAndNewState() {
 
 		const {
@@ -208,6 +233,10 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
+	/**
+	 * Handle new props and new state.
+	 * @return Merged props.
+	 */
 	private handleNewPropsAndNewState() {
 
 		const {
@@ -230,6 +259,10 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
+	/**
+	 * Handle new props and new actions.
+	 * @return Merged props.
+	 */
 	private handleNewPropsAndNewActions() {
 
 		const {
@@ -252,6 +285,10 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
+	/**
+	 * Handle new actions and new state.
+	 * @return Merged props.
+	 */
 	private handleNewActionsAndNewState() {
 
 		const {
@@ -270,6 +307,10 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
+	/**
+	 * Handle new props.
+	 * @return Merged props.
+	 */
 	private handleNewProps() {
 
 		const {
@@ -294,6 +335,10 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
+	/**
+	 * Handle new actions.
+	 * @return Merged props.
+	 */
 	private handleNewActions() {
 
 		const {
@@ -316,6 +361,10 @@ export default class Selector {
 		return this.mergedProps;
 	}
 
+	/**
+	 * Handle new state.
+	 * @return Merged props.
+	 */
 	private handleNewState() {
 
 		const {
