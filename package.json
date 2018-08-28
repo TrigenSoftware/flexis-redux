@@ -78,12 +78,12 @@
     "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-tslint": "^0.1.35",
-    "rollup-plugin-typescript2": "^0.16.1",
+    "rollup-plugin-typescript2": "^0.17.0",
     "ts-jest": "^23.1.4",
     "tslint": "^5.11.0",
     "tslint-config-trigen": "^3.0.6",
     "typedoc": "^0.12.0",
-    "typescript": "2.9.1"
+    "typescript": "3.0.1"
   },
   "files": [
     "lib"

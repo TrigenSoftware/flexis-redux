@@ -3,14 +3,14 @@ import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
-// import tslint from 'rollup-plugin-tslint';
+import tslint from 'rollup-plugin-tslint';
 import pkg from './package.json';
 
 const plugins = [
-	// tslint({
-	// 	exclude:    ['**/*.json', 'node_modules/**'],
-	// 	throwError: process.env.ROLLUP_WATCH != 'true'
-	// }),
+	tslint({
+		exclude:    ['**/*.json', 'node_modules/**'],
+		throwError: process.env.ROLLUP_WATCH != 'true'
+	}),
 	commonjs(),
 	typescript(),
 	babel({
