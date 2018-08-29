@@ -60,13 +60,27 @@
 					<a href="_actions_.actions.html">Actions</a>
 				</li>
 			</ul>
-			<h1>Class Actions</h1>
+			<h1>Class Actions&lt;TState, TGlobalState, TAllActions&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>TState</h4>
+					</li>
+					<li>
+						<h4>TGlobalState</h4>
+					</li>
+					<li>
+						<h4>TAllActions</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -74,10 +88,6 @@
 						<span class="target">Actions</span>
 					</li>
 				</ul>
-			</section>
-			<section class="tsd-panel tsd-kind-class tsd-parent-kind-external-module">
-				<h3 class="tsd-before-signature">Indexable</h3>
-				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>action: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
@@ -92,17 +102,16 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_actions_.actions.html#actions" class="tsd-kind-icon">actions</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_actions_.actions.html#globalstate" class="tsd-kind-icon">global<wbr>State</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_actions_.actions.html#state" class="tsd-kind-icon">state</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_actions_.actions.html#store" class="tsd-kind-icon">store</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_actions_.actions.html#store" class="tsd-kind-icon">store</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_actions_.actions.html#namespace" class="tsd-kind-icon">namespace</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Methods</h3>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_actions_.actions.html#definestategetters" class="tsd-kind-icon">define<wbr>State<wbr>Getters</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_actions_.actions.html#preparemethods" class="tsd-kind-icon">prepare<wbr>Methods</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_actions_.actions.html#actions" class="tsd-kind-icon">actions</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_actions_.actions.html#globalstate" class="tsd-kind-icon">global<wbr>State</a></li>
 							</ul>
 						</section>
 					</div>
@@ -114,25 +123,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Actions<span class="tsd-signature-symbol">(</span>store<span class="tsd-signature-symbol">: </span><a href="_store_.store.html" class="tsd-signature-type">Store</a>, actionsMap<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reducer_.ireducersmap.html" class="tsd-signature-type">IReducersMap</a>, namespace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_actions_.actions.html" class="tsd-signature-type">Actions</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Actions<span class="tsd-signature-symbol">(</span>store<span class="tsd-signature-symbol">: </span><a href="_store_.store.html" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_actions_.actions.html" class="tsd-signature-type">Actions</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/Actions.ts#L21">Actions.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L28">Actions.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>store: <a href="_store_.store.html" class="tsd-signature-type">Store</a></h5>
-								</li>
-								<li>
-									<h5>actionsMap: <a href="../interfaces/_reducer_.ireducersmap.html" class="tsd-signature-type">IReducersMap</a></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> namespace: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_actions_.actions.html" class="tsd-signature-type">Actions</a></h4>
@@ -143,91 +146,81 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="actions" class="tsd-anchor"></a>
-					<h3>actions</h3>
-					<div class="tsd-signature tsd-kind-icon">actions<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_store_.istoreactions.html" class="tsd-signature-type">IStoreActions</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_store_.istorenamespacedactions.html" class="tsd-signature-type">IStoreNamespacedActions</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/Actions.ts#L20">Actions.ts:20</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="globalstate" class="tsd-anchor"></a>
-					<h3>global<wbr>State</h3>
-					<div class="tsd-signature tsd-kind-icon">global<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/Actions.ts#L19">Actions.ts:19</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="state" class="tsd-anchor"></a>
 					<h3>state</h3>
-					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TState</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/Actions.ts#L18">Actions.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L28">Actions.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="store" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> store</h3>
+					<h3>store</h3>
 					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <a href="_store_.store.html" class="tsd-signature-type">Store</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/Actions.ts#L24">Actions.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L31">Actions.ts:31</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="namespace" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> namespace</h3>
+					<div class="tsd-signature tsd-kind-icon">namespace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L26">Actions.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="definestategetters" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> define<wbr>State<wbr>Getters</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">define<wbr>State<wbr>Getters<span class="tsd-signature-symbol">(</span>namespace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="actions" class="tsd-anchor"></a>
+					<h3>actions</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> actions<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TAllActions</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/Actions.ts#L32">Actions.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L48">Actions.ts:48</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>namespace: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Actions getter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TAllActions</span></h4>
+							<p>Actions object.</p>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="preparemethods" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> prepare<wbr>Methods</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">prepare<wbr>Methods<span class="tsd-signature-symbol">(</span>actionsMap<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reducer_.ireducersmap.html" class="tsd-signature-type">IReducersMap</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="globalstate" class="tsd-anchor"></a>
+					<h3>global<wbr>State</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> globalState<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TGlobalState</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/Actions.ts#L53">Actions.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L40">Actions.ts:40</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>actionsMap: <a href="../interfaces/_reducer_.ireducersmap.html" class="tsd-signature-type">IReducersMap</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Global state getter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TGlobalState</span></h4>
+							<p>Global state.</p>
 						</li>
 					</ul>
 				</section>
@@ -272,35 +265,35 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_utils_mergeprops_.html">"utils/merge<wbr>Props"</a>
 					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_proto_.html">"utils/proto"</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_actions_.actions.html" class="tsd-kind-icon">Actions</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_actions_.actions.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_actions_.actions.html#actions" class="tsd-kind-icon">actions</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_actions_.actions.html#globalstate" class="tsd-kind-icon">global<wbr>State</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_actions_.actions.html#state" class="tsd-kind-icon">state</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_actions_.actions.html#store" class="tsd-kind-icon">store</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_actions_.actions.html#definestategetters" class="tsd-kind-icon">define<wbr>State<wbr>Getters</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_actions_.actions.html#namespace" class="tsd-kind-icon">namespace</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_actions_.actions.html#preparemethods" class="tsd-kind-icon">prepare<wbr>Methods</a>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_actions_.actions.html#actions" class="tsd-kind-icon">actions</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_actions_.actions.html#globalstate" class="tsd-kind-icon">global<wbr>State</a>
 							</li>
 						</ul>
 					</li>
@@ -308,6 +301,15 @@
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_actions_.iactionsconstructor.html" class="tsd-kind-icon">IActions<wbr>Constructor</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_actions_.html#exclude_props" class="tsd-kind-icon">EXCLUDE_<wbr>PROPS</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_actions_.html#preparemethods" class="tsd-kind-icon">prepare<wbr>Methods</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_actions_.html#runtimepreparemethods" class="tsd-kind-icon">runtime<wbr>Prepare<wbr>Methods</a>
 					</li>
 				</ul>
 			</nav>

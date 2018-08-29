@@ -4,6 +4,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
 import tslint from 'rollup-plugin-tslint';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 import pkg from './package.json';
 
 const plugins = [
@@ -14,6 +15,11 @@ const plugins = [
 	commonjs(),
 	typescript(),
 	babel({
+		extensions: [
+			...DEFAULT_EXTENSIONS,
+			'ts',
+			'tsx'
+		],
 		runtimeHelpers: true
 	}),
 	resolve({

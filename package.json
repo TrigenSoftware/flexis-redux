@@ -15,7 +15,7 @@
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "generateDocs": "typedoc ./src --out ./docs --excludeExternals --mode modules; touch docs/.nojekyll",
+    "generateDocs": "typedoc ./src --out ./docs --ignoreCompilerErrors --excludeExternals --mode modules; touch docs/.nojekyll",
     "checkDeps": "npm-check -s; exit 0",
     "lint": "tslint -p . -t stylish 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
     "jest": "NODE_ENV=test jest -c jest.config.json",
@@ -33,6 +33,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.0.0",
+    "@babel/runtime-corejs2": "^7.0.0",
     "@types/node": "^10.9.2",
     "@types/prop-types": "^15.5.5",
     "@types/react": "16.4.12",
@@ -46,23 +47,10 @@
     "redux": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-decorators": "^7.0.0",
-    "@babel/plugin-proposal-export-default-from": "^7.0.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-proposal-function-sent": "^7.0.0",
-    "@babel/plugin-proposal-json-strings": "^7.0.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
     "@types/jest": "^23.3.1",
-    "babel-upgrade": "^0.0.23",
-    "browserslist-config-trigen": "^1.0.0",
+    "babel-preset-trigen": "^1.1.0",
+    "browserslist-config-trigen": "^1.1.0",
     "coveralls": "^3.0.0",
     "eslint": "^5.4.0",
     "eslint-config-trigen": "^3.2.0",
@@ -83,7 +71,7 @@
     "tslint": "^5.11.0",
     "tslint-config-trigen": "^3.0.6",
     "typedoc": "^0.12.0",
-    "typescript": "3.0.1"
+    "typescript": "^3.0.1"
   },
   "files": [
     "lib"

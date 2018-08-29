@@ -60,13 +60,27 @@
 					<a href="_utils_selector_.imapstatetoprops.html">IMapStateToProps</a>
 				</li>
 			</ul>
-			<h1>Interface IMapStateToProps</h1>
+			<h1>Interface IMapStateToProps&lt;TStateProps, TState, TOwnProps&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>TStateProps</h4>
+					</li>
+					<li>
+						<h4>TState</h4>
+					</li>
+					<li>
+						<h4>TOwnProps</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -82,26 +96,26 @@
 			</section>
 			<section class="tsd-panel">
 				<h3 class="tsd-before-signature">Callable</h3>
-				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-external-module">
-					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, ownProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TState</span>, ownProps<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">TOwnProps</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TStateProps</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/utils/Selector.ts#L11">utils/Selector.ts:11</a></li>
+								<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/utils/Selector.ts#L15">utils/Selector.ts:15</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>state: <span class="tsd-signature-type">any</span></h5>
+								<h5>state: <span class="tsd-signature-type">TState</span></h5>
 							</li>
 							<li>
-								<h5>ownProps: <span class="tsd-signature-type">object</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> ownProps: <span class="tsd-signature-type">TOwnProps</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TStateProps</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -142,7 +156,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Function.arguments</p>
 						<ul>
-							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:292</li>
+							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es5.d.ts:302</li>
 						</ul>
 					</aside>
 				</section>
@@ -153,7 +167,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Function.caller</p>
 						<ul>
-							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:293</li>
+							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es5.d.ts:303</li>
 						</ul>
 					</aside>
 				</section>
@@ -164,7 +178,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_utils_initmapfunction_.imapfunction.html">IMapFunction</a>.<a href="_utils_initmapfunction_.imapfunction.html#dependsonownprops">dependsOnOwnProps</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/utils/initMapFunction.ts#L3">utils/initMapFunction.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/utils/initMapFunction.ts#L3">utils/initMapFunction.ts:3</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -175,7 +189,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Function.length</p>
 						<ul>
-							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:289</li>
+							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es5.d.ts:299</li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +200,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Function.name</p>
 						<ul>
-							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.core.d.ts:99</li>
+							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es2015.core.d.ts:97</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -202,7 +216,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Function.prototype</p>
 						<ul>
-							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:288</li>
+							<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es5.d.ts:298</li>
 						</ul>
 					</aside>
 				</section>
@@ -220,7 +234,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Function.[Symbol.hasInstance]</p>
 								<ul>
-									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:157</li>
+									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts:157</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -252,7 +266,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Function.apply</p>
 								<ul>
-									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:268</li>
+									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es5.d.ts:278</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -293,7 +307,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Function.bind</p>
 								<ul>
-									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:283</li>
+									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es5.d.ts:293</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -335,7 +349,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Function.call</p>
 								<ul>
-									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:275</li>
+									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es5.d.ts:285</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -376,7 +390,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Function.toString</p>
 								<ul>
-									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:286</li>
+									<li>Defined in /Users/dangreen/github/flexis-redux/node_modules/typescript/lib/lib.es5.d.ts:296</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -429,6 +443,9 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_utils_mergeprops_.html">"utils/merge<wbr>Props"</a>
 					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_proto_.html">"utils/proto"</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -436,12 +453,12 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="../classes/_utils_selector_.selector.html" class="tsd-kind-icon">Selector</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_utils_selector_.imapactionstoprops.html" class="tsd-kind-icon">IMap<wbr>Actions<wbr>ToProps</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_utils_selector_.imapstatetoprops.html" class="tsd-kind-icon">IMap<wbr>State<wbr>ToProps</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -481,11 +498,8 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="_utils_selector_.imergeprops.html" class="tsd-kind-icon">IMerge<wbr>Props</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_utils_selector_.html#actions" class="tsd-kind-icon">Actions</a>
 					</li>
 				</ul>
 			</nav>
