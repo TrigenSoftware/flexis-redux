@@ -1200,10 +1200,11 @@ babel-preset-jest@^23.2.0:
     babel-plugin-jest-hoist "^23.2.0"
     babel-plugin-syntax-object-rest-spread "^6.13.0"
 
-babel-preset-trigen@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-trigen/-/babel-preset-trigen-1.1.0.tgz#61bc84a00a9481fb9bdec4427e0a854f23d33e43"
+babel-preset-trigen@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/babel-preset-trigen/-/babel-preset-trigen-1.2.2.tgz#321d38ab4852b385a0bed8145db28e7a66b4acb0"
   dependencies:
+    "@babel/plugin-proposal-async-generator-functions" "^7.0.0"
     "@babel/plugin-proposal-class-properties" "^7.0.0"
     "@babel/plugin-proposal-decorators" "^7.0.0"
     "@babel/plugin-proposal-export-default-from" "^7.0.0"
