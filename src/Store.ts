@@ -86,8 +86,8 @@ export default class Store<
 	private store: ReduxStore;
 	private storeActions: TActions;
 	private reducer: ReduxReducer = null;
-	private usedClasses = new Set();
-	private segmentsRegistry = new Map<any, SegmentLoader>();
+	private readonly usedClasses = new Set();
+	private readonly segmentsRegistry = new Map<any, SegmentLoader>();
 
 	constructor({
 		reducer: inputReducers,
