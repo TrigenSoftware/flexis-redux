@@ -45,6 +45,7 @@ function sortClasses({ namespace }: IReducerConstructor|IActionsConstructor) {
 /**
  * Convert class, array of classes or object of classes to array of classes.
  * @param  inputClasses - Target to convert.
+ * @param  usedClasses - Classes to exclude.
  * @return Array of classes.
  */
 function inputClassesToArray<T>(inputClasses, usedClasses: Set<any>): T[] {
