@@ -4,7 +4,9 @@ import {
 	StoreEnhancer,
 	createStore
 } from 'redux';
-import { Map } from 'immutable';
+import {
+	Map as ImmutableMap
+} from 'immutable';
 import {
 	IReducerConstructor,
 	createReducer
@@ -17,6 +19,8 @@ type InputClasses<T> = T | T[] | {
 	[key: string]: T;
 };
 
+type SegmentLoader = () => Promise<IAddSegmentConfig>;
+
 export interface IStoreConfig<TState> {
 	reducer?: InputClasses<IReducerConstructor>;
 	actions?: InputClasses<any>;
@@ -24,7 +28,7 @@ export interface IStoreConfig<TState> {
 	enhancer?: StoreEnhancer;
 }
 
-export interface IAddConfig {
+export interface IAddSegmentConfig {
 	reducer: InputClasses<IReducerConstructor>;
 	actions?: InputClasses<any>;
 }
@@ -43,14 +47,26 @@ function sortClasses({ namespace }: IReducerConstructor|IActionsConstructor) {
  * @param  inputClasses - Target to convert.
  * @return Array of classes.
  */
-function inputClassesToArray<T>(inputClasses): T[] {
+function inputClassesToArray<T>(inputClasses, usedClasses: Set<any>): T[] {
 	const classesArray = Array.isArray(inputClasses)
 		? inputClasses
 		: inputClasses && Reflect.getPrototypeOf(inputClasses) === Object.prototype
 			? Object.values(inputClasses)
 			: [inputClasses];
 
-	return classesArray.filter(Boolean).sort(sortClasses);
+	return classesArray
+		.map((inputClass) => {
+
+			if (usedClasses.has(inputClass)) {
+				return null;
+			}
+
+			usedClasses.add(inputClass);
+
+			return inputClass;
+		})
+		.filter(Boolean)
+		.sort(sortClasses);
 }
 
 /**
@@ -70,6 +86,8 @@ export default class Store<
 	private store: ReduxStore;
 	private storeActions: TActions;
 	private reducer: ReduxReducer = null;
+	private usedClasses = new Set();
+	private segmentsRegistry = new Map<any, SegmentLoader>();
 
 	constructor({
 		reducer: inputReducers,
@@ -78,8 +96,9 @@ export default class Store<
 		enhancer
 	}: IStoreConfig<TState>) {
 
-		const reducers = inputClassesToArray<IReducerConstructor>(inputReducers);
-		const actions = inputClassesToArray<IActionsConstructor>(inputActions);
+		const { usedClasses } = this;
+		const reducers = inputClassesToArray<IReducerConstructor>(inputReducers, usedClasses);
+		const actions = inputClassesToArray<IActionsConstructor>(inputActions, usedClasses);
 		let state: any = stateBase;
 
 		const reducer: ReduxReducer = reducers.reduce<ReduxReducer>((
@@ -96,7 +115,7 @@ export default class Store<
 			if (namespace) {
 
 				if (!state) {
-					state = Map();
+					state = ImmutableMap();
 				}
 
 				if (initialState
@@ -123,10 +142,11 @@ export default class Store<
 	 * @param  config - Object with reducers adn actions.
 	 * @return Store instance.
 	 */
-	add(config: IAddConfig) {
+	addSegment<TAddActions = any>(config: IAddSegmentConfig): Store<TState, TActions & TAddActions> {
 
-		const reducers = inputClassesToArray<IReducerConstructor>(config.reducer);
-		const actions = inputClassesToArray<IActionsConstructor>(config.actions);
+		const { usedClasses } = this;
+		const reducers = inputClassesToArray<IReducerConstructor>(config.reducer, usedClasses);
+		const actions = inputClassesToArray<IActionsConstructor>(config.actions, usedClasses);
 
 		const reducer: ReduxReducer = reducers.reduce<ReduxReducer>(
 			(
@@ -140,6 +160,62 @@ export default class Store<
 		Object.assign(this.storeActions, this.createActions(actions));
 		this.reducer = reducer;
 
+		return this as any;
+	}
+
+	/**
+	 * Add segment loader to the registry.
+	 * @param  id - Segment identificator.
+	 * @param  segmentLoader - Async segment loader.
+	 * @return Store instance.
+	 */
+	registerSegment(id: any, segmentLoader: SegmentLoader) {
+
+		const { segmentsRegistry } = this;
+
+		if (segmentsRegistry.has(id)) {
+			throw new Error('Segment is already registered.');
+		}
+
+		segmentsRegistry.set(id, segmentLoader);
+
+		return this;
+	}
+
+	/**
+	 * Load segment from registry.
+	 * @param  id - Segment identificator.
+	 * @return Store instance.
+	 */
+	async loadSegment(id: any) {
+
+		const { segmentsRegistry } = this;
+		const segmentLoader = segmentsRegistry.get(id);
+
+		// Already loaded.
+		if (segmentLoader === null) {
+			return this;
+		}
+
+		if (!segmentLoader) {
+			throw new Error('Segment is doesn\'t registered.');
+		}
+
+		const segmentConfig = await segmentLoader();
+
+		// Mark as loaded.
+		segmentsRegistry.set(id, null);
+
+		return this.addSegment(segmentConfig);
+	}
+
+	/**
+	 * Load segments from registry
+	 * @param  ids - Segments identificators.
+	 * @return Store instance.
+	 */
+	async loadSegments(ids: any[]) {
+		await Promise.all(ids.map(id => this.loadSegment(id)));
 		return this;
 	}
 

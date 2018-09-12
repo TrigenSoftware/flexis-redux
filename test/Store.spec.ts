@@ -145,10 +145,46 @@ describe('Store', () => {
 		});
 		expect(store.state.todos.toJS()).toEqual([]);
 
-		store.add({
+		store.addSegment({
 			reducer: TodosReducer,
 			actions: TodosActions
 		});
+
+		const { todos } = store.actions;
+
+		expect(todos).toBeInstanceOf(Object);
+		expect(typeof todos.setItems).toBe('function');
+		expect(typeof todos.addItem).toBe('function');
+		expect(typeof todos.removeItem).toBe('function');
+
+		store.dispatch({
+			type:    'todos/addItem',
+			payload: '1st todo'
+		});
+		expect(store.state.todos.toJS()).toEqual(['1st todo']);
+	});
+
+	it('should add reducer on the fly via registry', async () => {
+
+		const store = new Store<State, IActions>({
+			state: State({
+				todos: List()
+			})
+		});
+
+		expect(store.actions).toEqual({});
+
+		store.dispatch({
+			type:    'todos/addItem',
+			payload: '1st todo'
+		});
+		expect(store.state.todos.toJS()).toEqual([]);
+
+		store.registerSegment('todos', async () => ({
+			reducer: TodosReducer,
+			actions: TodosActions
+		}));
+		await store.loadSegment('todos');
 
 		const { todos } = store.actions;
 
