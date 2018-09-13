@@ -185,11 +185,12 @@ function Connect({
 
 			private renderChild({
 				loadSegments,
+				areSegmentsLoaded,
 				storeState,
 				actions
 			}: IContext) {
 
-				if (this.loadDeps(loadSegments)) {
+				if (this.loadDeps(loadSegments, areSegmentsLoaded)) {
 					return this.renderedChild;
 				}
 
@@ -259,7 +260,10 @@ function Connect({
 				return props;
 			}
 
-			private loadDeps(loadSegments: (ids: any[]) => Promise<void>) {
+			private loadDeps(
+				loadSegments: (ids: any[]) => Promise<void>,
+				areSegmentsLoaded: (ids: any[]) => boolean
+			) {
 
 				const {
 					depsLoadingStatus
@@ -270,6 +274,12 @@ function Connect({
 				}
 
 				if (depsLoadingStatus === LoadingStatus.Pending) {
+
+					if (areSegmentsLoaded(depsIds)) {
+						this.depsLoadingStatus = LoadingStatus.Done;
+						return false;
+					}
+
 					this.renderedChild = Loading
 						? createElement(Loading)
 						: null;

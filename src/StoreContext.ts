@@ -7,6 +7,7 @@ export interface IContext {
 	storeState: any;
 	actions: any;
 	loadSegments(ids: any[]): Promise<void>;
+	areSegmentsLoaded(ids: any[]): boolean;
 }
 
 export default createContext(null);

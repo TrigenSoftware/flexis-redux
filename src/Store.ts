@@ -78,7 +78,7 @@ function inputClassesToArray<T>(inputClasses, usedClasses: Set<any>): T[] {
 function noopReducer(state) {
 	return state;
 }
-
+// todo: null -> Symbol, sync check fn
 export default class Store<
 	TState = any,
 	TActions = any
@@ -218,6 +218,35 @@ export default class Store<
 	async loadSegments(ids: any[]) {
 		await Promise.all(ids.map(id => this.loadSegment(id)));
 		return this;
+	}
+
+	/**
+	 * Load all segments from registry.
+	 * @return Store instance.
+	 */
+	loadAllSegments() {
+
+		const {
+			segmentsRegistry
+		} = this;
+
+		return this.loadSegments(
+			Array.from(segmentsRegistry.keys())
+		);
+	}
+
+	/**
+	 * Are given segments loaded.
+	 * @param  ids - Segments identificators.
+	 * @return Result of checking.
+	 */
+	areSegmentsLoaded(ids: any[]) {
+
+		const {
+			segmentsRegistry
+		} = this;
+
+		return ids.every(id => segmentsRegistry.get(id) === null);
 	}
 
 	/**
