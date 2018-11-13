@@ -27,7 +27,7 @@ npm i @flexis/redux
 yarn add @flexis/redux
 ```
 
-# API
+## API
 
 Module exposes next API:
 

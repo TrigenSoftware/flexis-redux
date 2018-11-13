@@ -36,8 +36,8 @@ export default class Provider extends Component<IProps, IContext> {
 		} = store;
 
 		this.state = {
-			loadSegments:      store.loadSegments.bind(this),
-			areSegmentsLoaded: store.areSegmentsLoaded.bind(this),
+			loadSegments:      store.loadSegments.bind(store),
+			areSegmentsLoaded: store.areSegmentsLoaded.bind(store),
 			storeState,
 			actions
 		};
@@ -99,8 +99,8 @@ if (process.env.NODE_ENV !== 'production') {
 		}
 
 		return {
-			loadSegments:      store.loadSegments.bind(this),
-			areSegmentsLoaded: store.areSegmentsLoaded.bind(this),
+			loadSegments:      store.loadSegments.bind(store),
+			areSegmentsLoaded: store.areSegmentsLoaded.bind(store),
 			storeState,
 			actions
 		};

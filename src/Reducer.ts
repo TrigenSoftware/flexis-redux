@@ -58,7 +58,7 @@ export default class Reducer {
 
 /**
  * Decorator to override action type.
- * @param type - Action type.
+ * @param  type - Action type.
  * @return Decorator for class method.
  */
 export function ActionType(type: string) {

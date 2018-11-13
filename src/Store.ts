@@ -20,6 +20,7 @@ type InputClasses<T> = T | T[] | {
 };
 
 type SegmentLoader = () => Promise<IAddSegmentConfig>;
+type OnSegmentLoaded<TState, TActions> = (store: Store<TState, TActions>) => void|Promise<void>;
 
 export interface IStoreConfig<TState> {
 	reducer?: InputClasses<IReducerConstructor>;
@@ -31,6 +32,11 @@ export interface IStoreConfig<TState> {
 export interface IAddSegmentConfig {
 	reducer: InputClasses<IReducerConstructor>;
 	actions?: InputClasses<any>;
+}
+
+export interface IRegistryItem {
+	loader: SegmentLoader;
+	onLoaded?: OnSegmentLoaded<any, any>;
 }
 
 /**
@@ -88,7 +94,7 @@ export default class Store<
 	private storeActions: TActions;
 	private reducer: ReduxReducer = null;
 	private readonly usedClasses = new Set();
-	private readonly segmentsRegistry = new Map<any, SegmentLoader>();
+	private readonly segmentsRegistry = new Map<any, IRegistryItem>();
 
 	constructor({
 		reducer: inputReducers,
@@ -167,10 +173,15 @@ export default class Store<
 	/**
 	 * Add segment loader to the registry.
 	 * @param  id - Segment identificator.
-	 * @param  segmentLoader - Async segment loader.
+	 * @param  loader - Async segment loader.
+	 * @param  onLoaded - Will call after segment adding.
 	 * @return Store instance.
 	 */
-	registerSegment(id: any, segmentLoader: SegmentLoader) {
+	registerSegment<TAddActions = any>(
+		id: any,
+		loader: SegmentLoader,
+		onLoaded?: OnSegmentLoaded<TState, TActions & TAddActions>
+	) {
 
 		const { segmentsRegistry } = this;
 
@@ -178,7 +189,10 @@ export default class Store<
 			throw new Error('Segment is already registered.');
 		}
 
-		segmentsRegistry.set(id, segmentLoader);
+		segmentsRegistry.set(id, {
+			loader,
+			onLoaded
+		});
 
 		return this;
 	}
@@ -191,23 +205,32 @@ export default class Store<
 	async loadSegment(id: any) {
 
 		const { segmentsRegistry } = this;
-		const segmentLoader = segmentsRegistry.get(id);
+		const registryItem = segmentsRegistry.get(id);
 
 		// Already loaded.
-		if (segmentLoader === null) {
+		if (registryItem === null) {
 			return this;
 		}
 
-		if (!segmentLoader) {
+		if (!registryItem) {
 			throw new Error('Segment is doesn\'t registered.');
 		}
-
-		const segmentConfig = await segmentLoader();
 
 		// Mark as loaded.
 		segmentsRegistry.set(id, null);
 
-		return this.addSegment(segmentConfig);
+		const {
+			loader,
+			onLoaded
+		} = registryItem;
+		const segmentConfig = await loader();
+		const store = this.addSegment(segmentConfig);
+
+		if (typeof onLoaded === 'function') {
+			await onLoaded(store);
+		}
+
+		return store;
 	}
 
 	/**
