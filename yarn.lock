@@ -905,9 +905,16 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.4.12":
+"@types/react@*":
   version "16.4.12"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.4.12.tgz#c554005770b06c7cbcd6b0b19721e180deab7a02"
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/react@16.7.7":
+  version "16.7.7"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.7.tgz#1e5e23e7dd922968ed4b484cdec00a5402c9f31b"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -2423,14 +2430,6 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-fs-extra@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-5.0.0.tgz#414d0110cdd06705734d055652c5411260c31abd"
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^4.0.0"
-    universalify "^0.1.0"
-
 fs-extra@6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
@@ -2439,7 +2438,7 @@ fs-extra@6.0.1:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
-fs-extra@^7.0.0:
+fs-extra@7.0.0, fs-extra@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.0.tgz#8cc3f47ce07ef7b3593a11b9fb245f7e34c041d6"
   dependencies:
@@ -2792,9 +2791,9 @@ ignore@^4.0.2:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
 
-immutable@4.0.0-rc.9:
-  version "4.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.0.0-rc.9.tgz#1e6e0094e649013ec3742d2b5aeeca5eeda4f0bf"
+immutable@4.0.0-rc.12:
+  version "4.0.0-rc.12"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-4.0.0-rc.12.tgz#ca59a7e4c19ae8d9bf74a97bdf0f6e2f2a5d0217"
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -4825,25 +4824,32 @@ rollup-plugin-tslint@^0.1.35:
     tslint "^5.9.1"
     typescript "^3.0.0"
 
-rollup-plugin-typescript2@^0.16.1:
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.16.1.tgz#72e1f8a2e450550eabdc3d474e735feae322b474"
+rollup-plugin-typescript2@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.18.0.tgz#ab3f7003f47c3858810d516e4d3fada546bfb1df"
   dependencies:
-    fs-extra "5.0.0"
+    fs-extra "7.0.0"
     resolve "1.8.1"
-    rollup-pluginutils "2.3.0"
+    rollup-pluginutils "2.3.3"
     tslib "1.9.3"
 
-rollup-pluginutils@2.3.0, rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.3.0:
+rollup-pluginutils@2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.3.tgz#3aad9b1eb3e7fe8262820818840bf091e5ae6794"
+  dependencies:
+    estree-walker "^0.5.2"
+    micromatch "^2.3.11"
+
+rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.0.tgz#478ace04bd7f6da2e724356ca798214884738fc4"
   dependencies:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
 
-rollup@^0.65.0:
-  version "0.65.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.65.0.tgz#280db1252169b68fc3043028346b337dde453fba"
+rollup@^0.67.3:
+  version "0.67.3"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.67.3.tgz#55475b1b62c43220c3b4bd7edc5846233932f50b"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
@@ -5453,9 +5459,9 @@ typedoc-default-themes@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.5.0.tgz#6dc2433e78ed8bea8e887a3acde2f31785bd6227"
 
-typedoc@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.12.0.tgz#c5d606f52af29d841658e18d9faa1a72acf0e270"
+typedoc@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.13.0.tgz#9efdf352bd54873955cd161bd4b75f24a8c59dde"
   dependencies:
     "@types/fs-extra" "^5.0.3"
     "@types/handlebars" "^4.0.38"
@@ -5473,13 +5479,13 @@ typedoc@^0.12.0:
     progress "^2.0.0"
     shelljs "^0.8.2"
     typedoc-default-themes "^0.5.0"
-    typescript "3.0.x"
+    typescript "3.1.x"
 
-typescript@2.9.1:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.1.tgz#fdb19d2c67a15d11995fd15640e373e09ab09961"
+typescript@3.1.6, typescript@3.1.x:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
 
-typescript@3.0.x, typescript@^3.0.0:
+typescript@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.1.tgz#43738f29585d3a87575520a4b93ab6026ef11fdb"
 
