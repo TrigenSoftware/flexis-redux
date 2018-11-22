@@ -239,7 +239,9 @@ export default class Store<
 	 * @return Store instance.
 	 */
 	async loadSegments(ids: any[]) {
-		await Promise.all(ids.map(id => this.loadSegment(id)));
+		await Promise.all(
+			ids.map(id => this.loadSegment(id))
+		);
 		return this;
 	}
 

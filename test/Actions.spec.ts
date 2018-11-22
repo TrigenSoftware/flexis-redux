@@ -2,7 +2,14 @@ import {
 	fromJS,
 	is
 } from 'immutable';
-import Store from '../src';
+import Store, {
+	CustomDispatcher
+} from '../src';
+import {
+	State,
+	SetItemsPayload
+} from './Todos.types';
+import TodosReducer from './Todos.reducer';
 import TodosActions from './Todos.actions';
 
 function createMockStore(
@@ -89,5 +96,36 @@ describe('Actions', () => {
 		todos.addItem('todo');
 		expect(await todos.loadItems()).toBe(true);
 		expect(dispatch.mock.calls.length).toBe(3);
+	});
+
+	it('should apply custom dispatcher', () => {
+
+		const customDispatcher = jest.fn();
+		const dispatch = jest.fn();
+
+		class TodosActions extends TodosReducer.Actions<State> {
+
+			@CustomDispatcher(customDispatcher)
+			setItems(payload: SetItemsPayload) {}
+		}
+
+		const todos: TodosActions = new (TodosActions as any)(
+			createMockStore(mockState, dispatch)
+		);
+
+		todos.setItems(['todo']);
+		expect(dispatch.mock.calls.length).toBe(0);
+		expect(customDispatcher.mock.calls.length).toBe(1);
+	});
+
+	it('should not apply custom dispatcher', () => {
+
+		expect(() => {
+			class TodosActions extends TodosReducer.Actions<State> {
+
+				@CustomDispatcher(() => {})
+				notDispatcher() {}
+			}
+		}).toThrow(/is not dispatcher/);
 	});
 });

@@ -1,6 +1,4 @@
-import globals from 'rollup-plugin-node-globals';
 import commonjs from 'rollup-plugin-commonjs';
-import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import typescript from 'rollup-plugin-typescript2';
 import tslint from 'rollup-plugin-tslint';
@@ -21,12 +19,7 @@ const plugins = [
 			'tsx'
 		],
 		runtimeHelpers: true
-	}),
-	resolve({
-		browser:        true,
-		preferBuiltins: false
-	}),
-	globals()
+	})
 ];
 const dependencies = [].concat(
 	Object.keys(pkg.dependencies),

@@ -43,7 +43,9 @@ export default class Reducer {
 			TGlobalState,
 			TAllActions
 		> {
-			static namespace: string = namespace;
+			static customDispatchers = new Map();
+			static reversedActionsMap = {};
+			static namespace = namespace;
 		};
 		/* tslint:enable:max-classes-per-file */
 

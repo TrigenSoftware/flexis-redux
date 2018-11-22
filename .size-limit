@@ -1,0 +1,7 @@
+[{
+	path:  "lib/index.es.js",
+	limit: "35 KB"
+}, {
+	path:  "lib/index.js",
+	limit: "35 KB"
+}]
