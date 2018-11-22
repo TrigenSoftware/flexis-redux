@@ -1,5 +1,7 @@
 # @flexis/redux
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/TrigenSoftware/flexis-redux.svg)](https://greenkeeper.io/)
+
 [![NPM version][npm]][npm-url]
 [![Dependency status][deps]][deps-url]
 [![Build status][build]][build-url]
