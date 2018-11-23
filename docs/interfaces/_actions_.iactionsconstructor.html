@@ -85,6 +85,12 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-interface"><a href="_actions_.iactionsconstructor.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_actions_.iactionsconstructor.html#namespace" class="tsd-kind-icon">namespace</a></li>
+							</ul>
+						</section>
 					</div>
 				</section>
 			</section>
@@ -94,13 +100,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">new IActions<wbr>Constructor<span class="tsd-signature-symbol">(</span>store<span class="tsd-signature-symbol">: </span><a href="../classes/_store_.store.html" class="tsd-signature-type">Store</a>, actionsMap<span class="tsd-signature-symbol">: </span><a href="_reducer_.ireducersmap.html" class="tsd-signature-type">IReducersMap</a>, namespace<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_actions_.actions.html" class="tsd-signature-type">Actions</a></li>
+						<li class="tsd-signature tsd-kind-icon">new IActions<wbr>Constructor<span class="tsd-signature-symbol">(</span>store<span class="tsd-signature-symbol">: </span><a href="../classes/_store_.store.html" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_actions_.actions.html" class="tsd-signature-type">Actions</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/bbd48ef/src/Actions.ts#L8">Actions.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L10">Actions.ts:10</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -108,16 +114,23 @@
 								<li>
 									<h5>store: <a href="../classes/_store_.store.html" class="tsd-signature-type">Store</a></h5>
 								</li>
-								<li>
-									<h5>actionsMap: <a href="_reducer_.ireducersmap.html" class="tsd-signature-type">IReducersMap</a></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> namespace: <span class="tsd-signature-type">string</span></h5>
-								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../classes/_actions_.actions.html" class="tsd-signature-type">Actions</a></h4>
 						</li>
 					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="namespace" class="tsd-anchor"></a>
+					<h3>namespace</h3>
+					<div class="tsd-signature tsd-kind-icon">namespace<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L10">Actions.ts:10</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -160,11 +173,14 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_utils_mergeprops_.html">"utils/merge<wbr>Props"</a>
 					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_proto_.html">"utils/proto"</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="../classes/_actions_.actions.html" class="tsd-kind-icon">Actions</a>
 					</li>
 				</ul>
@@ -175,10 +191,22 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-interface">
 								<a href="_actions_.iactionsconstructor.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_actions_.iactionsconstructor.html#namespace" class="tsd-kind-icon">namespace</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_actions_.html#exclude_props" class="tsd-kind-icon">EXCLUDE_<wbr>PROPS</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_actions_.html#preparemethods" class="tsd-kind-icon">prepare<wbr>Methods</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_actions_.html#runtimepreparemethods" class="tsd-kind-icon">runtime<wbr>Prepare<wbr>Methods</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

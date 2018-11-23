@@ -6,8 +6,14 @@ import {
 import Store from './Store';
 import { IReducersMap } from './Reducer';
 
+export type ICustomDispatcher = (store: Store, action: AnyAction) => void;
+
+export type ICustomDispatchersMap = Map<() => void, ICustomDispatcher>;
+
 export interface IActionsConstructor {
-	namespace: string;
+	customDispatchers: ICustomDispatchersMap;
+	reversedActionsMap: IReducersMap;
+	namespace?: string;
 	new (store: Store): Actions;
 }
 
@@ -23,7 +29,9 @@ export default abstract class Actions<
 	TAllActions = any
 > {
 
-	static namespace: string;
+	static customDispatchers: ICustomDispatchersMap;
+	static reversedActionsMap: IReducersMap;
+	static namespace?: string;
 
 	readonly state: TState;
 
@@ -51,36 +59,82 @@ export default abstract class Actions<
 }
 
 /**
+ * Decorator to set custom dispatcher.
+ * @param  dispatcher - Custom dispatcher.
+ * @return Decorator for class method.
+ */
+export function CustomDispatcher(dispatcher: ICustomDispatcher) {
+	return (target, key, descriptor) => {
+
+		const {
+			customDispatchers,
+			reversedActionsMap
+		} = target.constructor as IActionsConstructor;
+		const {
+			value: method
+		} = descriptor;
+
+		if (reversedActionsMap.hasOwnProperty(key)) {
+			customDispatchers.set(method, dispatcher);
+		} else {
+			throw Error(`Method '${key}' is not dispatcher.`);
+		}
+	};
+}
+
+/**
+ * Helper to create action object.
+ * @param  type - Action type.
+ * @param  payload - Payload.
+ * @param  meta - Meta data.
+ * @return Action object.
+ */
+export function createAction(
+	type: string,
+	payload?: any,
+	meta?: any
+) {
+
+	const action: AnyAction = {
+		type
+	};
+
+	if (typeof payload !== 'undefined') {
+
+		action.payload = payload;
+
+		if (payload instanceof Error) {
+			action.error = true;
+		}
+	}
+
+	if (typeof meta !== 'undefined') {
+		action.meta = meta;
+	}
+
+	return action;
+}
+
+/**
  * Define dispatch methods on actios class prototype.
  * @param Actions - Actions class.
  * @param actionsMap - `{ [action name]: [method name] }` map.
  */
 export function prepareMethods(
 	{
+		reversedActionsMap,
 		prototype
 	}: IActionsConstructor,
 	actionsMap: IReducersMap
 ) {
 	Object.entries(actionsMap).forEach(([type, methodName]) => {
+
+		reversedActionsMap[methodName] = type;
+
 		Reflect.defineProperty(prototype, methodName, {
 			value(payload, meta) {
 
-				const action: AnyAction = {
-					type
-				};
-
-				if (typeof payload !== 'undefined') {
-
-					action.payload = payload;
-
-					if (payload instanceof Error) {
-						action.error = true;
-					}
-				}
-
-				if (typeof meta !== 'undefined') {
-					action.meta = meta;
-				}
+				const action = createAction(type, payload, meta);
 
 				this.store.dispatch(action);
 			}
@@ -94,7 +148,11 @@ export function prepareMethods(
  */
 function runtimePrepareMethods(actions: Actions) {
 
-	const { namespace } = actions.constructor as IActionsConstructor;
+	const {
+		reversedActionsMap,
+		customDispatchers,
+		namespace
+	} = actions.constructor as IActionsConstructor;
 	const selfProto = Object.getPrototypeOf(actions);
 	const superProto = Object.getPrototypeOf(selfProto);
 	const methods = protoKeys(selfProto, EXCLUDE_PROPS);
@@ -118,18 +176,42 @@ function runtimePrepareMethods(actions: Actions) {
 		const selfMethod = selfProto[methodName];
 		const superMethod = superProto[methodName];
 		const superIsFunction = typeof superMethod === 'function';
+		const selfIsSuper = selfMethod === superMethod;
+		let callDispatcher = superMethod;
 
-		if (selfMethod !== superMethod && superIsFunction) {
+		if (reversedActionsMap.hasOwnProperty(methodName)
+			&& customDispatchers.has(selfMethod)
+		) {
+
+			const type = reversedActionsMap[methodName];
+			const customDispatcher = customDispatchers.get(selfMethod);
+
+			callDispatcher = (payload, meta) => {
+
+				const action = createAction(type, payload, meta);
+
+				customDispatcher(actions.store, action);
+			};
+		}
+
+		if (superIsFunction && !selfIsSuper) {
 			Reflect.defineProperty(actions, methodName, {
 				enumerable: true,
-				async value(payload, meta) {
+				value(payload, meta) {
 
-					const result = await Reflect.apply(selfMethod, actions, [
+					const result = Reflect.apply(selfMethod, actions, [
 						payload,
 						meta
 					]);
 
-					superMethod(payload, meta);
+					if (result instanceof Promise) {
+						return result.then((result) => {
+							callDispatcher(payload, meta);
+							return result;
+						});
+					}
+
+					callDispatcher(payload, meta);
 
 					return result;
 				}
@@ -137,7 +219,9 @@ function runtimePrepareMethods(actions: Actions) {
 		} else {
 			Reflect.defineProperty(actions, methodName, {
 				enumerable: true,
-				value: selfMethod.bind(actions)
+				value: callDispatcher === superMethod
+					? selfMethod.bind(actions)
+					: callDispatcher
 			});
 		}
 

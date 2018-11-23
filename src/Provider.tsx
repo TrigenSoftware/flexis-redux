@@ -4,22 +4,19 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import Store from './Store';
-import StoreContext from './StoreContext';
+import StoreContext, {
+	IContext
+} from './StoreContext';
 
 interface IProps {
 	store: Store;
-}
-
-interface IState {
-	storeState: any;
-	actions: any;
 }
 
 const {
 	Provider: StoreContextProvider
 } = StoreContext;
 
-export default class Provider extends Component<IProps, IState> {
+export default class Provider extends Component<IProps, IContext> {
 
 	static propTypes = {
 		store: PropTypes.instanceOf(Store).isRequired,
@@ -32,12 +29,15 @@ export default class Provider extends Component<IProps, IState> {
 
 		super(props);
 
+		const { store } = props;
 		const {
 			state: storeState,
 			actions
-		} = props.store;
+		} = store;
 
 		this.state = {
+			loadSegments:      store.loadSegments.bind(store),
+			areSegmentsLoaded: store.areSegmentsLoaded.bind(store),
 			storeState,
 			actions
 		};
@@ -84,8 +84,8 @@ if (process.env.NODE_ENV !== 'production') {
 		{
 			storeState: prevStoreState,
 			actions: prevActions
-		}: IState
-	): IState {
+		}: IContext
+	): IContext {
 
 		const {
 			state: storeState,
@@ -99,6 +99,8 @@ if (process.env.NODE_ENV !== 'production') {
 		}
 
 		return {
+			loadSegments:      store.loadSegments.bind(store),
+			areSegmentsLoaded: store.areSegmentsLoaded.bind(store),
 			storeState,
 			actions
 		};

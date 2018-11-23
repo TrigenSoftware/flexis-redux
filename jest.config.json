@@ -19,5 +19,10 @@
 	"coverageReporters": [
 		"lcovonly",
 		"text"
-	]
+	],
+	"globals": {
+		"ts-jest": {
+			"diagnostics": false
+		}
+	}
 }

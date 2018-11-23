@@ -11,14 +11,16 @@ import Selector, {
 	IMapActionsToProps,
 	IMergeProps
 } from './utils/Selector';
-import StoreContext from './StoreContext';
+import StoreContext, {
+	IContext
+} from './StoreContext';
 
-interface IContext {
-	storeState: any;
-	actions: any;
-}
-
-interface IOptions {
+interface IConnectOptions {
+	dependsOn?: any|any[];
+	loading?: ComponentType;
+	mapStateToProps: IMapFunction;
+	mapActionsToProps?: IMapFunction;
+	mergeProps?: IMapFunction;
 	withRef?: boolean;
 }
 
@@ -34,6 +36,12 @@ type ConnectDecorator<TOwnProps, TProps> = (WrappedComponent: ComponentType<Comb
 	ConnectedComponentClass<TOwnProps, TProps>
 ;
 
+enum LoadingStatus {
+	Pending,
+	InProgress,
+	Done
+}
+
 const {
 	Consumer: StoreContextConsumer
 } = StoreContext;
@@ -46,18 +54,22 @@ function Connect<
 	TStateProps,
 	TState,
 	TOwnProps = {}
->(
+>(options: {
+	dependsOn?: any|any[];
+	loading?: ComponentType;
 	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>
-): ConnectDecorator<TOwnProps, TStateProps>;
+}): ConnectDecorator<TOwnProps, TStateProps>;
 
 function Connect<
 	TActionsProps,
 	TActions,
 	TOwnProps = {}
->(
+>(options: {
+	dependsOn?: any|any[];
+	loading?: ComponentType;
 	mapStateToProps: null | undefined,
 	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>
-): ConnectDecorator<TOwnProps, TActionsProps>;
+}): ConnectDecorator<TOwnProps, TActionsProps>;
 
 function Connect<
 	TStateProps,
@@ -65,10 +77,12 @@ function Connect<
 	TState,
 	TActions,
 	TOwnProps = {}
->(
+>(options: {
+	dependsOn?: any|any[];
+	loading?: ComponentType;
 	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
 	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>
-): ConnectDecorator<TOwnProps, TStateProps & TActionsProps>;
+}): ConnectDecorator<TOwnProps, TStateProps & TActionsProps>;
 
 function Connect<
 	TStateProps,
@@ -76,12 +90,14 @@ function Connect<
 	TMergedProps,
 	TState,
 	TOwnProps = {}
->(
+>(options: {
+	dependsOn?: any|any[];
+	loading?: ComponentType;
 	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
 	mapActionsToProps: null | undefined,
 	mergeProps: IMergeProps<TMergedProps, TStateProps, TActionsProps, TOwnProps>,
-	options?: IOptions
-): ConnectDecorator<TOwnProps, TMergedProps>;
+	withRef?: boolean
+}): ConnectDecorator<TOwnProps, TMergedProps>;
 
 function Connect<
 	TStateProps,
@@ -89,12 +105,14 @@ function Connect<
 	TMergedProps,
 	TActions,
 	TOwnProps = {}
->(
+>(options: {
+	dependsOn?: any|any[];
+	loading?: ComponentType;
 	mapStateToProps: null | undefined,
 	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>,
 	mergeProps: IMergeProps<TMergedProps, TStateProps, TActionsProps, TOwnProps>,
-	options?: IOptions
-): ConnectDecorator<TOwnProps, TMergedProps>;
+	withRef?: boolean
+}): ConnectDecorator<TOwnProps, TMergedProps>;
 
 function Connect<
 	TStateProps,
@@ -103,12 +121,14 @@ function Connect<
 	TState,
 	TActions,
 	TOwnProps = {}
->(
+>(options: {
+	dependsOn?: any|any[];
+	loading?: ComponentType;
 	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
 	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>,
 	mergeProps: IMergeProps<TMergedProps, TStateProps, TActionsProps, TOwnProps>,
-	options?: IOptions
-): ConnectDecorator<TOwnProps, TMergedProps>;
+	withRef?: boolean
+}): ConnectDecorator<TOwnProps, TMergedProps>;
 
 /**
  * Decorator to connect component to the store.
@@ -118,23 +138,25 @@ function Connect<
  * @param  options - Connect options.
  * @return Connect HOC.
  */
-function Connect(
-	mapStateToProps: IMapFunction,
-	mapActionsToProps?: IMapFunction,
-	mergeProps?: IMapFunction,
-	options?: IOptions
-) {
-
-	const {
-		withRef = false
-	} = options;
-
+function Connect({
+	dependsOn,
+	loading: Loading,
+	mapStateToProps,
+	mapActionsToProps,
+	mergeProps,
+	withRef
+}: IConnectOptions) {
 	return (WrappedComponent) => {
 
+		const depsIds = Array.isArray(dependsOn)
+			? dependsOn
+			: dependsOn
+				? [dependsOn]
+				: [];
+		const withDeps = Boolean(depsIds.length);
 		const wrappedComponentName = WrappedComponent.displayName
 			|| WrappedComponent.name
 			|| 'Component';
-
 		const displayName = `Connect(${wrappedComponentName})`;
 
 		class Connect extends Component {
@@ -143,6 +165,7 @@ function Connect(
 			static displayName = displayName;
 
 			wrappedInstance = null;
+			private depsLoadingStatus: LoadingStatus = LoadingStatus.Pending;
 			private selector: Selector = null;
 			private renderedChild = null;
 
@@ -161,9 +184,15 @@ function Connect(
 			}
 
 			private renderChild({
+				loadSegments,
+				areSegmentsLoaded,
 				storeState,
 				actions
 			}: IContext) {
+
+				if (this.loadDeps(loadSegments, areSegmentsLoaded)) {
+					return this.renderedChild;
+				}
 
 				if (this.selector === null) {
 					this.initSelector(storeState, actions);
@@ -229,6 +258,39 @@ function Connect(
 			// tslint:disable-next-line
 			private addExtraProps(props) {
 				return props;
+			}
+
+			private loadDeps(
+				loadSegments: (ids: any[]) => Promise<void>,
+				areSegmentsLoaded: (ids: any[]) => boolean
+			) {
+
+				const {
+					depsLoadingStatus
+				} = this;
+
+				if (!withDeps || depsLoadingStatus === LoadingStatus.Done) {
+					return false;
+				}
+
+				if (depsLoadingStatus === LoadingStatus.Pending) {
+
+					if (areSegmentsLoaded(depsIds)) {
+						this.depsLoadingStatus = LoadingStatus.Done;
+						return false;
+					}
+
+					this.renderedChild = Loading
+						? createElement(Loading)
+						: null;
+					this.depsLoadingStatus = LoadingStatus.InProgress;
+					loadSegments(depsIds).then(() => {
+						this.depsLoadingStatus = LoadingStatus.Done;
+						this.forceUpdate();
+					});
+				}
+
+				return true;
 			}
 		}
 
