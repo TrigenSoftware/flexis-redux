@@ -100,8 +100,10 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#reducer" class="tsd-kind-icon">reducer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#segmentsregistry" class="tsd-kind-icon">segments<wbr>Registry</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#store" class="tsd-kind-icon">store</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#storeactions" class="tsd-kind-icon">store<wbr>Actions</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#usedclasses" class="tsd-kind-icon">used<wbr>Classes</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -116,10 +118,15 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_store_.store.html#add" class="tsd-kind-icon">add</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="_store_.store.html#addsegment" class="tsd-kind-icon">add<wbr>Segment</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_store_.store.html#aresegmentsloaded" class="tsd-kind-icon">are<wbr>Segments<wbr>Loaded</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#checkifdestroyed" class="tsd-kind-icon">check<wbr>IfDestroyed</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#createactions" class="tsd-kind-icon">create<wbr>Actions</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_store_.store.html#destroy" class="tsd-kind-icon">destroy</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_store_.store.html#loadallsegments" class="tsd-kind-icon">load<wbr>All<wbr>Segments</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_store_.store.html#loadsegment" class="tsd-kind-icon">load<wbr>Segment</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_store_.store.html#loadsegments" class="tsd-kind-icon">load<wbr>Segments</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="_store_.store.html#registersegment" class="tsd-kind-icon">register<wbr>Segment</a></li>
 							</ul>
 						</section>
 					</div>
@@ -137,7 +144,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L72">Store.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L97">Store.ts:97</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -191,7 +198,17 @@
 					<div class="tsd-signature tsd-kind-icon">reducer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReduxReducer</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L72">Store.ts:72</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L95">Store.ts:95</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="segmentsregistry" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> segments<wbr>Registry</h3>
+					<div class="tsd-signature tsd-kind-icon">segments<wbr>Registry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_.iregistryitem.html" class="tsd-signature-type">IRegistryItem</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Map&lt;any, IRegistryItem&gt;()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L97">Store.ts:97</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -201,7 +218,7 @@
 					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReduxStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L70">Store.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L93">Store.ts:93</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -211,7 +228,17 @@
 					<div class="tsd-signature tsd-kind-icon">store<wbr>Actions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TActions</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L71">Store.ts:71</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L94">Store.ts:94</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="usedclasses" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> used<wbr>Classes</h3>
+					<div class="tsd-signature tsd-kind-icon">used<wbr>Classes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Set()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L96">Store.ts:96</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -228,7 +255,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L220">Store.ts:220</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L351">Store.ts:351</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -251,7 +278,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L202">Store.ts:202</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L333">Store.ts:333</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -274,7 +301,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L193">Store.ts:193</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L324">Store.ts:324</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -297,7 +324,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L211">Store.ts:211</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L342">Store.ts:342</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -313,17 +340,17 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="add" class="tsd-anchor"></a>
-					<h3>add</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_.iaddconfig.html" class="tsd-signature-type">IAddConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="addsegment" class="tsd-anchor"></a>
+					<h3>add<wbr>Segment</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Segment&lt;TAddActions&gt;<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/_store_.iaddsegmentconfig.html" class="tsd-signature-type">IAddSegmentConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_store_.store.html" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TActions</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">TAddActions</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L126">Store.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L152">Store.ts:152</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -331,17 +358,55 @@
 									<p>Add reducers and actions on the fly. Initial state will be ignored.</p>
 								</div>
 							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TAddActions</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <a href="../interfaces/_store_.iaddconfig.html" class="tsd-signature-type">IAddConfig</a></h5>
+									<h5>config: <a href="../interfaces/_store_.iaddsegmentconfig.html" class="tsd-signature-type">IAddSegmentConfig</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Object with reducers adn actions.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_store_.store.html" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TActions</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">TAddActions</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>Store instance.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="aresegmentsloaded" class="tsd-anchor"></a>
+					<h3>are<wbr>Segments<wbr>Loaded</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">are<wbr>Segments<wbr>Loaded<span class="tsd-signature-symbol">(</span>ids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L268">Store.ts:268</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Are given segments loaded.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ids: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Segments identificators.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>Result of checking.</p>
 						</li>
 					</ul>
 				</section>
@@ -355,7 +420,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L182">Store.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L313">Store.ts:313</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -377,7 +442,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L159">Store.ts:159</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L290">Store.ts:290</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -409,7 +474,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Store.ts#L149">Store.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L280">Store.ts:280</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -418,6 +483,143 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadallsegments" class="tsd-anchor"></a>
+					<h3>load<wbr>All<wbr>Segments</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">load<wbr>All<wbr>Segments<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L252">Store.ts:252</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Load all segments from registry.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Store instance.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadsegment" class="tsd-anchor"></a>
+					<h3>load<wbr>Segment</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Segment<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_.store.html" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L205">Store.ts:205</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Load segment from registry.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Segment identificator.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_.store.html" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Store instance.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="loadsegments" class="tsd-anchor"></a>
+					<h3>load<wbr>Segments</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Segments<span class="tsd-signature-symbol">(</span>ids<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L241">Store.ts:241</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Load segments from registry</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ids: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Segments identificators.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Store instance.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="registersegment" class="tsd-anchor"></a>
+					<h3>register<wbr>Segment</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">register<wbr>Segment&lt;TAddActions&gt;<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, loader<span class="tsd-signature-symbol">: </span><a href="../modules/_store_.html#segmentloader" class="tsd-signature-type">SegmentLoader</a>, onLoaded<span class="tsd-signature-symbol">?: </span><a href="../modules/_store_.html#onsegmentloaded" class="tsd-signature-type">OnSegmentLoaded</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TActions</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">TAddActions</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Store.ts#L180">Store.ts:180</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add segment loader to the registry.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>TAddActions</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Segment identificator.</p>
+									</div>
+								</li>
+								<li>
+									<h5>loader: <a href="../modules/_store_.html#segmentloader" class="tsd-signature-type">SegmentLoader</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Async segment loader.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> onLoaded: <a href="../modules/_store_.html#onsegmentloaded" class="tsd-signature-type">OnSegmentLoaded</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TActions</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">TAddActions</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Will call after segment adding.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<p>Store instance.</p>
 						</li>
 					</ul>
 				</section>
@@ -481,10 +683,16 @@
 								<a href="_store_.store.html#reducer" class="tsd-kind-icon">reducer</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_store_.store.html#segmentsregistry" class="tsd-kind-icon">segments<wbr>Registry</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_store_.store.html#store" class="tsd-kind-icon">store</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_store_.store.html#storeactions" class="tsd-kind-icon">store<wbr>Actions</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_store_.store.html#usedclasses" class="tsd-kind-icon">used<wbr>Classes</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_store_.store.html#actions" class="tsd-kind-icon">actions</a>
@@ -498,8 +706,11 @@
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_store_.store.html#subscribe" class="tsd-kind-icon">subscribe</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="_store_.store.html#addsegment" class="tsd-kind-icon">add<wbr>Segment</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_store_.store.html#add" class="tsd-kind-icon">add</a>
+								<a href="_store_.store.html#aresegmentsloaded" class="tsd-kind-icon">are<wbr>Segments<wbr>Loaded</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 								<a href="_store_.store.html#checkifdestroyed" class="tsd-kind-icon">check<wbr>IfDestroyed</a>
@@ -510,18 +721,39 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_store_.store.html#destroy" class="tsd-kind-icon">destroy</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_store_.store.html#loadallsegments" class="tsd-kind-icon">load<wbr>All<wbr>Segments</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_store_.store.html#loadsegment" class="tsd-kind-icon">load<wbr>Segment</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_store_.store.html#loadsegments" class="tsd-kind-icon">load<wbr>Segments</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="_store_.store.html#registersegment" class="tsd-kind-icon">register<wbr>Segment</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_store_.iaddconfig.html" class="tsd-kind-icon">IAdd<wbr>Config</a>
+						<a href="../interfaces/_store_.iaddsegmentconfig.html" class="tsd-kind-icon">IAdd<wbr>Segment<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_store_.iregistryitem.html" class="tsd-kind-icon">IRegistry<wbr>Item</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
 						<a href="../interfaces/_store_.istoreconfig.html" class="tsd-kind-icon">IStore<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="../modules/_store_.html#inputclasses" class="tsd-kind-icon">Input<wbr>Classes</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="../modules/_store_.html#onsegmentloaded" class="tsd-kind-icon">On<wbr>Segment<wbr>Loaded</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_store_.html#segmentloader" class="tsd-kind-icon">Segment<wbr>Loader</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="../modules/_store_.html#inputclassestoarray" class="tsd-kind-icon">input<wbr>Classes<wbr>ToArray</a>

@@ -80,6 +80,13 @@
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_actions_.iactionsconstructor.html" class="tsd-kind-icon">IActions<wbr>Constructor</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_actions_.html#icustomdispatcher" class="tsd-kind-icon">ICustom<wbr>Dispatcher</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_actions_.html#icustomdispatchersmap" class="tsd-kind-icon">ICustom<wbr>Dispatchers<wbr>Map</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
@@ -89,11 +96,60 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_actions_.html#customdispatcher" class="tsd-kind-icon">Custom<wbr>Dispatcher</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_actions_.html#createaction" class="tsd-kind-icon">create<wbr>Action</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_actions_.html#preparemethods" class="tsd-kind-icon">prepare<wbr>Methods</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_actions_.html#runtimepreparemethods" class="tsd-kind-icon">runtime<wbr>Prepare<wbr>Methods</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="icustomdispatcher" class="tsd-anchor"></a>
+					<h3>ICustom<wbr>Dispatcher</h3>
+					<div class="tsd-signature tsd-kind-icon">ICustom<wbr>Dispatcher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Actions.ts#L9">Actions.ts:9</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>store<span class="tsd-signature-symbol">: </span><a href="../classes/_store_.store.html" class="tsd-signature-type">Store</a>, action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AnyAction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>store: <a href="../classes/_store_.store.html" class="tsd-signature-type">Store</a></h5>
+											</li>
+											<li>
+												<h5>action: <span class="tsd-signature-type">AnyAction</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="icustomdispatchersmap" class="tsd-anchor"></a>
+					<h3>ICustom<wbr>Dispatchers<wbr>Map</h3>
+					<div class="tsd-signature tsd-kind-icon">ICustom<wbr>Dispatchers<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">, </span><a href="_actions_.html#icustomdispatcher" class="tsd-signature-type">ICustomDispatcher</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Actions.ts#L11">Actions.ts:11</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
@@ -104,13 +160,89 @@
 					<div class="tsd-signature tsd-kind-icon">EXCLUDE_<wbr>PROPS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[&#x27;state&#x27;,&#x27;globalState&#x27;,&#x27;actions&#x27;]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L14">Actions.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Actions.ts#L20">Actions.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="customdispatcher" class="tsd-anchor"></a>
+					<h3>Custom<wbr>Dispatcher</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">Custom<wbr>Dispatcher<span class="tsd-signature-symbol">(</span>dispatcher<span class="tsd-signature-symbol">: </span><a href="_actions_.html#icustomdispatcher" class="tsd-signature-type">ICustomDispatcher</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Actions.ts#L66">Actions.ts:66</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Decorator to set custom dispatcher.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dispatcher: <a href="_actions_.html#icustomdispatcher" class="tsd-signature-type">ICustomDispatcher</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Custom dispatcher.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">(Anonymous function)</span></h4>
+							<p>Decorator for class method.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="createaction" class="tsd-anchor"></a>
+					<h3>create<wbr>Action</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Action<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, payload<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, meta<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AnyAction</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Actions.ts#L92">Actions.ts:92</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Helper to create action object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Action type.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> payload: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Payload.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> meta: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Meta data.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AnyAction</span></h4>
+							<p>Action object.</p>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="preparemethods" class="tsd-anchor"></a>
 					<h3>prepare<wbr>Methods</h3>
@@ -121,7 +253,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L58">Actions.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Actions.ts#L123">Actions.ts:123</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -136,6 +268,9 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter">
 											<h5>prototype<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>reversed<wbr>Actions<wbr>Map<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reducer_.ireducersmap.html" class="tsd-signature-type">IReducersMap</a></h5>
 										</li>
 									</ul>
 								</li>
@@ -160,7 +295,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/4042779/src/Actions.ts#L95">Actions.ts:95</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/b579fe6/src/Actions.ts#L149">Actions.ts:149</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -235,8 +370,20 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_actions_.iactionsconstructor.html" class="tsd-kind-icon">IActions<wbr>Constructor</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_actions_.html#icustomdispatcher" class="tsd-kind-icon">ICustom<wbr>Dispatcher</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_actions_.html#icustomdispatchersmap" class="tsd-kind-icon">ICustom<wbr>Dispatchers<wbr>Map</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_actions_.html#exclude_props" class="tsd-kind-icon">EXCLUDE_<wbr>PROPS</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_actions_.html#customdispatcher" class="tsd-kind-icon">Custom<wbr>Dispatcher</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_actions_.html#createaction" class="tsd-kind-icon">create<wbr>Action</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_actions_.html#preparemethods" class="tsd-kind-icon">prepare<wbr>Methods</a>

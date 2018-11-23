@@ -66,18 +66,22 @@
 				<p><a href="https://npmjs.com/package/@flexis/redux"><img src="https://img.shields.io/npm/v/%40flexis/redux.svg" alt="NPM version"></a>
 					<a href="https://david-dm.org/TrigenSoftware/flexis-redux"><img src="https://david-dm.org/TrigenSoftware/flexis-redux.svg" alt="Dependency status"></a>
 					<a href="https://travis-ci.org/TrigenSoftware/flexis-redux"><img src="http://img.shields.io/travis/TrigenSoftware/flexis-redux.svg" alt="Build status"></a>
-				<a href="https://coveralls.io/r/TrigenSoftware/flexis-redux"><img src="https://img.shields.io/coveralls/TrigenSoftware/flexis-redux.svg" alt="Coverage status"></a></p>
+					<a href="https://coveralls.io/r/TrigenSoftware/flexis-redux"><img src="https://img.shields.io/coveralls/TrigenSoftware/flexis-redux.svg" alt="Coverage status"></a>
+				<a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/TrigenSoftware/flexis-redux.svg" alt="Greenkeeper badge"></a></p>
 				<p>Wrapper for <a href="https://github.com/reactjs/redux">Redux</a>, based on <a href="https://github.com/facebook/immutable-js/">ImmutableJS</a>.</p>
 				<h2 id="install">Install</h2>
 				<pre><code class="language-sh">npm i @flexis/redux
 <span class="hljs-comment"># or</span>
 yarn add @flexis/redux</code></pre>
-				<h1 id="api">API</h1>
+				<h2 id="api">API</h2>
 				<p>Module exposes next API:</p>
 				<pre><code class="language-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Store;
 <span class="hljs-keyword">export</span> {
+    ICustomDispatcher,
     Reducer,
     ActionType,
+    CustomDispatcher,
+    createAction,
     Provider,
     Connect
 };</code></pre>

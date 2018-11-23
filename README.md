@@ -38,8 +38,11 @@ Module exposes next API:
 ```js
 export default Store;
 export {
+	ICustomDispatcher,
 	Reducer,
 	ActionType,
+	CustomDispatcher,
+	createAction,
 	Provider,
 	Connect
 };
