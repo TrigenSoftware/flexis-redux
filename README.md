@@ -4,6 +4,7 @@
 [![Dependency status][deps]][deps-url]
 [![Build status][build]][build-url]
 [![Coverage status][coverage]][coverage-url]
+[![Greenkeeper badge][greenkeeper]][greenkeeper-url]
 
 [npm]: https://img.shields.io/npm/v/%40flexis/redux.svg
 [npm-url]: https://npmjs.com/package/@flexis/redux
@@ -16,6 +17,9 @@
 
 [coverage]: https://img.shields.io/coveralls/TrigenSoftware/flexis-redux.svg
 [coverage-url]: https://coveralls.io/r/TrigenSoftware/flexis-redux
+
+[greenkeeper]: https://badges.greenkeeper.io/TrigenSoftware/flexis-redux.svg
+[greenkeeper-url]: https://greenkeeper.io/
 
 Wrapper for [Redux](https://github.com/reactjs/redux), based on [ImmutableJS](https://github.com/facebook/immutable-js/).
 
