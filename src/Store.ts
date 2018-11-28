@@ -200,9 +200,10 @@ export default class Store<
 	/**
 	 * Load segment from registry.
 	 * @param  id - Segment identificator.
+	 * @param  skipOnLoaded - Do not call `onLoaded` function.
 	 * @return Store instance.
 	 */
-	async loadSegment(id: any) {
+	async loadSegment(id: any, skipOnLoaded = false) {
 
 		const { segmentsRegistry } = this;
 		const registryItem = segmentsRegistry.get(id);
@@ -226,7 +227,7 @@ export default class Store<
 		const segmentConfig = await loader();
 		const store = this.addSegment(segmentConfig);
 
-		if (typeof onLoaded === 'function') {
+		if (typeof onLoaded === 'function' && !skipOnLoaded) {
 			await onLoaded(store);
 		}
 
@@ -236,27 +237,30 @@ export default class Store<
 	/**
 	 * Load segments from registry
 	 * @param  ids - Segments identificators.
+	 * @param  skipOnLoaded - Do not call `onLoaded` function.
 	 * @return Store instance.
 	 */
-	async loadSegments(ids: any[]) {
+	async loadSegments(ids: any[], skipOnLoaded = false) {
 		await Promise.all(
-			ids.map(id => this.loadSegment(id))
+			ids.map(id => this.loadSegment(id, skipOnLoaded))
 		);
 		return this;
 	}
 
 	/**
 	 * Load all segments from registry.
+	 * @param  skipOnLoaded - Do not call `onLoaded` function.
 	 * @return Store instance.
 	 */
-	loadAllSegments() {
+	loadAllSegments(skipOnLoaded = false) {
 
 		const {
 			segmentsRegistry
 		} = this;
 
 		return this.loadSegments(
-			Array.from(segmentsRegistry.keys())
+			Array.from(segmentsRegistry.keys()),
+			skipOnLoaded
 		);
 	}
 
