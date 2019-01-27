@@ -24,7 +24,7 @@ type SegmentLoader = () => Promise<IAddSegmentConfig>;
 type OnSegmentLoaded<TState, TActions> = (store: Store<TState, TActions>) => void|Promise<void>;
 
 export interface IStoreConfig<TState> {
-	createStore?: StoreCreator;
+	storeCreator?: StoreCreator;
 	reducer?: InputClasses<IReducerConstructor>;
 	actions?: InputClasses<any>;
 	state: TState;
@@ -99,7 +99,7 @@ export default class Store<
 	private readonly segmentsRegistry = new Map<any, IRegistryItem>();
 
 	constructor({
-		createStore: customCreateStore = createStore,
+		storeCreator: customCreateStore = createStore,
 		reducer: inputReducers,
 		actions: inputActions,
 		state: stateBase,
@@ -142,7 +142,7 @@ export default class Store<
 			return reducer;
 		}, null);
 
-		this.store = createStore(reducer || noopReducer, state, enhancer);
+		this.store = customCreateStore(reducer || noopReducer, state, enhancer);
 		this.storeActions = this.createActions(actions);
 		this.reducer = reducer;
 	}
