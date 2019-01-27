@@ -178,6 +178,7 @@ function runtimePrepareMethods(actions: Actions) {
 		const superIsFunction = typeof superMethod === 'function';
 		const selfIsSuper = selfMethod === superMethod;
 		let callDispatcher = superMethod;
+		let isCustomDispatcher = false;
 
 		if (reversedActionsMap.hasOwnProperty(methodName)
 			&& customDispatchers.has(selfMethod)
@@ -186,6 +187,7 @@ function runtimePrepareMethods(actions: Actions) {
 			const type = reversedActionsMap[methodName];
 			const customDispatcher = customDispatchers.get(selfMethod);
 
+			isCustomDispatcher = true;
 			callDispatcher = (payload, meta) => {
 
 				const action = createAction(type, payload, meta);
@@ -195,6 +197,11 @@ function runtimePrepareMethods(actions: Actions) {
 		}
 
 		if (superIsFunction && !selfIsSuper) {
+
+			if (!isCustomDispatcher) {
+				callDispatcher = callDispatcher.bind(actions);
+			}
+
 			Reflect.defineProperty(actions, methodName, {
 				enumerable: true,
 				value(payload, meta) {
@@ -219,9 +226,9 @@ function runtimePrepareMethods(actions: Actions) {
 		} else {
 			Reflect.defineProperty(actions, methodName, {
 				enumerable: true,
-				value: callDispatcher === superMethod
-					? selfMethod.bind(actions)
-					: callDispatcher
+				value: isCustomDispatcher
+					? callDispatcher
+					: selfMethod.bind(actions)
 			});
 		}
 
