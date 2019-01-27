@@ -142,7 +142,7 @@ export default class Store<
 			return reducer;
 		}, null);
 
-		this.store = customCreateStore(reducer || noopReducer, state, enhancer);
+		this.store = createStore(reducer || noopReducer, state, enhancer);
 		this.storeActions = this.createActions(actions);
 		this.reducer = reducer;
 	}
