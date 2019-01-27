@@ -1,6 +1,7 @@
 import {
 	Store as ReduxStore,
 	Reducer as ReduxReducer,
+	StoreCreator,
 	StoreEnhancer,
 	createStore
 } from 'redux';
@@ -23,6 +24,7 @@ type SegmentLoader = () => Promise<IAddSegmentConfig>;
 type OnSegmentLoaded<TState, TActions> = (store: Store<TState, TActions>) => void|Promise<void>;
 
 export interface IStoreConfig<TState> {
+	storeCreator?: StoreCreator;
 	reducer?: InputClasses<IReducerConstructor>;
 	actions?: InputClasses<any>;
 	state: TState;
@@ -97,6 +99,7 @@ export default class Store<
 	private readonly segmentsRegistry = new Map<any, IRegistryItem>();
 
 	constructor({
+		storeCreator: customCreateStore = createStore,
 		reducer: inputReducers,
 		actions: inputActions,
 		state: stateBase,
@@ -139,7 +142,7 @@ export default class Store<
 			return reducer;
 		}, null);
 
-		this.store = createStore(reducer || noopReducer, state, enhancer);
+		this.store = customCreateStore(reducer || noopReducer, state, enhancer);
 		this.storeActions = this.createActions(actions);
 		this.reducer = reducer;
 	}
@@ -319,6 +322,15 @@ export default class Store<
 		if (this.store === null) {
 			throw new Error('Store was destroyed.');
 		}
+	}
+
+	/**
+	 * Original Redux store getter.
+	 * @return Redux store.
+	 */
+	get reduxStore() {
+		this.checkIfDestroyed();
+		return this.store;
 	}
 
 	/**

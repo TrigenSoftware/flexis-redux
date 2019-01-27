@@ -12,8 +12,8 @@
 [deps]: https://david-dm.org/TrigenSoftware/flexis-redux.svg
 [deps-url]: https://david-dm.org/TrigenSoftware/flexis-redux
 
-[build]: http://img.shields.io/travis/TrigenSoftware/flexis-redux.svg
-[build-url]: https://travis-ci.org/TrigenSoftware/flexis-redux
+[build]: http://img.shields.io/travis/com/TrigenSoftware/flexis-redux.svg
+[build-url]: https://travis-ci.com/TrigenSoftware/flexis-redux
 
 [coverage]: https://img.shields.io/coveralls/TrigenSoftware/flexis-redux.svg
 [coverage-url]: https://coveralls.io/r/TrigenSoftware/flexis-redux
