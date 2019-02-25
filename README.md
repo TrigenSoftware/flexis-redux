@@ -1,13 +1,17 @@
 # @flexis/redux
 
 [![NPM version][npm]][npm-url]
-[![Dependency status][deps]][deps-url]
+[![Peer dependencies status][peer-deps]][peer-deps-url]
+[![Dependencies status][deps]][deps-url]
 [![Build status][build]][build-url]
 [![Coverage status][coverage]][coverage-url]
 [![Greenkeeper badge][greenkeeper]][greenkeeper-url]
 
-[npm]: https://img.shields.io/npm/v/%40flexis/redux.svg
+[npm]: https://img.shields.io/npm/v/@flexis/redux.svg
 [npm-url]: https://npmjs.com/package/@flexis/redux
+
+[peer-deps]: https://david-dm.org/TrigenSoftware/flexis-redux/peer-status.svg
+[peer-deps-url]: https://david-dm.org/TrigenSoftware/flexis-redux?type=peer
 
 [deps]: https://david-dm.org/TrigenSoftware/flexis-redux.svg
 [deps-url]: https://david-dm.org/TrigenSoftware/flexis-redux
