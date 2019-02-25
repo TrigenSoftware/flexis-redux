@@ -1,12 +1,12 @@
 {
   "name": "@flexis/redux",
-  "version": "0.3.1-alpha",
+  "version": "0.3.2-alpha",
   "description": "Wrapper for Redux.",
   "author": "dangreen",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TrigenSoftware/flexis-redux.git"
+    "url": "https://github.com/TrigenSoftware/flexis-redux"
   },
   "bugs": {
     "url": "https://github.com/TrigenSoftware/flexis-redux/issues"
@@ -15,11 +15,11 @@
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "generateDocs": "typedoc ./src --out ./docs --ignoreCompilerErrors --excludeExternals --mode modules; touch docs/.nojekyll",
     "lint": "tslint -p . -t stylish 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
     "jest": "NODE_ENV=test jest -c jest.config.json",
     "checkSize": "size-limit",
     "test": "npm run lint && npm run jest && npm run build && npm run checkSize",
+    "build:docs": "typedoc ./src --out ./docs --ignoreCompilerErrors --excludeExternals --mode modules; touch docs/.nojekyll",
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "coverage": "cat ./coverage/lcov.info | coveralls",
