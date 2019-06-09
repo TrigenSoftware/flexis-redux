@@ -13,7 +13,8 @@
 							"node": "current"
 						},
 						"commonjs": true,
-						"typescript": true
+						"typescript": true,
+						"react": true
 					}
 				]
 			]
