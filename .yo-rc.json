@@ -1,0 +1,20 @@
+{
+  "generator-trigen-lib": {
+    "editPackage": true,
+    "pkg": {
+      "name": "@flexis/redux",
+      "version": "0.3.2-alpha",
+      "description": "Wrapper for Redux.",
+      "repository": "https://github.com/TrigenSoftware/flexis-redux",
+      "author": "dangreen"
+    },
+    "type": "universal",
+    "lang": "ts",
+    "rollup": true,
+    "jest": true,
+    "coverage": true,
+    "publishAsRoot": false,
+    "cleanPublish": true,
+    "checkSize": true
+  }
+}

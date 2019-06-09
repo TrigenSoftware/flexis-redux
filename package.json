@@ -14,16 +14,19 @@
   "main": "lib/index.js",
   "module": "lib/index.es.js",
   "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "scripts": {
-    "lint": "tslint -p . -t stylish 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
-    "jest": "NODE_ENV=test jest -c jest.config.json",
-    "checkSize": "size-limit",
-    "test": "npm run lint && npm run jest && npm run build && npm run checkSize",
-    "build:docs": "typedoc ./src --out ./docs --ignoreCompilerErrors --excludeExternals --mode modules; touch docs/.nojekyll",
-    "build": "rollup -c",
-    "watch": "rollup -c -w",
-    "coverage": "cat ./coverage/lcov.info | coveralls",
-    "cleanPublish": "npm run test && clean-publish"
+    "lint": "trigen-scripts lint",
+    "jest": "trigen-scripts jest",
+    "checkSize": "trigen-scripts checkSize",
+    "test": "trigen-scripts test",
+    "build:docs": "trigen-scripts build:docs",
+    "start": "trigen-scripts start",
+    "build": "trigen-scripts build",
+    "cleanPublish": "trigen-scripts cleanPublish",
+    "coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "redux",
@@ -31,46 +34,35 @@
     "state",
     "immutable"
   ],
-  "dependencies": {
-    "@babel/runtime": "^7.1.5",
-    "@types/node": "^10.12.10",
-    "@types/prop-types": "^15.5.6",
-    "@types/react": "16.7.8",
-    "hoist-non-react-statics": "^3.1.0",
-    "immutable": "4.0.0-rc.12"
-  },
   "peerDependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "redux": "^4.0.0"
   },
+  "dependencies": {
+    "@babel/runtime": "^7.1.5",
+    "@types/node": "^12.0.7",
+    "@types/prop-types": "^15.5.6",
+    "@types/react": "16.8.19",
+    "core-js": "3",
+    "hoist-non-react-statics": "^3.1.0",
+    "immutable": "4.0.0-rc.12"
+  },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@types/jest": "^23.3.9",
-    "babel-preset-trigen": "^1.7.1",
-    "browserslist-config-trigen": "^1.1.0",
-    "clean-publish": "^1.1.0",
-    "coveralls": "^3.0.0",
-    "eslint": "^5.9.0",
-    "eslint-config-trigen": "^3.2.0",
-    "husky": "^1.2.0",
-    "jest": "^23.6.0",
-    "lint-staged": "^8.1.0",
+    "@trigen/scripts": "2",
+    "@trigen/scripts-plugin-babel": "2",
+    "@trigen/scripts-plugin-eslint": "2",
+    "@trigen/scripts-plugin-jest": "2",
+    "@trigen/scripts-plugin-rollup": "2",
+    "@trigen/scripts-plugin-size-limit": "2",
+    "@trigen/scripts-plugin-typescript": "2",
+    "@trigen/scripts-preset-lib": "2",
     "prop-types": "^15.6.1",
     "react": "^16.6.3",
     "redux": "^4.0.1",
-    "rollup": "^0.68.0",
-    "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-tslint": "^0.1.38",
-    "rollup-plugin-typescript2": "^0.19.0",
-    "size-limit": "^0.21.0",
-    "ts-jest": "^23.10.4",
-    "tslint": "^5.11.0",
-    "tslint-config-trigen": "^3.0.6",
-    "typedoc": "^0.14.0",
-    "typescript": "^3.1.6"
+    "rollup-plugin-tslint": "^0.2.2",
+    "rollup-plugin-typescript2": "^0.21.1"
   },
   "files": [
     "lib"
