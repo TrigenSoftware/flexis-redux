@@ -53,7 +53,7 @@ export default Connect;
 function Connect<
 	TStateProps,
 	TState,
-	TOwnProps = {}
+	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
 	loading?: ComponentType;
@@ -63,7 +63,7 @@ function Connect<
 function Connect<
 	TActionsProps,
 	TActions,
-	TOwnProps = {}
+	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
 	loading?: ComponentType;
@@ -76,7 +76,7 @@ function Connect<
 	TActionsProps,
 	TState,
 	TActions,
-	TOwnProps = {}
+	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
 	loading?: ComponentType;
@@ -89,7 +89,7 @@ function Connect<
 	TActionsProps,
 	TMergedProps,
 	TState,
-	TOwnProps = {}
+	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
 	loading?: ComponentType;
@@ -104,7 +104,7 @@ function Connect<
 	TActionsProps,
 	TMergedProps,
 	TActions,
-	TOwnProps = {}
+	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
 	loading?: ComponentType;
@@ -120,7 +120,7 @@ function Connect<
 	TMergedProps,
 	TState,
 	TActions,
-	TOwnProps = {}
+	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
 	loading?: ComponentType;
