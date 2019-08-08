@@ -19,6 +19,8 @@ export interface IReducersMap {
 	[actionType: string]: string;
 }
 
+const EMPTY_METHOD_NAME = 'value';
+
 export default class Reducer {
 
 	static namespace: string;
@@ -108,8 +110,14 @@ function getReducersMap(Reducer: IReducerConstructor) {
 		? `${namespace}/`
 		: '';
 	const reducersNames = protoKeys(prototype);
+	let methodName = '';
 	const reducersMap = reducersNames.reduce<IReducersMap>((reducersMap, reducerName) => {
-		reducersMap[`${actionNamespace}${prototype[reducerName].name}`] = reducerName;
+		methodName = prototype[reducerName].name;
+		reducersMap[`${actionNamespace}${
+			methodName === EMPTY_METHOD_NAME
+				? reducerName
+				: methodName
+		}`] = reducerName;
 		return reducersMap;
 	}, {});
 
