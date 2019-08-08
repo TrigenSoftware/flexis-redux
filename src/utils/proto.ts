@@ -1,4 +1,5 @@
 
+const EMPTY_METHOD_NAME = 'value';
 const {
 	getPrototypeOf,
 	prototype: objectProto
@@ -45,4 +46,19 @@ export function isFunctionProp(proto, prop: string): boolean {
 	}
 
 	return typeof descriptor.value === 'function';
+}
+
+/**
+ * Get method name.
+ * @param  proto - Target prototype.
+ * @param  name - Prop name.
+ * @result Method name.
+ */
+export function getMethodName(proto, name: string) {
+
+	const methodName = proto[name].name;
+
+	return !methodName || methodName === EMPTY_METHOD_NAME
+		? name
+		: methodName;
 }

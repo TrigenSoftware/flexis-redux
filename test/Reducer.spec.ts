@@ -2,7 +2,10 @@ import {
 	fromJS,
 	List
 } from 'immutable';
-import { createReducer } from '../src/Reducer';
+import {
+	createReducer,
+	getReducersMap
+} from '../src/Reducer';
 import TodosReducer from './Todos.reducer';
 
 describe('Reducer', () => {
@@ -100,5 +103,33 @@ describe('Reducer', () => {
 		});
 
 		expect(state.toJS()).toEqual([]);
+	});
+
+	describe('getReducersMap', () => {
+
+		it('should get correct methods names', () => {
+
+			function FakeReducer() {}
+			// tslint:disable-next-line: only-arrow-functions
+			FakeReducer.prototype.methodA = function() {};
+			FakeReducer.prototype.methodB = function b() {};
+			Reflect.defineProperty(FakeReducer.prototype, 'methodC', {
+				// tslint:disable-next-line
+				value: function() {}
+			});
+			Reflect.defineProperty(FakeReducer.prototype, 'methodE', {
+				// tslint:disable-next-line
+				value: function e() {}
+			});
+
+			expect(
+				getReducersMap(FakeReducer as any)
+			).toMatchObject({
+				methodA: 'methodA',
+				b:       'methodB',
+				methodC: 'methodC',
+				e:       'methodE'
+			});
+		});
 	});
 });

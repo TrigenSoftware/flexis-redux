@@ -2,7 +2,8 @@ import {
 	Reducer as ReduxReducer
 } from 'redux';
 import {
-	protoKeys
+	protoKeys,
+	getMethodName
 } from './utils/proto';
 import Actions, {
 	prepareMethods
@@ -18,8 +19,6 @@ export interface IReducerConstructor {
 export interface IReducersMap {
 	[actionType: string]: string;
 }
-
-const EMPTY_METHOD_NAME = 'value';
 
 export default class Reducer {
 
@@ -100,7 +99,7 @@ export function createReducer(
  * @param  Reducer - Reducer class.
  * @return `{ [action name]: [method name] }` map.
  */
-function getReducersMap(Reducer: IReducerConstructor) {
+export function getReducersMap(Reducer: IReducerConstructor) {
 
 	const {
 		namespace,
@@ -110,14 +109,8 @@ function getReducersMap(Reducer: IReducerConstructor) {
 		? `${namespace}/`
 		: '';
 	const reducersNames = protoKeys(prototype);
-	let methodName = '';
 	const reducersMap = reducersNames.reduce<IReducersMap>((reducersMap, reducerName) => {
-		methodName = prototype[reducerName].name;
-		reducersMap[`${actionNamespace}${
-			methodName === EMPTY_METHOD_NAME
-				? reducerName
-				: methodName
-		}`] = reducerName;
+		reducersMap[`${actionNamespace}${getMethodName(prototype, reducerName)}`] = reducerName;
 		return reducersMap;
 	}, {});
 
