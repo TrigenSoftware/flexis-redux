@@ -5,7 +5,8 @@
 [![Dependencies status][deps]][deps-url]
 [![Build status][build]][build-url]
 [![Coverage status][coverage]][coverage-url]
-[![Greenkeeper badge][greenkeeper]][greenkeeper-url]
+[![Dependabot badge][dependabot]][dependabot-url]
+[![Documentation badge][documentation]][documentation-url]
 
 [npm]: https://img.shields.io/npm/v/@flexis/redux.svg
 [npm-url]: https://npmjs.com/package/@flexis/redux
@@ -16,14 +17,17 @@
 [deps]: https://david-dm.org/TrigenSoftware/flexis-redux.svg
 [deps-url]: https://david-dm.org/TrigenSoftware/flexis-redux
 
-[build]: http://img.shields.io/travis/com/TrigenSoftware/flexis-redux.svg
+[build]: http://img.shields.io/travis/com/TrigenSoftware/flexis-redux/master.svg
 [build-url]: https://travis-ci.com/TrigenSoftware/flexis-redux
 
 [coverage]: https://img.shields.io/coveralls/TrigenSoftware/flexis-redux.svg
 [coverage-url]: https://coveralls.io/r/TrigenSoftware/flexis-redux
 
-[greenkeeper]: https://badges.greenkeeper.io/TrigenSoftware/flexis-redux.svg
-[greenkeeper-url]: https://greenkeeper.io/
+[dependabot]: https://api.dependabot.com/badges/status?host=github&repo=TrigenSoftware/flexis-redux
+[dependabot-url]: https://dependabot.com/
+
+[documentation]: https://img.shields.io/badge/API-Documentation-2b7489.svg
+[documentation-url]: https://trigensoftware.github.io/flexis-redux
 
 Wrapper for [Redux](https://github.com/reactjs/redux), based on [ImmutableJS](https://github.com/facebook/immutable-js/).
 
