@@ -19,7 +19,7 @@ const {
 export default class Provider extends Component<IProps, IContext> {
 
 	static propTypes = {
-		store: PropTypes.instanceOf(Store).isRequired,
+		store:    PropTypes.instanceOf(Store).isRequired,
 		children: PropTypes.any.isRequired
 	};
 
