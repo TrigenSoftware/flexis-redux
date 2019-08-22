@@ -3,7 +3,11 @@ import {
 	List,
 	is
 } from 'immutable';
+import {
+	Action
+} from 'redux';
 import Store, {
+	ImmutableAdapter,
 	Reducer
 } from '../src';
 import TodosReducer from './Todos.reducer';
@@ -31,6 +35,7 @@ describe('Store', () => {
 	it('should create correct instance', () => {
 
 		const store = new Store<State, IActions>({
+			adapter: ImmutableAdapter,
 			reducer: [TodosReducer],
 			actions: [TodosActions],
 			state: State()
@@ -54,6 +59,7 @@ describe('Store', () => {
 	it('should correct destroy', () => {
 
 		const store = new Store<State>({
+			adapter: ImmutableAdapter,
 			reducer: [TodosReducer],
 			state: State()
 		});
@@ -74,6 +80,7 @@ describe('Store', () => {
 		}
 
 		const store = new Store<TodosState, TodosActions>({
+			adapter: ImmutableAdapter,
 			reducer: TodosReducerNoNamespaced,
 			actions: TodosActionsNoNamespaced,
 			state: List()
@@ -108,6 +115,7 @@ describe('Store', () => {
 		}
 
 		const store = new Store<State, IHybridActions>({
+			adapter: ImmutableAdapter,
 			reducer: [RootReducer, TodosReducer],
 			actions: [RootActions, TodosActions],
 			state: State()
@@ -132,7 +140,8 @@ describe('Store', () => {
 	it('should add reducer on the fly', () => {
 
 		const store = new Store<State, IActions>({
-			state: State({
+			adapter: ImmutableAdapter,
+			state:   State({
 				todos: List()
 			})
 		});
@@ -167,7 +176,8 @@ describe('Store', () => {
 	it('should add reducer on the fly via registry', async () => {
 
 		const store = new Store<State, IActions>({
-			state: State({
+			adapter: ImmutableAdapter,
+			state:   State({
 				todos: List()
 			})
 		});
@@ -203,8 +213,9 @@ describe('Store', () => {
 	it('should change state by dispatch', () => {
 
 		const store = new Store<State>({
+			adapter: ImmutableAdapter,
 			reducer: TodosReducer,
-			state: State()
+			state:   State()
 		});
 
 		store.dispatch({
@@ -221,8 +232,9 @@ describe('Store', () => {
 		}
 
 		const store = new Store<TodosState>({
+			adapter: ImmutableAdapter,
 			reducer: TodosReducerNoNamespaced,
-			state: List()
+			state:   List()
 		});
 
 		store.dispatch({
@@ -250,8 +262,9 @@ describe('Store', () => {
 		});
 
 		const store = new Store<ExtendedState>({
+			adapter: ImmutableAdapter,
 			reducer: [TodosReducer, TasksReducer],
-			state: ExtendedState()
+			state:   ExtendedState()
 		});
 
 		store.dispatch({
@@ -279,8 +292,9 @@ describe('Store', () => {
 		}
 
 		const store = new Store<State>({
+			adapter: ImmutableAdapter,
 			reducer: { RootReducer, TodosReducer },
-			state: State()
+			state:   State()
 		});
 
 		store.dispatch({
@@ -309,13 +323,30 @@ describe('Store', () => {
 		});
 
 		const store = new Store({
+			adapter: ImmutableAdapter,
 			reducer: TodosReducer,
-			state: forceState
+			state:   forceState
 		});
 
 		expect(is(
 			store.state,
 			forceState
 		)).toBe(true);
+	});
+
+	it('should work with rare reducer', () => {
+
+		const store = new Store<TodosState>({
+			adapter: ImmutableAdapter,
+			reducer: (state: List<string>, action: Action) => {
+				return state.push(action.type);
+			},
+			state:   List()
+		});
+
+		store.dispatch({
+			type: 'someAction'
+		});
+		expect(store.state.last()).toEqual('someAction');
 	});
 });

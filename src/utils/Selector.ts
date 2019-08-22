@@ -2,7 +2,6 @@ import defaultMergeProps from './mergeProps';
 import initMapFunction, {
 	IMapFunction
 } from './initMapFunction';
-import isEqual from './isEqual';
 
 export {
 	IMapFunction
@@ -60,6 +59,7 @@ export default class Selector {
 	private mergedProps: {};
 
 	constructor(
+		private readonly isEqual: (a: any, b: any) => boolean,
 		mapStateToProps?: IMapFunction,
 		mapActionsToProps?: IMapFunction,
 		mergeProps: IMapFunction = defaultMergeProps
@@ -172,6 +172,9 @@ export default class Selector {
 		nextOwnProps: {}
 	) {
 
+		const {
+			isEqual
+		} = this;
 		const propsChanged = !isEqual(nextOwnProps, this.ownProps);
 		const actionsChanged = !isEqual(nextActions, this.actions);
 		const stateChanged = !isEqual(nextState, this.state);
@@ -342,6 +345,7 @@ export default class Selector {
 	private handleNewActions() {
 
 		const {
+			isEqual,
 			mapActionsToProps,
 			mergeProps,
 			actions,
@@ -368,6 +372,7 @@ export default class Selector {
 	private handleNewState() {
 
 		const {
+			isEqual,
 			mapStateToProps,
 			mergeProps,
 			state,

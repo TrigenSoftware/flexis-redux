@@ -3,6 +3,9 @@ import {
 	List
 } from 'immutable';
 import {
+	ImmutableAdapter
+} from '../src/adapters';
+import {
 	createReducer,
 	getReducersMap
 } from '../src/Reducer';
@@ -28,7 +31,7 @@ describe('Reducer', () => {
 
 	it('should apply reducer to the previous state', async () => {
 
-		const todosReducer = createReducer(TodosReducer);
+		const todosReducer = createReducer(ImmutableAdapter, TodosReducer);
 		let state = fromJS({
 			todos: []
 		});
@@ -70,7 +73,7 @@ describe('Reducer', () => {
 			static namespace = undefined;
 		}
 
-		const todosReducer = createReducer(TodosReducerNoNamespaced);
+		const todosReducer = createReducer(ImmutableAdapter, TodosReducerNoNamespaced);
 		let state = List();
 
 		state = todosReducer(state, {

@@ -25,21 +25,25 @@ export default class Provider extends Component<IProps, IContext> {
 
 	private unsubscribe: () => void = null;
 
-	constructor(props: IProps) {
+	constructor(props: IProps, context) {
 
-		super(props);
+		super(props, context);
 
-		const { store } = props;
+		const {
+			store
+		} = props;
 		const {
 			state: storeState,
-			actions
+			actions,
+			isEqual
 		} = store;
 
 		this.state = {
 			loadSegments:      store.loadSegments.bind(store),
 			areSegmentsLoaded: store.areSegmentsLoaded.bind(store),
 			storeState,
-			actions
+			actions,
+			isEqual
 		};
 	}
 
@@ -89,7 +93,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 		const {
 			state: storeState,
-			actions
+			actions,
+			isEqual
 		} = store;
 
 		if (storeState === prevStoreState
@@ -102,7 +107,8 @@ if (process.env.NODE_ENV !== 'production') {
 			loadSegments:      store.loadSegments.bind(store),
 			areSegmentsLoaded: store.areSegmentsLoaded.bind(store),
 			storeState,
-			actions
+			actions,
+			isEqual
 		};
 	};
 

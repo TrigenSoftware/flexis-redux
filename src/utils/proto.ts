@@ -62,3 +62,12 @@ export function getMethodName(proto, name: string) {
 		? name
 		: methodName;
 }
+
+/**
+ * Check target is object.
+ * @param  target - Target to check.
+ * @return Is object or not.
+ */
+export function isObject(target: any) {
+	return target && Reflect.getPrototypeOf(target) === objectProto;
+}

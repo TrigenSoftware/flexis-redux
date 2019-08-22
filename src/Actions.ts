@@ -1,10 +1,14 @@
-import { AnyAction } from 'redux';
+import {
+	AnyAction
+} from 'redux';
 import {
 	protoKeys,
 	isFunctionProp
 } from './utils/proto';
 import Store from './Store';
-import { IReducersMap } from './Reducer';
+import {
+	IReducersMap
+} from './Reducer';
 
 export type ICustomDispatcher = (store: Store, action: AnyAction) => void;
 

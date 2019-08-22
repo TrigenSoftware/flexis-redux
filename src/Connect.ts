@@ -1,4 +1,5 @@
-import React, {
+import {
+	ContextType,
 	ComponentType,
 	ComponentClass,
 	Component,
@@ -11,9 +12,7 @@ import Selector, {
 	IMapActionsToProps,
 	IMergeProps
 } from './utils/Selector';
-import StoreContext, {
-	IContext
-} from './StoreContext';
+import StoreContext from './StoreContext';
 
 interface IConnectOptions {
 	dependsOn?: any|any[];
@@ -41,10 +40,6 @@ enum LoadingStatus {
 	InProgress,
 	Done
 }
-
-const {
-	Consumer: StoreContextConsumer
-} = StoreContext;
 
 let hotReloadingVersion = 0;
 
@@ -163,39 +158,37 @@ function Connect({
 
 			static WrappedComponent = WrappedComponent;
 			static displayName = displayName;
+			static contextType = StoreContext;
 
+			context!: ContextType<typeof StoreContext>;
 			wrappedInstance = null;
 			private depsLoadingStatus: LoadingStatus = LoadingStatus.Pending;
 			private selector: Selector = null;
 			private renderedChild = null;
 
-			constructor(props) {
-				super(props);
-				this.renderChild = this.renderChild.bind(this);
+			constructor(props, context) {
+
+				super(props, context);
+
 				this.onWrappedInstance = this.onWrappedInstance.bind(this);
 			}
 
 			render() {
-				return (
-					<StoreContextConsumer>
-						{this.renderChild}
-					</StoreContextConsumer>
-				);
-			}
 
-			private renderChild({
-				loadSegments,
-				areSegmentsLoaded,
-				storeState,
-				actions
-			}: IContext) {
+				const {
+					loadSegments,
+					areSegmentsLoaded,
+					storeState,
+					actions,
+					isEqual
+				} = this.context;
 
 				if (this.loadDeps(loadSegments, areSegmentsLoaded)) {
 					return this.renderedChild;
 				}
 
 				if (this.selector === null) {
-					this.initSelector(storeState, actions);
+					this.initSelector(storeState, actions, isEqual);
 				} else {
 					this.selector.run(
 						storeState,
@@ -239,9 +232,10 @@ function Connect({
 				return this.wrappedInstance;
 			}
 
-			private initSelector(storeState, actions) {
+			private initSelector(storeState, actions, isEqual) {
 
 				const selector = new Selector(
+					isEqual,
 					mapStateToProps,
 					mapActionsToProps,
 					mergeProps

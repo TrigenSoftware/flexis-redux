@@ -5,6 +5,9 @@ import {
 	protoKeys,
 	getMethodName
 } from './utils/proto';
+import {
+	IStateAdapter
+} from './adapters';
 import Actions, {
 	prepareMethods
 } from './Actions';
@@ -79,6 +82,7 @@ export function ActionType(type: string) {
  * @return Reducer function.
  */
 export function createReducer(
+	adapter: IStateAdapter,
 	Reducer: IReducerConstructor,
 	parentReducer?: ReduxReducer
 ): ReduxReducer {
@@ -88,7 +92,7 @@ export function createReducer(
 	} = Reducer;
 
 	if (namespace) {
-		return createNamespaceReducer(Reducer, parentReducer);
+		return createNamespaceReducer(adapter, Reducer, parentReducer);
 	}
 
 	return createSimpleReducer(Reducer, parentReducer);
@@ -174,10 +178,15 @@ function createSimpleReducer(
  * @return Reducer function.
  */
 function createNamespaceReducer(
+	adapter: IStateAdapter,
 	Reducer: IReducerConstructor,
 	parentReducer: ReduxReducer
 ): ReduxReducer {
 
+	const {
+		get,
+		set
+	} = adapter;
 	const {
 		namespace
 	} = Reducer;
@@ -199,9 +208,10 @@ function createNamespaceReducer(
 			} = action;
 
 			if (reducersMap.hasOwnProperty(type)) {
-				return state.set(
+				return set(
+					state,
 					namespace,
-					reducer[reducersMap[type]](state.get(namespace), action)
+					reducer[reducersMap[type]](get(state, namespace), action)
 				);
 			}
 
@@ -216,12 +226,22 @@ function createNamespaceReducer(
 		} = action;
 
 		if (reducersMap.hasOwnProperty(type)) {
-			return state.set(
+			return set(
+				state,
 				namespace,
-				reducer[reducersMap[type]](state.get(namespace), action)
+				reducer[reducersMap[type]](get(state, namespace), action)
 			);
 		}
 
 		return state;
 	};
+}
+
+/**
+ * Check target it is reducer class.
+ * @param  target - Target to check.
+ * @return Result.
+ */
+export function isReducerClass(target: any): target is IReducerConstructor {
+	return target && target.prototype instanceof Reducer;
 }

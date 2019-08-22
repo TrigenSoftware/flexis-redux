@@ -3,10 +3,12 @@ import {
 	isImmutable
 } from 'immutable';
 
-const { hasOwnProperty } = Object.prototype;
+const {
+	hasOwnProperty
+} = Object.prototype;
 
 /**
- * Deep equal check function.
+ * Shallow equal check function.
  * @param  objA - A object.
  * @param  objB - B object.
  * @return Result of equality check.

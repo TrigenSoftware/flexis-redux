@@ -10,6 +10,8 @@ import {
 import Provider from './Provider';
 import Connect from './Connect';
 
+export * from './adapters';
+
 export default Store;
 export {
 	ICustomDispatcher,

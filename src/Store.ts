@@ -6,15 +6,23 @@ import {
 	createStore
 } from 'redux';
 import {
-	Map as ImmutableMap
-} from 'immutable';
+	IStateAdapter
+} from './adapters';
+import {
+	inputClassesToArray,
+	composeReducers,
+	noopReducer
+} from './utils/store';
 import {
 	IReducerConstructor,
-	createReducer
+	createReducer,
+	isReducerClass
 } from './Reducer';
 import {
 	IActionsConstructor
 } from './Actions';
+
+type InputReducer = ReduxReducer | IReducerConstructor;
 
 type InputClasses<T> = T | T[] | {
 	[key: string]: T;
@@ -25,14 +33,15 @@ type OnSegmentLoaded<TState, TActions> = (store: Store<TState, TActions>) => voi
 
 export interface IStoreConfig<TState> {
 	storeCreator?: StoreCreator;
-	reducer?: InputClasses<IReducerConstructor>;
+	adapter: IStateAdapter;
+	reducer?: InputClasses<InputReducer>;
 	actions?: InputClasses<any>;
 	state: TState;
 	enhancer?: StoreEnhancer;
 }
 
 export interface IAddSegmentConfig {
-	reducer: InputClasses<IReducerConstructor>;
+	reducer: InputClasses<InputReducer>;
 	actions?: InputClasses<any>;
 }
 
@@ -41,51 +50,6 @@ export interface IRegistryItem {
 	onLoaded?: OnSegmentLoaded<any, any>;
 }
 
-/**
- * Sort classes by having of namespace property.
- * @param  class - Target class.
- * @return Has namespace property or not.
- */
-function sortClasses({ namespace }: IReducerConstructor|IActionsConstructor) {
-	return namespace ? 1 : 0;
-}
-
-/**
- * Convert class, array of classes or object of classes to array of classes.
- * @param  inputClasses - Target to convert.
- * @param  usedClasses - Classes to exclude.
- * @return Array of classes.
- */
-function inputClassesToArray<T>(inputClasses, usedClasses: Set<any>): T[] {
-	const classesArray = Array.isArray(inputClasses)
-		? inputClasses
-		: inputClasses && Reflect.getPrototypeOf(inputClasses) === Object.prototype
-			? Object.values(inputClasses)
-			: [inputClasses];
-
-	return classesArray
-		.map((inputClass) => {
-
-			if (usedClasses.has(inputClass)) {
-				return null;
-			}
-
-			usedClasses.add(inputClass);
-
-			return inputClass;
-		})
-		.filter(Boolean)
-		.sort(sortClasses);
-}
-
-/**
- * Empty reducer.
- * @param  state - State.
- * @return State.
- */
-function noopReducer(state) {
-	return state;
-}
 // todo: null -> Symbol, sync check fn
 export default class Store<
 	TState = any,
@@ -95,11 +59,13 @@ export default class Store<
 	private store: ReduxStore;
 	private storeActions: TActions;
 	private reducer: ReduxReducer = null;
+	private adapter: IStateAdapter = null;
 	private readonly usedClasses = new Set();
 	private readonly segmentsRegistry = new Map<any, IRegistryItem>();
 
 	constructor({
 		storeCreator: customCreateStore = createStore,
+		adapter,
 		reducer: inputReducers,
 		actions: inputActions,
 		state: stateBase,
@@ -107,31 +73,33 @@ export default class Store<
 	}: IStoreConfig<TState>) {
 
 		const { usedClasses } = this;
-		const reducers = inputClassesToArray<IReducerConstructor>(inputReducers, usedClasses);
+		const reducers = inputClassesToArray<InputReducer>(inputReducers, usedClasses);
 		const actions = inputClassesToArray<IActionsConstructor>(inputActions, usedClasses);
 		let state: any = stateBase;
 
 		const reducer: ReduxReducer = reducers.reduce<ReduxReducer>((
 			parentReducer: ReduxReducer,
-			Reducer: IReducerConstructor
+			Reducer: InputReducer
 		) => {
+
+			if (!isReducerClass(Reducer)) {
+				return composeReducers(Reducer, parentReducer);
+			}
 
 			const {
 				namespace,
 				initialState
 			} = Reducer;
-			const reducer = createReducer(Reducer, parentReducer);
+			const reducer = createReducer(adapter, Reducer, parentReducer);
 
 			if (namespace) {
 
 				if (!state) {
-					state = ImmutableMap();
+					state = adapter.getDefaultState();
 				}
 
-				if (initialState
-					&& (!state.has(namespace) || state.get(namespace) === null)
-				) {
-					state = state.set(namespace, initialState);
+				if (initialState && !adapter.has(state, namespace)) {
+					state = adapter.set(state, namespace, initialState);
 				}
 
 			} else
@@ -142,9 +110,14 @@ export default class Store<
 			return reducer;
 		}, null);
 
-		this.store = customCreateStore(reducer || noopReducer, state, enhancer);
+		this.store = customCreateStore(
+			adapter.wrapReducer(reducer || noopReducer),
+			state,
+			enhancer
+		);
 		this.storeActions = this.createActions(actions);
 		this.reducer = reducer;
+		this.adapter = adapter;
 	}
 
 	/**
@@ -154,19 +127,26 @@ export default class Store<
 	 */
 	addSegment<TAddActions = any>(config: IAddSegmentConfig): Store<TState, TActions & TAddActions> {
 
-		const { usedClasses } = this;
-		const reducers = inputClassesToArray<IReducerConstructor>(config.reducer, usedClasses);
+		const {
+			usedClasses,
+			adapter
+		} = this;
+		const reducers = inputClassesToArray<InputReducer>(config.reducer, usedClasses);
 		const actions = inputClassesToArray<IActionsConstructor>(config.actions, usedClasses);
 
 		const reducer: ReduxReducer = reducers.reduce<ReduxReducer>(
 			(
 				parentReducer: ReduxReducer,
-				Reducer: IReducerConstructor
-			) => createReducer(Reducer, parentReducer),
+				Reducer: InputReducer
+			) => isReducerClass(Reducer)
+				? createReducer(adapter, Reducer, parentReducer)
+				: composeReducers(Reducer, parentReducer),
 			this.reducer
 		);
 
-		this.store.replaceReducer(reducer || noopReducer);
+		this.store.replaceReducer(
+			adapter.wrapReducer(reducer || noopReducer)
+		);
 		Object.assign(this.storeActions, this.createActions(actions));
 		this.reducer = reducer;
 
@@ -285,6 +265,7 @@ export default class Store<
 	 * Destroy store instance.
 	 */
 	destroy() {
+		this.adapter = null;
 		this.store = null;
 		this.storeActions = null;
 	}
@@ -367,5 +348,14 @@ export default class Store<
 	get actions() {
 		this.checkIfDestroyed();
 		return this.storeActions;
+	}
+
+	/**
+	 * `isEqual` adapter function getter.
+	 * @return `isEqual` function.
+	 */
+	get isEqual() {
+		this.checkIfDestroyed();
+		return this.adapter.isEqual;
 	}
 }

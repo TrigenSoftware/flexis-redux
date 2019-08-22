@@ -1,11 +1,14 @@
-import { List } from 'immutable';
+import {
+	List
+} from 'immutable';
+import isEqual from '../src/adapters/Immutable/isEqual';
 import Selector from '../src/utils/Selector';
 
 describe('Selector', () => {
 
 	it('should create correct instance', () => {
 
-		const selector = new Selector();
+		const selector = new Selector(isEqual);
 
 		expect(selector.error).toBe(null);
 		expect(selector.shouldComponentUpdate).toBe(true);
@@ -14,7 +17,7 @@ describe('Selector', () => {
 
 	it('should correct destroy', () => {
 
-		const selector = new Selector();
+		const selector = new Selector(isEqual);
 
 		selector.run({ todos: List() }, {}, { prop: true });
 		selector.destroy();
@@ -29,7 +32,7 @@ describe('Selector', () => {
 		const state = { todos: List() };
 		const actions = {};
 		const props = {};
-		const selector = new Selector();
+		const selector = new Selector(isEqual);
 
 		selector.run(state, actions, props);
 
@@ -41,7 +44,7 @@ describe('Selector', () => {
 		const state = { todos: List() };
 		const actions = {};
 		const props = {};
-		const selector = new Selector();
+		const selector = new Selector(isEqual);
 
 		selector.run(state, actions, props);
 		selector.shouldComponentUpdate = false;
@@ -77,6 +80,7 @@ describe('Selector', () => {
 		const actions = {};
 		const props = {};
 		const selector = new Selector(
+			isEqual,
 			state => ({ todos: state.todos })
 		);
 
@@ -111,6 +115,7 @@ describe('Selector', () => {
 		};
 		const props = {};
 		const selector = new Selector(
+			isEqual,
 			null,
 			actions => ({ action: actions.action })
 		);
@@ -137,6 +142,7 @@ describe('Selector', () => {
 		};
 		const props = {};
 		const selector = new Selector(
+			isEqual,
 			state => ({ todos: state.todos }),
 			actions => ({ action: actions.action })
 		);
@@ -160,7 +166,7 @@ describe('Selector', () => {
 				// Empty
 			}
 		};
-		const selector = new Selector();
+		const selector = new Selector(isEqual);
 
 		selector.run({ todos: List() }, {}, {});
 
@@ -178,6 +184,7 @@ describe('Selector', () => {
 	it('should set `shouldComponentUpdate` to `true` with `mapStateToProps`', () => {
 
 		const selector = new Selector(
+			isEqual,
 			state => ({ todos: state.todos })
 		);
 
@@ -202,6 +209,7 @@ describe('Selector', () => {
 			}
 		};
 		const selector = new Selector(
+			isEqual,
 			null,
 			actions => ({ action: actions.action })
 		);
@@ -232,6 +240,7 @@ describe('Selector', () => {
 			}
 		};
 		const selector = new Selector(
+			isEqual,
 			state => ({ todos: state.todos }),
 			actions => ({ action: actions.action })
 		);
