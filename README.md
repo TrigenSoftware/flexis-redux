@@ -29,7 +29,7 @@
 [documentation]: https://img.shields.io/badge/API-Documentation-2b7489.svg
 [documentation-url]: https://trigensoftware.github.io/flexis-redux
 
-Wrapper for [Redux](https://github.com/reactjs/redux), based on [ImmutableJS](https://github.com/facebook/immutable-js/).
+Wrapper for [Redux](https://github.com/reactjs/redux).
 
 ## Install
 
@@ -46,7 +46,11 @@ Module exposes next API:
 ```js
 export default Store;
 export {
-	ICustomDispatcher,
+    ICustomDispatcher,
+    IStateAdapter,
+    DefaultAdapter,
+    ImmutableAdapter,
+    ImmerAdapter,
 	Reducer,
 	ActionType,
 	CustomDispatcher,
