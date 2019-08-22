@@ -89,6 +89,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_reducer_.html#createreducer" class="tsd-kind-icon">create<wbr>Reducer</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_reducer_.html#createsimplereducer" class="tsd-kind-icon">create<wbr>Simple<wbr>Reducer</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_reducer_.html#getreducersmap" class="tsd-kind-icon">get<wbr>Reducers<wbr>Map</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_reducer_.html#isreducerclass" class="tsd-kind-icon">is<wbr>Reducer<wbr>Class</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,7 +107,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Reducer.ts#L67">Reducer.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Reducer.ts#L70">Reducer.ts:70</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -132,13 +133,13 @@
 					<a name="createnamespacereducer" class="tsd-anchor"></a>
 					<h3>create<wbr>Namespace<wbr>Reducer</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Namespace<wbr>Reducer<span class="tsd-signature-symbol">(</span>Reducer<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a>, parentReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReduxReducer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReduxReducer</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Namespace<wbr>Reducer<span class="tsd-signature-symbol">(</span>adapter<span class="tsd-signature-symbol">: </span><a href="../interfaces/_adapters_types_.istateadapter.html" class="tsd-signature-type">IStateAdapter</a>, Reducer<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a>, parentReducer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReduxReducer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReduxReducer</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Reducer.ts#L176">Reducer.ts:176</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Reducer.ts#L180">Reducer.ts:180</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -148,6 +149,9 @@
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>adapter: <a href="../interfaces/_adapters_types_.istateadapter.html" class="tsd-signature-type">IStateAdapter</a></h5>
+								</li>
 								<li>
 									<h5>Reducer: <a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a></h5>
 									<div class="tsd-comment tsd-typography">
@@ -170,13 +174,13 @@
 					<a name="createreducer" class="tsd-anchor"></a>
 					<h3>create<wbr>Reducer</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Reducer<span class="tsd-signature-symbol">(</span>Reducer<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a>, parentReducer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReduxReducer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReduxReducer</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Reducer<span class="tsd-signature-symbol">(</span>adapter<span class="tsd-signature-symbol">: </span><a href="../interfaces/_adapters_types_.istateadapter.html" class="tsd-signature-type">IStateAdapter</a>, Reducer<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a>, parentReducer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReduxReducer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReduxReducer</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Reducer.ts#L81">Reducer.ts:81</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Reducer.ts#L84">Reducer.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -186,6 +190,9 @@
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>adapter: <a href="../interfaces/_adapters_types_.istateadapter.html" class="tsd-signature-type">IStateAdapter</a></h5>
+								</li>
 								<li>
 									<h5>Reducer: <a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a></h5>
 									<div class="tsd-comment tsd-typography">
@@ -214,7 +221,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Reducer.ts#L126">Reducer.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Reducer.ts#L130">Reducer.ts:130</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -252,7 +259,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Reducer.ts#L102">Reducer.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Reducer.ts#L106">Reducer.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -271,6 +278,38 @@
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_reducer_.ireducersmap.html" class="tsd-signature-type">IReducersMap</a></h4>
 							<p><code>{ [action name]: [method name] }</code> map.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="isreducerclass" class="tsd-anchor"></a>
+					<h3>is<wbr>Reducer<wbr>Class</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Reducer<wbr>Class<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Reducer.ts#L245">Reducer.ts:245</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check target it is reducer class.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>target: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Target to check.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>Result.</p>
 						</li>
 					</ul>
 				</section>
@@ -301,6 +340,27 @@
 						<a href="_storecontext_.html">"<wbr>Store<wbr>Context"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="_adapters_default_index_.html">"adapters/<wbr>Default/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_default_isequal_.html">"adapters/<wbr>Default/is<wbr>Equal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_immer_index_.html">"adapters/<wbr>Immer/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_immutable_index_.html">"adapters/<wbr>Immutable/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_immutable_isequal_.html">"adapters/<wbr>Immutable/is<wbr>Equal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_index_.html">"adapters/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_types_.html">"adapters/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -310,13 +370,13 @@
 						<a href="_utils_initmapfunction_.html">"utils/init<wbr>Map<wbr>Function"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_utils_isequal_.html">"utils/is<wbr>Equal"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="_utils_mergeprops_.html">"utils/merge<wbr>Props"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_utils_proto_.html">"utils/proto"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_utils_store_.html">"utils/store"</a>
 					</li>
 				</ul>
 			</nav>
@@ -346,6 +406,9 @@
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_reducer_.html#getreducersmap" class="tsd-kind-icon">get<wbr>Reducers<wbr>Map</a>
 					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="_reducer_.html#isreducerclass" class="tsd-kind-icon">is<wbr>Reducer<wbr>Class</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -363,6 +426,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -411,7 +475,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

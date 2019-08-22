@@ -86,16 +86,9 @@
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported"><a href="_store_.html#inputclasses" class="tsd-kind-icon">Input<wbr>Classes</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_store_.html#inputreducer" class="tsd-kind-icon">Input<wbr>Reducer</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported"><a href="_store_.html#onsegmentloaded" class="tsd-kind-icon">On<wbr>Segment<wbr>Loaded</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="_store_.html#segmentloader" class="tsd-kind-icon">Segment<wbr>Loader</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported"><a href="_store_.html#inputclassestoarray" class="tsd-kind-icon">input<wbr>Classes<wbr>ToArray</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_store_.html#noopreducer" class="tsd-kind-icon">noop<wbr>Reducer</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_store_.html#sortclasses" class="tsd-kind-icon">sort<wbr>Classes</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,22 +99,47 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
 					<a name="inputclasses" class="tsd-anchor"></a>
 					<h3>Input<wbr>Classes</h3>
-					<div class="tsd-signature tsd-kind-icon">Input<wbr>Classes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
+					<div class="tsd-signature tsd-kind-icon">Input<wbr>Classes&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L19">Store.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L27">Store.ts:27</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>T</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="inputreducer" class="tsd-anchor"></a>
+					<h3>Input<wbr>Reducer</h3>
+					<div class="tsd-signature tsd-kind-icon">Input<wbr>Reducer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReduxReducer</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L25">Store.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
 					<a name="onsegmentloaded" class="tsd-anchor"></a>
 					<h3>On<wbr>Segment<wbr>Loaded</h3>
-					<div class="tsd-signature tsd-kind-icon">On<wbr>Segment<wbr>Loaded<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<div class="tsd-signature tsd-kind-icon">On<wbr>Segment<wbr>Loaded&lt;TState, TActions&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L24">Store.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L32">Store.ts:32</a></li>
 						</ul>
 					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>TState</h4>
+						</li>
+						<li>
+							<h4>TActions</h4>
+						</li>
+					</ul>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
@@ -153,7 +171,7 @@
 					<div class="tsd-signature tsd-kind-icon">Segment<wbr>Loader<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L23">Store.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L31">Store.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -171,122 +189,6 @@
 							</li>
 						</ul>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-					<a name="inputclassestoarray" class="tsd-anchor"></a>
-					<h3>input<wbr>Classes<wbr>ToArray</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">input<wbr>Classes<wbr>ToArray&lt;T&gt;<span class="tsd-signature-symbol">(</span>inputClasses<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, usedClasses<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L59">Store.ts:59</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Convert class, array of classes or object of classes to array of classes.</p>
-								</div>
-							</div>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>T</h4>
-								</li>
-							</ul>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>inputClasses: <span class="tsd-signature-type">any</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Target to convert.</p>
-									</div>
-								</li>
-								<li>
-									<h5>usedClasses: <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Classes to exclude.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h4>
-							<p>Array of classes.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="noopreducer" class="tsd-anchor"></a>
-					<h3>noop<wbr>Reducer</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">noop<wbr>Reducer<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L86">Store.ts:86</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Empty reducer.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>state: <span class="tsd-signature-type">any</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>State.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-							<p>State.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="sortclasses" class="tsd-anchor"></a>
-					<h3>sort<wbr>Classes</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">sort<wbr>Classes<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L49">Store.ts:49</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Sort classes by having of namespace property.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>__namedParameters: <span class="tsd-signature-type">object</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>namespace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">1</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">0</span>
-							</h4>
-							<p>Has namespace property or not.</p>
-						</li>
-					</ul>
 				</section>
 			</section>
 		</div>
@@ -315,6 +217,27 @@
 						<a href="_storecontext_.html">"<wbr>Store<wbr>Context"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="_adapters_default_index_.html">"adapters/<wbr>Default/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_default_isequal_.html">"adapters/<wbr>Default/is<wbr>Equal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_immer_index_.html">"adapters/<wbr>Immer/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_immutable_index_.html">"adapters/<wbr>Immutable/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_immutable_isequal_.html">"adapters/<wbr>Immutable/is<wbr>Equal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_index_.html">"adapters/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_adapters_types_.html">"adapters/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -324,13 +247,13 @@
 						<a href="_utils_initmapfunction_.html">"utils/init<wbr>Map<wbr>Function"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_utils_isequal_.html">"utils/is<wbr>Equal"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="_utils_mergeprops_.html">"utils/merge<wbr>Props"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="_utils_proto_.html">"utils/proto"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="_utils_store_.html">"utils/store"</a>
 					</li>
 				</ul>
 			</nav>
@@ -351,20 +274,14 @@
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="_store_.html#inputclasses" class="tsd-kind-icon">Input<wbr>Classes</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_store_.html#inputreducer" class="tsd-kind-icon">Input<wbr>Reducer</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="_store_.html#onsegmentloaded" class="tsd-kind-icon">On<wbr>Segment<wbr>Loaded</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_store_.html#segmentloader" class="tsd-kind-icon">Segment<wbr>Loader</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="_store_.html#inputclassestoarray" class="tsd-kind-icon">input<wbr>Classes<wbr>ToArray</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_store_.html#noopreducer" class="tsd-kind-icon">noop<wbr>Reducer</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_store_.html#sortclasses" class="tsd-kind-icon">sort<wbr>Classes</a>
 					</li>
 				</ul>
 			</nav>
@@ -383,6 +300,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -431,7 +349,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

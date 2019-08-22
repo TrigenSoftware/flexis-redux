@@ -99,6 +99,7 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#adapter" class="tsd-kind-icon">adapter</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#reducer" class="tsd-kind-icon">reducer</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#segmentsregistry" class="tsd-kind-icon">segments<wbr>Registry</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_store_.store.html#store" class="tsd-kind-icon">store</a></li>
@@ -111,6 +112,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_store_.store.html#actions" class="tsd-kind-icon">actions</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_store_.store.html#dispatch" class="tsd-kind-icon">dispatch</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_store_.store.html#isequal" class="tsd-kind-icon">is<wbr>Equal</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_store_.store.html#reduxstore" class="tsd-kind-icon">redux<wbr>Store</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_store_.store.html#state" class="tsd-kind-icon">state</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_store_.store.html#subscribe" class="tsd-kind-icon">subscribe</a></li>
@@ -145,7 +147,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L99">Store.ts:99</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L64">Store.ts:64</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -153,6 +155,9 @@
 								<li>
 									<h5>__namedParameters: <span class="tsd-signature-type">object</span></h5>
 									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>adapter<span class="tsd-signature-symbol">: </span><a href="../interfaces/_adapters_types_.istateadapter.html" class="tsd-signature-type">IStateAdapter</a></h5>
+										</li>
 										<li class="tsd-parameter">
 											<h5>custom<wbr>Create<wbr>Store<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">StoreCreator</span></h5>
 										</li>
@@ -181,7 +186,7 @@
 											<h5>input<wbr>Actions<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h5>
 										</li>
 										<li class="tsd-parameter">
-											<h5>input<wbr>Reducers<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+											<h5>input<wbr>Reducers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_reducer_.ireducerconstructor.html" class="tsd-signature-type">IReducerConstructor</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
 										</li>
 										<li class="tsd-parameter">
 											<h5>state<wbr>Base<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TState</span></h5>
@@ -197,12 +202,22 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="adapter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> adapter</h3>
+					<div class="tsd-signature tsd-kind-icon">adapter<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_adapters_types_.istateadapter.html" class="tsd-signature-type">IStateAdapter</a><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L62">Store.ts:62</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="reducer" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> reducer</h3>
 					<div class="tsd-signature tsd-kind-icon">reducer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReduxReducer</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L97">Store.ts:97</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L61">Store.ts:61</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -212,7 +227,7 @@
 					<div class="tsd-signature tsd-kind-icon">segments<wbr>Registry<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_store_.iregistryitem.html" class="tsd-signature-type">IRegistryItem</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Map&lt;any, IRegistryItem&gt;()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L99">Store.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L64">Store.ts:64</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -222,7 +237,7 @@
 					<div class="tsd-signature tsd-kind-icon">store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReduxStore</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L95">Store.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L59">Store.ts:59</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -232,17 +247,17 @@
 					<div class="tsd-signature tsd-kind-icon">store<wbr>Actions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TActions</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L96">Store.ts:96</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L60">Store.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="usedclasses" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> used<wbr>Classes</h3>
-					<div class="tsd-signature tsd-kind-icon">used<wbr>Classes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Set()</span></div>
+					<div class="tsd-signature tsd-kind-icon">used<wbr>Classes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Set()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L98">Store.ts:98</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L63">Store.ts:63</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -259,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L367">Store.ts:367</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L348">Store.ts:348</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -282,7 +297,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L349">Store.ts:349</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L330">Store.ts:330</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -296,6 +311,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="isequal" class="tsd-anchor"></a>
+					<h3>is<wbr>Equal</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isEqual<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_adapters_types_.istateadapter.html#isequal" class="tsd-signature-type">isEqual</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L357">Store.ts:357</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p><code>isEqual</code> adapter function getter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_adapters_types_.istateadapter.html#isequal" class="tsd-signature-type">isEqual</a></h4>
+							<p><code>isEqual</code> function.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="reduxstore" class="tsd-anchor"></a>
 					<h3>redux<wbr>Store</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
@@ -305,7 +343,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L331">Store.ts:331</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L312">Store.ts:312</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -328,7 +366,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L340">Store.ts:340</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L321">Store.ts:321</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -351,7 +389,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L358">Store.ts:358</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L339">Store.ts:339</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -377,7 +415,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L155">Store.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L128">Store.ts:128</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -415,7 +453,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L275">Store.ts:275</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L255">Store.ts:255</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -447,7 +485,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L320">Store.ts:320</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L301">Store.ts:301</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -469,7 +507,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L297">Store.ts:297</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L278">Store.ts:278</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -501,7 +539,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L287">Store.ts:287</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L267">Store.ts:267</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -523,7 +561,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L258">Store.ts:258</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L238">Store.ts:238</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -549,13 +587,13 @@
 					<a name="loadsegment" class="tsd-anchor"></a>
 					<h3>load<wbr>Segment</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">load<wbr>Segment<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, skipOnLoaded<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_.store.html" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Segment<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, skipOnLoaded<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L209">Store.ts:209</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L189">Store.ts:189</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -578,7 +616,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_store_.store.html" class="tsd-signature-type">Store</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TState</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 							<p>Store instance.</p>
 						</li>
 					</ul>
@@ -593,7 +631,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L246">Store.ts:246</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L226">Store.ts:226</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -631,7 +669,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/Store.ts#L183">Store.ts:183</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/Store.ts#L163">Store.ts:163</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -698,6 +736,27 @@
 						<a href="../modules/_storecontext_.html">"<wbr>Store<wbr>Context"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_default_index_.html">"adapters/<wbr>Default/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_default_isequal_.html">"adapters/<wbr>Default/is<wbr>Equal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_immer_index_.html">"adapters/<wbr>Immer/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_immutable_index_.html">"adapters/<wbr>Immutable/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_immutable_isequal_.html">"adapters/<wbr>Immutable/is<wbr>Equal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_index_.html">"adapters/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_types_.html">"adapters/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -707,13 +766,13 @@
 						<a href="../modules/_utils_initmapfunction_.html">"utils/init<wbr>Map<wbr>Function"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_utils_isequal_.html">"utils/is<wbr>Equal"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_utils_mergeprops_.html">"utils/merge<wbr>Props"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_utils_proto_.html">"utils/proto"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_store_.html">"utils/store"</a>
 					</li>
 				</ul>
 			</nav>
@@ -726,6 +785,9 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_store_.store.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_store_.store.html#adapter" class="tsd-kind-icon">adapter</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_store_.store.html#reducer" class="tsd-kind-icon">reducer</a>
@@ -747,6 +809,9 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_store_.store.html#dispatch" class="tsd-kind-icon">dispatch</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_store_.store.html#isequal" class="tsd-kind-icon">is<wbr>Equal</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="_store_.store.html#reduxstore" class="tsd-kind-icon">redux<wbr>Store</a>
@@ -800,20 +865,14 @@
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="../modules/_store_.html#inputclasses" class="tsd-kind-icon">Input<wbr>Classes</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_store_.html#inputreducer" class="tsd-kind-icon">Input<wbr>Reducer</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
 						<a href="../modules/_store_.html#onsegmentloaded" class="tsd-kind-icon">On<wbr>Segment<wbr>Loaded</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="../modules/_store_.html#segmentloader" class="tsd-kind-icon">Segment<wbr>Loader</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter tsd-is-not-exported">
-						<a href="../modules/_store_.html#inputclassestoarray" class="tsd-kind-icon">input<wbr>Classes<wbr>ToArray</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_store_.html#noopreducer" class="tsd-kind-icon">noop<wbr>Reducer</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_store_.html#sortclasses" class="tsd-kind-icon">sort<wbr>Classes</a>
 					</li>
 				</ul>
 			</nav>
@@ -832,6 +891,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -880,7 +940,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

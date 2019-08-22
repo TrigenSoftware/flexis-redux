@@ -92,6 +92,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_utils_selector_.selector.html#actionsprops" class="tsd-kind-icon">actions<wbr>Props</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_utils_selector_.selector.html#error" class="tsd-kind-icon">error</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_utils_selector_.selector.html#hasrunatleastonce" class="tsd-kind-icon">has<wbr>Run<wbr>AtLeast<wbr>Once</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_utils_selector_.selector.html#isequal" class="tsd-kind-icon">is<wbr>Equal</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_utils_selector_.selector.html#mapactionstoprops" class="tsd-kind-icon">map<wbr>Actions<wbr>ToProps</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_utils_selector_.selector.html#mapstatetoprops" class="tsd-kind-icon">map<wbr>State<wbr>ToProps</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_utils_selector_.selector.html#mergeprops" class="tsd-kind-icon">merge<wbr>Props</a></li>
@@ -128,17 +129,41 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Selector<span class="tsd-signature-symbol">(</span>mapStateToProps<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a>, mapActionsToProps<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a>, mergeProps<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_utils_selector_.selector.html" class="tsd-signature-type">Selector</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Selector<span class="tsd-signature-symbol">(</span>isEqual<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, mapStateToProps<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a>, mapActionsToProps<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a>, mergeProps<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_utils_selector_.selector.html" class="tsd-signature-type">Selector</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L60">utils/Selector.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L59">utils/Selector.ts:59</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5>isEqual: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>a: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5>b: <span class="tsd-signature-type">any</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> mapStateToProps: <a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a></h5>
 								</li>
@@ -162,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">actions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L56">utils/Selector.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L55">utils/Selector.ts:55</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -172,7 +197,7 @@
 					<div class="tsd-signature tsd-kind-icon">actions<wbr>Props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">__type</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L59">utils/Selector.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L58">utils/Selector.ts:58</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,7 +207,7 @@
 					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Error</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L48">utils/Selector.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L47">utils/Selector.ts:47</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -192,9 +217,43 @@
 					<div class="tsd-signature tsd-kind-icon">has<wbr>Run<wbr>AtLeast<wbr>Once<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L54">utils/Selector.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L53">utils/Selector.ts:53</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="isequal" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> is<wbr>Equal</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Equal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L62">utils/Selector.ts:62</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>a: <span class="tsd-signature-type">any</span></h5>
+											</li>
+											<li>
+												<h5>b: <span class="tsd-signature-type">any</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="mapactionstoprops" class="tsd-anchor"></a>
@@ -202,7 +261,7 @@
 					<div class="tsd-signature tsd-kind-icon">map<wbr>Actions<wbr>ToProps<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L52">utils/Selector.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L51">utils/Selector.ts:51</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -212,7 +271,7 @@
 					<div class="tsd-signature tsd-kind-icon">map<wbr>State<wbr>ToProps<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L51">utils/Selector.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L50">utils/Selector.ts:50</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -222,7 +281,7 @@
 					<div class="tsd-signature tsd-kind-icon">merge<wbr>Props<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_utils_initmapfunction_.imapfunction.html" class="tsd-signature-type">IMapFunction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L53">utils/Selector.ts:53</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L52">utils/Selector.ts:52</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -232,7 +291,7 @@
 					<div class="tsd-signature tsd-kind-icon">merged<wbr>Props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">__type</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L60">utils/Selector.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L59">utils/Selector.ts:59</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -242,7 +301,7 @@
 					<div class="tsd-signature tsd-kind-icon">own<wbr>Props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">__type</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L57">utils/Selector.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L56">utils/Selector.ts:56</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -252,7 +311,7 @@
 					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">__type</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L50">utils/Selector.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L49">utils/Selector.ts:49</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -262,7 +321,7 @@
 					<div class="tsd-signature tsd-kind-icon">should<wbr>Component<wbr>Update<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L49">utils/Selector.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L48">utils/Selector.ts:48</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -272,7 +331,7 @@
 					<div class="tsd-signature tsd-kind-icon">state<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L55">utils/Selector.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L54">utils/Selector.ts:54</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -282,7 +341,7 @@
 					<div class="tsd-signature tsd-kind-icon">state<wbr>Props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">__type</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L58">utils/Selector.ts:58</a></li>
+							<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L57">utils/Selector.ts:57</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -299,7 +358,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L85">utils/Selector.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L85">utils/Selector.ts:85</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -321,7 +380,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L140">utils/Selector.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L140">utils/Selector.ts:140</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -364,7 +423,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L342">utils/Selector.ts:342</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L345">utils/Selector.ts:345</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -387,7 +446,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L292">utils/Selector.ts:292</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L295">utils/Selector.ts:295</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -410,7 +469,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L314">utils/Selector.ts:314</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L317">utils/Selector.ts:317</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -433,7 +492,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L266">utils/Selector.ts:266</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L269">utils/Selector.ts:269</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -456,7 +515,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L218">utils/Selector.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L221">utils/Selector.ts:221</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -479,7 +538,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L240">utils/Selector.ts:240</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L243">utils/Selector.ts:243</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -502,7 +561,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L368">utils/Selector.ts:368</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L372">utils/Selector.ts:372</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -525,7 +584,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L169">utils/Selector.ts:169</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L169">utils/Selector.ts:169</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -568,7 +627,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/ee41d19/src/utils/Selector.ts#L110">utils/Selector.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/TrigenSoftware/flexis-redux/blob/c33f007/src/utils/Selector.ts#L110">utils/Selector.ts:110</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -628,6 +687,27 @@
 						<a href="../modules/_storecontext_.html">"<wbr>Store<wbr>Context"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_default_index_.html">"adapters/<wbr>Default/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_default_isequal_.html">"adapters/<wbr>Default/is<wbr>Equal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_immer_index_.html">"adapters/<wbr>Immer/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_immutable_index_.html">"adapters/<wbr>Immutable/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_immutable_isequal_.html">"adapters/<wbr>Immutable/is<wbr>Equal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_index_.html">"adapters/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_adapters_types_.html">"adapters/types"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_index_.html">"index"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
@@ -637,13 +717,13 @@
 						<a href="../modules/_utils_initmapfunction_.html">"utils/init<wbr>Map<wbr>Function"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_utils_isequal_.html">"utils/is<wbr>Equal"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_utils_mergeprops_.html">"utils/merge<wbr>Props"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_utils_proto_.html">"utils/proto"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_utils_store_.html">"utils/store"</a>
 					</li>
 				</ul>
 			</nav>
@@ -668,6 +748,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_utils_selector_.selector.html#hasrunatleastonce" class="tsd-kind-icon">has<wbr>Run<wbr>AtLeast<wbr>Once</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="_utils_selector_.selector.html#isequal" class="tsd-kind-icon">is<wbr>Equal</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_utils_selector_.selector.html#mapactionstoprops" class="tsd-kind-icon">map<wbr>Actions<wbr>ToProps</a>
@@ -759,6 +842,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -807,7 +891,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
