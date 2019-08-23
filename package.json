@@ -1,6 +1,6 @@
 {
   "name": "@flexis/redux",
-  "version": "1.0.0-alpha",
+  "version": "1.0.1-alpha",
   "description": "Wrapper for Redux.",
   "author": "dangreen",
   "license": "MIT",
