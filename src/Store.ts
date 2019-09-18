@@ -8,6 +8,7 @@ import {
 import {
 	IStateAdapter
 } from './adapters';
+import lock from './utils/lock';
 import {
 	inputClassesToArray,
 	composeReducers,
@@ -62,6 +63,7 @@ export default class Store<
 	private adapter: IStateAdapter = null;
 	private readonly usedClasses = new Set();
 	private readonly segmentsRegistry = new Map<any, IRegistryItem>();
+	private readonly segmentsLocks = new Map<any, Promise<void>>();
 
 	constructor({
 		storeCreator: customCreateStore = createStore,
@@ -188,7 +190,10 @@ export default class Store<
 	 */
 	async loadSegment(id: any, skipOnLoaded = false) {
 
-		const { segmentsRegistry } = this;
+		const {
+			segmentsRegistry,
+			segmentsLocks
+		} = this;
 		const registryItem = segmentsRegistry.get(id);
 
 		// Already loaded.
@@ -200,6 +205,20 @@ export default class Store<
 			throw new Error('Segment is doesn\'t registered.');
 		}
 
+		const alreadyLocked = segmentsLocks.get(id);
+
+		if (alreadyLocked) {
+			await alreadyLocked;
+			return this;
+		}
+
+		const [
+			locked,
+			unlock
+		] = lock();
+
+		segmentsLocks.set(id, locked);
+
 		const {
 			loader,
 			onLoaded
@@ -207,12 +226,14 @@ export default class Store<
 		const segmentConfig = await loader();
 		const store = this.addSegment(segmentConfig);
 
-		// Mark as loaded.
-		segmentsRegistry.set(id, null);
-
 		if (typeof onLoaded === 'function' && !skipOnLoaded) {
 			await onLoaded(store);
 		}
+
+		// Mark as loaded.
+		segmentsRegistry.set(id, null);
+		segmentsLocks.delete(id);
+		unlock();
 
 		return store;
 	}
