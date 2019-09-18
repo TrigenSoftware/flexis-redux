@@ -200,15 +200,15 @@ export default class Store<
 			throw new Error('Segment is doesn\'t registered.');
 		}
 
-		// Mark as loaded.
-		segmentsRegistry.set(id, null);
-
 		const {
 			loader,
 			onLoaded
 		} = registryItem;
 		const segmentConfig = await loader();
 		const store = this.addSegment(segmentConfig);
+
+		// Mark as loaded.
+		segmentsRegistry.set(id, null);
 
 		if (typeof onLoaded === 'function' && !skipOnLoaded) {
 			await onLoaded(store);
