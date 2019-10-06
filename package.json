@@ -67,7 +67,7 @@
     "react": "^16.9.0",
     "redux": "^4.0.4",
     "rollup-plugin-tslint": "^0.2.2",
-    "rollup-plugin-typescript2": "^0.22.1"
+    "rollup-plugin-typescript2": "^0.24.3"
   },
   "files": [
     "lib"
