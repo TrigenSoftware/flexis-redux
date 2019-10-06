@@ -8,5 +8,10 @@
 		"path": "lib/index.es.js",
 		"limit": "35 KB",
 		"webpack": false
+	},
+	{
+		"path": "lib/index.babel.js",
+		"limit": "10 KB",
+		"webpack": false
 	}
 ]
