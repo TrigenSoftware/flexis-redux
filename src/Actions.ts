@@ -164,7 +164,13 @@ function runtimePrepareMethods(actions: Actions) {
 	Reflect.defineProperty(actions, 'state', {
 		get: namespace
 			? function state() {
-				return this.store.state.get(namespace);
+
+				const {
+					adapter,
+					state
+				} = this.store;
+
+				return adapter.get(state, namespace);
 			}
 			: function state() {
 				return this.store.state;

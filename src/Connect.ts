@@ -16,6 +16,7 @@ import StoreContext from './StoreContext';
 
 interface IConnectOptions {
 	dependsOn?: any|any[];
+	skipWaiting?: boolean;
 	loading?: ComponentType;
 	mapStateToProps: IMapFunction;
 	mapActionsToProps?: IMapFunction;
@@ -51,6 +52,7 @@ function Connect<
 	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
+	skipWaiting?: boolean;
 	loading?: ComponentType;
 	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>
 }): ConnectDecorator<TOwnProps, TStateProps>;
@@ -61,6 +63,7 @@ function Connect<
 	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
+	skipWaiting?: boolean;
 	loading?: ComponentType;
 	mapStateToProps: null | undefined,
 	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>
@@ -74,6 +77,7 @@ function Connect<
 	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
+	skipWaiting?: boolean;
 	loading?: ComponentType;
 	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
 	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>
@@ -87,6 +91,7 @@ function Connect<
 	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
+	skipWaiting?: boolean;
 	loading?: ComponentType;
 	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
 	mapActionsToProps: null | undefined,
@@ -102,6 +107,7 @@ function Connect<
 	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
+	skipWaiting?: boolean;
 	loading?: ComponentType;
 	mapStateToProps: null | undefined,
 	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>,
@@ -118,6 +124,7 @@ function Connect<
 	TOwnProps = any
 >(options: {
 	dependsOn?: any|any[];
+	skipWaiting?: boolean;
 	loading?: ComponentType;
 	mapStateToProps: IMapStateToProps<TStateProps, TState, TOwnProps>,
 	mapActionsToProps: IMapActionsToProps<TActionsProps, TActions, TOwnProps>,
@@ -135,6 +142,7 @@ function Connect<
  */
 function Connect({
 	dependsOn,
+	skipWaiting,
 	loading: Loading,
 	mapStateToProps,
 	mapActionsToProps,
@@ -171,6 +179,7 @@ function Connect({
 				super(props, context);
 
 				this.onWrappedInstance = this.onWrappedInstance.bind(this);
+				this.onSegmentsLoaded = this.onSegmentsLoaded.bind(this);
 			}
 
 			render() {
@@ -278,13 +287,24 @@ function Connect({
 						? createElement(Loading)
 						: null;
 					this.depsLoadingStatus = LoadingStatus.InProgress;
-					loadSegments(depsIds).then(() => {
-						this.depsLoadingStatus = LoadingStatus.Done;
-						this.forceUpdate();
-					});
+					loadSegments(depsIds).then(this.onSegmentsLoaded);
 				}
 
-				return true;
+				return !skipWaiting;
+			}
+
+			private onSegmentsLoaded() {
+
+				const {
+					selector
+				} = this;
+
+				if (selector) {
+					selector.forceUpdateOnNextRun();
+				}
+
+				this.depsLoadingStatus = LoadingStatus.Done;
+				this.forceUpdate();
 			}
 		}
 

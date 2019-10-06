@@ -132,6 +132,13 @@ export default class Selector {
 	}
 
 	/**
+	 * Do force update on next run.
+	 */
+	forceUpdateOnNextRun() {
+		this.hasRunAtLeastOnce = false;
+	}
+
+	/**
 	 * Handle first calculating call.
 	 * @param firstState - Store state.
 	 * @param firstActions - Store actions.
