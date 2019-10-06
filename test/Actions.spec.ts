@@ -3,7 +3,8 @@ import {
 	is
 } from 'immutable';
 import Store, {
-	CustomDispatcher
+	CustomDispatcher,
+	ImmutableAdapter
 } from '../src';
 import {
 	State,
@@ -23,7 +24,8 @@ function createMockStore(
 				getState: () => mockState,
 				dispatch: mockDispatch
 			},
-			storeActions: {}
+			storeActions: {},
+			adapter:      ImmutableAdapter
 		}
 	);
 }

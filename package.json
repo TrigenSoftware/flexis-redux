@@ -13,7 +13,7 @@
   },
   "main": "lib/index.js",
   "module": "lib/index.es.js",
-  "babel": "lib/index.babel.js",
+  "raw": "lib/index.babel.js",
   "types": "lib/index.d.ts",
   "engines": {
     "node": ">=8.0.0"

@@ -46,7 +46,7 @@ export default [{
 	plugins:  plugins(false),
 	external: external(pkg, true),
 	output:   {
-		file:      pkg.babel,
+		file:      pkg.raw,
 		format:    'es',
 		sourcemap: 'inline'
 	}
