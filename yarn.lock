@@ -1176,12 +1176,12 @@
     "@trigen/scripts" "^3.2.0"
     babel-preset-trigen "^2.2.1"
 
-"@trigen/scripts-plugin-eslint@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@trigen/scripts-plugin-eslint/-/scripts-plugin-eslint-3.2.0.tgz#cffc42544771b401897a4ba055369ba1bfb65d1b"
-  integrity sha512-dCVM4jIfKEmBevRnRpe+fzB40GQEOaxJSX2gglDicXdOXKGGD6ko+JBm66yZn2P+YGqkVCu6GpvMo4hTsvl+MQ==
+"@trigen/scripts-plugin-eslint@3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@trigen/scripts-plugin-eslint/-/scripts-plugin-eslint-3.5.0.tgz#ed296aaeb37e8358a6d2ae7fc0ca4b4b356eb9d5"
+  integrity sha512-NS5HkughasT9YChTdSZUaT7zyHhSlu5a6Y7dwfTe+bwP5W1fQJVjsXCgzEEEJ77ti67dap5yu5VNFo4l63BjSQ==
   dependencies:
-    "@trigen/scripts" "^3.2.0"
+    "@trigen/scripts" "^3.5.0"
     eslint "^5.15.3"
     eslint-config-trigen "^3.2.3"
 
@@ -1230,22 +1230,34 @@
     typedoc "^0.15.0"
     typescript "3.6.2"
 
-"@trigen/scripts-preset-lib@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@trigen/scripts-preset-lib/-/scripts-preset-lib-3.2.0.tgz#a9026ab605cbb0a99501624ede69a3c4763a0a3a"
-  integrity sha512-qV0ljKFeFhCnkZLhkFxtDovLkxullumx6meW1KCy91V0B3MOfJflx3Bf2aGyke2/If/5W1nqxTo8KRVCcUnTZg==
+"@trigen/scripts-preset-lib@3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@trigen/scripts-preset-lib/-/scripts-preset-lib-3.5.0.tgz#9faa961af8ee77eacc6995832eeede4eb2a4640e"
+  integrity sha512-pWinGyV8tkWBGXqFEiDRNVwCuu9GwYbYdqREG6ZSIwNAdTi+urLZhPppeSmctgd+ILixlBo7SiWUkhwVj+85eA==
   dependencies:
-    "@trigen/scripts" "^3.2.0"
+    "@trigen/scripts" "^3.5.0"
     browserslist-config-trigen "^1.1.0"
     clean-publish "^1.1.0"
     coveralls "^3.0.0"
     husky "^3.0.3"
     lint-staged "^9.2.1"
 
-"@trigen/scripts@3.2.0", "@trigen/scripts@^3.2.0":
+"@trigen/scripts@3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@trigen/scripts/-/scripts-3.2.0.tgz#9bc4cb29e56eafa915593f6dca878b5065efb7d9"
   integrity sha512-bYgqjaaiyWlFqR9lsC58As2+MUhyHJ0T/96/GDbN3TtxAnXWKIRwuy7u6HYOXO9gq3T+HoMy0V6FEIELfnFFZA==
+  dependencies:
+    "@babel/runtime" "^7.4.2"
+    chalk "^2.4.2"
+    core-js "3"
+    immutability-helper "^3.0.0"
+    rcfile "^1.0.3"
+    resolve-cwd "^3.0.0"
+
+"@trigen/scripts@^3.2.0", "@trigen/scripts@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@trigen/scripts/-/scripts-3.5.0.tgz#f5658e086b8c2d4e34ff4c38f5ffe8e2f40db206"
+  integrity sha512-5S3kk+UoyPJIasiSiy323SDw3eNZcN7HD7edVQCDGC9DGm/kNHeV9k05SKzXs3v23TZ6kpB+fBoI9KaHtaMYJg==
   dependencies:
     "@babel/runtime" "^7.4.2"
     chalk "^2.4.2"
@@ -1349,9 +1361,9 @@
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
 "@types/node@*", "@types/node@^12.0.3", "@types/node@^12.7.2":
-  version "12.7.12"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.12.tgz#7c6c571cc2f3f3ac4a59a5f2bd48f5bdbc8653cc"
-  integrity sha512-KPYGmfD0/b1eXurQ59fXD1GBzhSQfz6/lKBxkaHX9dKTzjXbK68Zt7yGUxUsCS1jeTy/8aL+d9JEr+S54mpkWQ==
+  version "12.12.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.9.tgz#0b5ae05516b757cbff2e82c04500190aef986c7b"
+  integrity sha512-kV3w4KeLsRBW+O2rKhktBwENNJuqAUQHS3kf4ia2wIaF/MN6U7ANgTsx7tGremcA0Pk3Yh0Hl0iKiLPuBdIgmw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -1369,9 +1381,9 @@
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
 "@types/react@^16.9.2":
-  version "16.9.5"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.5.tgz#079dabd918b19b32118c25fd00a786bb6d0d5e51"
-  integrity sha512-jQ12VMiFOWYlp+j66dghOWcmDDwhca0bnlcTxS4Qz/fh5gi6wpaZDthPEu/Gc/YlAuO87vbiUXL8qKstFvuOaA==
+  version "16.9.11"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
+  integrity sha512-UBT4GZ3PokTXSWmdgC/GeCGEJXE5ofWyibCcecRLUVN2ZBpXQGVgQGtG2foS7CrTKFKlQVVswLvf7Js6XA/CVQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -2910,9 +2922,9 @@ core-js-pure@3.1.3:
   integrity sha512-k3JWTrcQBKqjkjI0bkfXS0lbpWPxYuHWfMMjC1VDmzU4Q58IwSbuXSo99YO/hUHlw/EB4AlfA2PVxOGkrIq6dA==
 
 core-js@3, core-js@^3.0.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.2.1.tgz#cd41f38534da6cc59f7db050fe67307de9868b09"
-  integrity sha512-Qa5XSVefSVPRxy2XfUC13WbvqkxhkwB3ve+pgCQveNgYzbM/UxZeu1dcOX/xr4UmfUd+muuvsaxilQzCyUurMw==
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.4.1.tgz#76dd6828412900ab27c8ce0b22e6114d7ce21b18"
+  integrity sha512-KX/dnuY/J8FtEwbnrzmAjUYgLqtk+cxM86hfG60LGiW3MmltIc2yAmDgBgEkfm0blZhUrdr1Zd84J2Y14mLxzg==
 
 core-js@^2.6.5:
   version "2.6.9"
@@ -7616,9 +7628,9 @@ react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
 react@^16.9.0:
-  version "16.10.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.10.2.tgz#a5ede5cdd5c536f745173c8da47bda64797a4cf0"
-  integrity sha512-MFVIq0DpIhrHFyqLU0S3+4dIcBhhOvBE8bJ/5kHPVOVaGdo0KuiQzpcjCPsf585WvhypqtrMILyoE2th6dT+Lw==
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
+  integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
