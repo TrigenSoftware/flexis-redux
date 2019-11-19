@@ -204,8 +204,8 @@ export default class Store<
 			context,
 			skipOnLoaded
 		] = typeof contextOrSkipOnLoaded !== 'boolean'
-			? [contextOrSkipOnLoaded, maybeSkipOnLoaded]
-			: [undefined, contextOrSkipOnLoaded];
+			? [contextOrSkipOnLoaded || {}, maybeSkipOnLoaded]
+			: [{}, contextOrSkipOnLoaded];
 		const {
 			segmentsRegistry,
 			segmentsLocks
