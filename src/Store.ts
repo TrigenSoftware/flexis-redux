@@ -30,7 +30,10 @@ type InputClasses<T> = T | T[] | {
 };
 
 type SegmentLoader = () => Promise<IAddSegmentConfig>;
-type OnSegmentLoaded<TState, TActions> = (store: Store<TState, TActions>) => void|Promise<void>;
+type OnSegmentLoaded<TState, TActions> = (
+	store: Store<TState, TActions>,
+	context?: Record<string, any>
+) => void|Promise<void>;
 
 export interface IStoreConfig<TState> {
 	storeCreator?: StoreCreator;
@@ -185,11 +188,24 @@ export default class Store<
 	/**
 	 * Load segment from registry.
 	 * @param  id - Segment identificator.
+	 * @param  context - Context to pass to `onLoaded` function.
 	 * @param  skipOnLoaded - Do not call `onLoaded` function.
 	 * @return Store instance.
 	 */
-	async loadSegment(id: any, skipOnLoaded = false) {
+	loadSegment(id: any, skipOnLoaded?: boolean): Promise<Store<TState, TActions>>;
+	loadSegment(id: any, context?: Record<string, any>, skipOnLoaded?: boolean): Promise<Store<TState, TActions>>;
+	async loadSegment(
+		id: any,
+		contextOrSkipOnLoaded?: boolean | Record<string, any>,
+		maybeSkipOnLoaded?: boolean
+	) {
 
+		const [
+			context,
+			skipOnLoaded
+		] = typeof contextOrSkipOnLoaded !== 'boolean'
+			? [contextOrSkipOnLoaded, maybeSkipOnLoaded]
+			: [undefined, contextOrSkipOnLoaded];
 		const {
 			segmentsRegistry,
 			segmentsLocks
@@ -227,7 +243,7 @@ export default class Store<
 		const store = this.addSegment(segmentConfig);
 
 		if (typeof onLoaded === 'function' && !skipOnLoaded) {
-			await onLoaded(store);
+			await onLoaded(store, context);
 		}
 
 		// Mark as loaded.
@@ -241,22 +257,39 @@ export default class Store<
 	/**
 	 * Load segments from registry
 	 * @param  ids - Segments identificators.
+	 * @param  context - Context to pass to `onLoaded` function.
 	 * @param  skipOnLoaded - Do not call `onLoaded` function.
 	 * @return Store instance.
 	 */
-	async loadSegments(ids: any[], skipOnLoaded = false) {
+	loadSegments(ids: any[], skipOnLoaded?: boolean): Promise<Store<TState, TActions>>;
+	loadSegments(ids: any[], context?: Record<string, any>, skipOnLoaded?: boolean): Promise<Store<TState, TActions>>;
+	async loadSegments(
+		ids: any[],
+		contextOrSkipOnLoaded?: boolean | Record<string, any>,
+		maybeSkipOnLoaded?: boolean
+	) {
 		await Promise.all(
-			ids.map(id => this.loadSegment(id, skipOnLoaded))
+			ids.map(id => this.loadSegment(
+				id,
+				contextOrSkipOnLoaded as Record<string, any>,
+				maybeSkipOnLoaded
+			))
 		);
 		return this;
 	}
 
 	/**
 	 * Load all segments from registry.
+	 * @param  context - Context to pass to `onLoaded` function.
 	 * @param  skipOnLoaded - Do not call `onLoaded` function.
 	 * @return Store instance.
 	 */
-	loadAllSegments(skipOnLoaded = false) {
+	loadAllSegments(skipOnLoaded?: boolean): Promise<Store<TState, TActions>>;
+	loadAllSegments(context?: Record<string, any>, skipOnLoaded?: boolean): Promise<Store<TState, TActions>>;
+	loadAllSegments(
+		contextOrSkipOnLoaded?: boolean | Record<string, any>,
+		maybeSkipOnLoaded?: boolean
+	) {
 
 		const {
 			segmentsRegistry
@@ -264,7 +297,8 @@ export default class Store<
 
 		return this.loadSegments(
 			Array.from(segmentsRegistry.keys()),
-			skipOnLoaded
+			contextOrSkipOnLoaded as Record<string, any>,
+			maybeSkipOnLoaded
 		);
 	}
 

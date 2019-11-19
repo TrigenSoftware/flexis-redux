@@ -8,7 +8,7 @@ import babel from 'rollup-plugin-babel';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
 import pkg from './package.json';
 
-function plugins(transpile = true) {
+function getPlugins(transpile = true) {
 	return [
 		tslint({
 			exclude:    ['**/*.json', 'node_modules/**'],
@@ -29,7 +29,7 @@ function plugins(transpile = true) {
 
 export default [{
 	input:    'src/index.ts',
-	plugins:  plugins(),
+	plugins:  getPlugins(),
 	external: external(pkg, true),
 	output:   [{
 		file:      pkg.main,
@@ -43,7 +43,7 @@ export default [{
 	}]
 }, {
 	input:    'src/index.ts',
-	plugins:  plugins(false),
+	plugins:  getPlugins(false),
 	external: external(pkg, true),
 	output:   {
 		file:      pkg.raw,
