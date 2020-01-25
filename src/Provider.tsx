@@ -1,6 +1,5 @@
 import React, {
-	Component,
-	Fragment
+	Component
 } from 'react';
 import PropTypes from 'prop-types';
 import Store from './Store';
@@ -55,9 +54,9 @@ export default class Provider extends Component<IProps, IContext> {
 
 		return (
 			<StoreContextProvider value={this.state}>
-				<Fragment>
+				<>
 					{children}
-				</Fragment>
+				</>
 			</StoreContextProvider>
 		);
 	}
