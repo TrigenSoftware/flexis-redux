@@ -51,12 +51,12 @@ export {
     DefaultAdapter,
     ImmutableAdapter,
     ImmerAdapter,
-	Reducer,
-	ActionType,
-	CustomDispatcher,
-	createAction,
-	Provider,
-	Connect
+    Reducer,
+    ActionType,
+    CustomDispatcher,
+    createAction,
+    Provider,
+    Connect
 };
 ```
 
