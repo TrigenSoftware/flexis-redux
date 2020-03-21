@@ -1380,18 +1380,6 @@
     husky "^4.0.9"
     lint-staged "^10.0.0"
 
-"@trigen/scripts@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@trigen/scripts/-/scripts-4.0.0.tgz#f2e03de69e760a56faab0549c6a0c787a316ca83"
-  integrity sha512-6G1sFEJd3YNBBfeynFIp2BZmaXTq0C8wQXV0NsQK7WZYgpjbHuvtJ0iu2O8+by5+n5oabG67VmjpWT0X29zQog==
-  dependencies:
-    "@babel/runtime" "^7.4.2"
-    chalk "^3.0.0"
-    core-js "3"
-    immutability-helper "^3.0.0"
-    rcfile "^1.0.3"
-    resolve-cwd "^3.0.0"
-
 "@trigen/scripts@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@trigen/scripts/-/scripts-5.1.0.tgz#f54598de9545a092629d295ed8a0dda4cb5902b8"
@@ -1511,9 +1499,9 @@
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
 "@types/react@^16.9.2":
-  version "16.9.23"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.23.tgz#1a66c6d468ba11a8943ad958a8cb3e737568271c"
-  integrity sha512-SsGVT4E7L2wLN3tPYLiF20hmZTPGuzaayVunfgXzUn1x4uHVsKH6QDJQ/TdpHqwsTLd4CwrmQ2vOgxN7gE24gw==
+  version "16.9.25"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.25.tgz#6ae2159b40138c792058a23c3c04fd3db49e929e"
+  integrity sha512-Dlj2V72cfYLPNscIG3/SMUOzhzj7GK3bpSrfefwt2YT9GLynvLCCZjbhyF6VsT0q0+aRACRX03TDJGb7cA0cqg==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
